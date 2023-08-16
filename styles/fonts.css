@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'mont_extralightdemo';
+  src: url('../public/fonts/mont_extralightdemo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mont-Light';
+  src: 
+    url('../public/fonts/Mont-Light.woff') format("woff"),
+    url('../public/fonts/Mont-Light.woff2') format("woff2");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Mont-Regular';
+  src: url('../public/fonts/Mont-Regular.woff') format("woff");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Mont-SemiBold';
+  src: 
+    url('../public/fonts/Mont-SemiBold.woff') format("woff");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Montserrat-Light';
+  src: 
+    url('../public/fonts/Montserrat-Light.woff') format("woff");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Montserrat-Medium';
+  src: 
+    url('../public/fonts/Montserrat-Medium.woff') format("woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: 
+    url('../public/fonts/Montserrat-Regular.woff') format("woff");
+  font-weight: 600;
+}
+
+
+

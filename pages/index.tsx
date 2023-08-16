@@ -1,19 +1,31 @@
-/* export default function Page() {
-  return <h1>get ready?</h1>
-}
-*/
+import App from "../components/App";
+import Header from "../components/Header";
+import Main from "../components/Main";
+import Head from "next/head";
 
-import Link from "next/link";
-import MainContainer from "../components/MainContainer";
-
-const Index = () => {
-    return (
-            <MainContainer>
-
-                <h1>Главная страница</h1>
-
-            </MainContainer>
-    );
+const Index = ({ data }) => {
+  return (
+    <>
+      <Header isMain={true} />
+      <Main
+        mainPictures={data.sellPictures.desctopPhoto}
+        mainPicturesMobile={data.sellPictures.mobilePhoto}
+        storesPictures={data.storesPictures}
+        aboutInfo={data.aboutInfo}
+        instaPhoto={data.instaPhoto.data}
+      />
+    </>
+  );
 };
 
 export default Index;
+
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:4001");
+  const data = await res.json();
+  return {
+    props: {
+      data,
+    },
+  };
+}
