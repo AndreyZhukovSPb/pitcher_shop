@@ -1,0 +1,21 @@
+.sectionLine {
+  border-top: 1px solid rgba(104, 100, 100, 0.4);
+  height: 1px;
+  width: 94vw;
+}
+
+.sectionLine_type_main {
+  width: calc(100vw - 30px);
+}
+
+@media screen and (max-width: 767px) {
+  .sectionLine_type_techs {
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid rgba(104, 100, 100, 0.4);
+    height: 28px;
+  }
+  .sectionLine {
+    width: 94vw;
+  }
+  
+}
