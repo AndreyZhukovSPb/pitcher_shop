@@ -20,22 +20,3 @@ export default function App() {
   );
 }
 
-/* 
-
-<Header headerType="main_header header__type_main" isMain={true} />
-
-export default MainContainer;
-<div>
-<Link href={"/mayak"}>Маяк</Link>
-<Link href={"/park"}>Парк</Link>
-</div>
-<link rel="shortcut icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
-*/
-
-/*
-to-do: 
-ScrollToTop
-шрифты проверить
-скорость перелистывания карусели для мобилы увеличить
-Haed точно применяется если переходить сразу на страницу кофеен?
-*/

@@ -1,13 +1,11 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router";
+import { useEffect } from 'react';
 
-const ScrollToTop = (props: any) => {
-  const location = useLocation();
+const ScrollToTop = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location]);
+  }, []);
 
-  return <>{props.children}</>
+  return null; // This component doesn't render anything, it's just for scrolling
 };
 
 export default ScrollToTop;

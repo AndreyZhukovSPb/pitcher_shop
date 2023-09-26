@@ -1,12 +1,15 @@
 import App from "../components/App";
 import Header from "../components/Header";
 import Main from "../components/Main";
-import Head from "next/head";
+import Footer from "../components/Footer";
+import { useEffect } from "react";
 
-const Index = ({ data }) => {
+const Index = ({ data, switchOffIsMain }) => {
+  // <Header isMain={true} />
+
+
   return (
     <>
-      <Header isMain={true} />
       <Main
         mainPictures={data.sellPictures.desctopPhoto}
         mainPicturesMobile={data.sellPictures.mobilePhoto}
@@ -14,6 +17,7 @@ const Index = ({ data }) => {
         aboutInfo={data.aboutInfo}
         instaPhoto={data.instaPhoto.data}
       />
+      <Footer/>
     </>
   );
 };
@@ -29,3 +33,35 @@ export async function getStaticProps() {
     },
   };
 }
+
+
+
+
+/*
+to-do: 
+FEATURE:
+скорость перелистывания карусели для мобилы увеличить
+
+REFACTOR
+baseURL вынести в константу и поменять во всех фетч запросах
+удалить шрифты из page
+
+WAITING FOR
+меню переделать и залить в облако - надпись "меню", белое или черное?
+team photo парк - поменять
+main photo park new
+photo Kiri ot Kiri
+Barista about - add
+
+??
+Menu popup?
+what does menu include?
+на мобиле есть ховер и курсор поинтер?
+
+filally:
+удалить app и appOld
+ScrollToTop проверить
+favicon check?
+errors console
+*/
+
