@@ -1,0 +1,308 @@
+.footer {
+  color: #424242;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+  font-family: 'Mont-Regular';
+}
+
+.footer__container {
+  display: flex;
+  padding: 30px 3vw 20px 3vw;
+  box-sizing: border-box;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.footer__contacts {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  color: #424242;
+  padding: 0;
+  /* font-weight: 500; */
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 0;
+  font-family: 'Mont-SemiBold';
+  text-decoration: none;
+}
+
+.footer__contactbox {
+  width: 100%;
+  display: flex;
+  list-style: none;
+  margin-top: 14px;
+  align-items: flex-end;
+  letter-spacing: 0.8px;
+  position: relative;
+}
+
+.footer__contactbox:first-of-type {
+  margin-top: 18px;
+}
+
+.footer__icon {
+  width: 20px !important;
+  height: 20px !important;
+  position: relative !important;
+  margin-right: 8px;
+}
+
+.footer__content {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.2;
+  list-style: none;
+  font-family: 'Mont-Regular';
+}
+
+
+.footer__content_type_contacts {
+  line-height: 20px;
+}
+
+.footer__content_type_adres {
+  margin-top: 12px;
+}
+
+.footer__content_type_adres:first-of-type {
+  margin-top: 14px;
+}
+
+.footer__coffeshops {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__coffeshopsTitle {
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 0;
+  font-family: 'Mont-SemiBold';
+}
+
+.footer__coffeshopsBox {
+  width: 280px;
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 0.8px;
+}
+
+.footer__coffeshop {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__copyright {
+  margin: 0 0 20px 0;
+  font-style: normal;
+  /* font-weight: 400; */
+  font-size: 13px;
+  line-height: 1.2;
+  color: #424242;
+  text-align: center;
+  letter-spacing: 0.8px;
+  font-family: 'Montserrat-Medium';
+  text-transform: uppercase;
+}
+
+
+@media screen and (max-width: 1279px)  {
+  .footer__coffeshopsTitle {
+    font-size: 14px;
+  }
+  .footer__content {
+    font-size: 11px;
+  }
+  .footer__contacts {
+    font-size: 14px;
+  }
+  .footer__content_type_adres {
+    margin-top: 10px;
+  }
+  .footer__content_type_adres:first-of-type {
+    margin-top: 12px;
+  }
+  .footer__contactbox {
+    margin-top: 10px;
+  }
+  .footer__contactbox:first-of-type {
+    margin-top: 12px;
+  }
+  .footer__copyright {
+    font-size: 12px;
+  }
+  .footer__coffeshopsBox {
+    width: 245px;
+  }
+}
+
+@media screen and (max-width: 1024px)  {
+  .footer__coffeshopsTitle {
+    font-size: 12px;
+  }
+  .footer__content {
+    font-size: 10px;
+  }
+  .footer__contacts {
+    font-size: 12px;
+  }
+  .footer__content_type_adres {
+    margin-top: 9px;
+  }
+  .footer__content_type_adres:first-of-type {
+    margin-top: 11px;
+  }
+  .footer__contactbox {
+    margin-top: 9px;
+  }
+  .footer__contactbox:first-of-type {
+    margin-top: 11px;
+  }
+  .footer__copyright {
+    font-size: 11px;
+    margin: 0 0 15px 0;
+  }
+  .footer__coffeshopsBox {
+    width: 235px;
+  }
+  .footer__container {
+    padding: 20px 3vw; 
+  }
+}
+
+@media screen and (max-width: 899px)  {
+  .footer__coffeshopsTitle {
+    font-size: 11px;
+  }
+  .footer__content {
+    font-size: 9px;
+  }
+  .footer__contacts {
+    font-size: 11px;
+  }
+  .footer__content_type_adres {
+    margin-top: 8px;
+  }
+  .footer__contactbox {
+    margin-top: 6px;
+  }
+  .footer__copyright {
+    font-size: 10px;
+    margin: 0 0 13px 0;
+  }
+  .footer__coffeshopsBox {
+    width: 225px;
+  }
+}
+
+@media screen and (max-width: 767px)  {
+  .footer__container {
+    padding: 20px 4vw; 
+  }
+  .footer__contactbox {
+    margin-top: 5px;
+  }
+  .footer__contactbox:first-of-type {
+    margin-top: 7px;
+  }
+  .footer__content_type_adres:first-of-type {
+    margin-top: 7px;
+  }
+  .footer__icon {
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 8px;
+  }
+  .footer__content_type_contacts {
+    line-height: 18px;
+  }
+  .footer__coffeshopsBox {
+    width: 210px;
+  }
+}
+
+@media screen and (max-width: 589px)  {
+  .footer__container {
+    flex-direction: column-reverse;
+  }
+  .footer__coffeshopsTitle {
+    font-size: 14px;
+    text-align: center;
+  }
+  .footer__content {
+    font-size: 12px;
+  }
+  .footer__coffeshopsBox {
+    width: 270px;
+    justify-content: space-between;
+  }
+  .footer__contacts {
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  .footer__contactbox {
+    margin-top: 8px;
+  }
+  .footer__contactbox:first-of-type {
+    margin-top: 10px;
+  }
+  .footer__content_type_adres:first-of-type {
+    margin-top: 10px;
+  }
+  .footer__container {
+    align-items: center;
+    padding-top: 26px;
+    padding-bottom: 26px;
+  }
+  .footer__copyright {
+    font-size: 11px;
+  }
+}
+
+
+
+
+/* 
+@media screen and (max-width: 1279px) {
+  .footer__container {
+    width: 708px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .footer {
+    height: 253px;
+  }
+  .footer__title {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .footer__container {
+    width: 300px;
+    flex-direction: column-reverse;
+    padding-top: 30px;
+    align-items: center;
+
+  }
+  .footer__linkCotainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer__link {
+    margin-right: 0;
+  }
+  .footer__link:last-of-type {
+    margin-top: 12px;
+  }
+  .footer__copyright {
+    margin: 30px 0 0;
+  }
+}
+
+*/
