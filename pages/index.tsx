@@ -32,6 +32,8 @@ export async function getStaticProps() {
 
 /*
 to-do: 
+del compomemst app, head
+
 
 WAITING FOR
 меню переделать и залить в облако - надпись "меню", белое или черное?
@@ -57,5 +59,23 @@ errors console
 
 readme
 написать как собирать проект + проверить собирается ли, убрать технологии
+
+
+
+children: any CorouselBox
+что лежит в headerType?
+типизировать useState, useEffect
+переписать carouselProps - для функций
+карусель разнести на несколько компонентов
+
+npm i cors - probably will be usefull
+553648129
+"homepage": "https://AndreyZhukovSPb.github.io/pitcher",
+git push origin level-1     
+    "typescript": "^5.1.6",
+    "private": true,
+    
 */
+
+
 
