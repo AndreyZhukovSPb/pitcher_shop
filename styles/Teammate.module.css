@@ -5,9 +5,8 @@
   color: white;
   position: relative;
   font-family: 'Mont-Regular';
-  color: black;
+  color: #000000;
   align-items: center;
-  
 }
 
 .teammate__image {
@@ -43,7 +42,7 @@
   font-family: 'Mont-Light';
 }
 
-@media screen and (max-width: 1279px) {
+@media (width <= 1279px) {
   .teammate__image {
     width: 180px;
     height: 180px;
@@ -56,7 +55,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media (width <= 1024px) {
   .teammate__image {
     width: 160px;
     height: 160px;
@@ -67,16 +66,15 @@
   .teammate__subTitle {
     font-size: 13px;    
   }
-  
 }
 
-@media screen and (max-width: 899px) {
+@media (width <= 899px) {
   .teammate__title {
     font-size: 15px;
   }
 }
 
-@media screen and (max-width: 599px) {
+@media (width <= 599px) {
   .teammate__title {
     font-size: 17px;
     margin-top: 8px;
@@ -94,7 +92,8 @@
     font-size: 13px;
   }
 }
-@media screen and (max-width: 359px) {
+
+@media (width <= 359px) {
   .teammate__title {
     font-size: 15px;
   }
@@ -108,5 +107,4 @@
   .teammate__about {
     font-size: 11px;
   }
-
 }

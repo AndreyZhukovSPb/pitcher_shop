@@ -4,10 +4,7 @@ import Header from "../components/Header";
 import StoreData from "../components/StoreData";
 import Image from "next/image";
 import SectionLine from "../components/SectionLine";
-// import { dataMayak, dataPark } from "../../utils/constants";
-
-
-//     <Header isContacts={true} />
+import { baseURL } from "../utils/constatnts";
 
 const Contacts = ({ data }) => {
   return (
@@ -21,30 +18,30 @@ const Contacts = ({ data }) => {
         <ul className={styles.contacts__data}>
           <li className={styles.contacts__contactbox}>
             <Image
-              src={"/phone_new.png"}
+              src={"/phone.svg"}
               alt="icon phone"
               className={styles.contacts__icon}
               fill
             />
-            <p className={styles.contacts__content}>+7-931-339-30-43</p>
+            <a href='tel:+79313393043' className={styles.contacts__content}>+7-931-339-30-43</a>
           </li>
           <li className={styles.contacts__contactbox}>
             <Image
-              src={"/email.png"}
+              src={"/email.svg"}
               alt="icon email"
               className={styles.contacts__icon}
               fill
             />
-            <p className={styles.contacts__content}>pitcherbar@gmail.com</p>
+            <a href='mailto:pitcherbar@gmail.com' className={styles.contacts__content}>pitcherbar@gmail.com</a>
           </li>
           <li className={styles.contacts__contactbox}>
             <Image
-              src={"/insta.png"}
+              src={"/instagram.svg"}
               alt="icon email"
               className={styles.contacts__icon}
               fill
             />
-            <p className={styles.contacts__content}>pitcherbar</p>
+            <a href='https://www.instagram.com/pitcherbar/' target='_blank' className={styles.contacts__content}>pitcherbar</a>
           </li>
         </ul>
         <p className={styles.contacts__message}>
@@ -58,7 +55,7 @@ const Contacts = ({ data }) => {
 export default Contacts;
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:4001/contacts");
+  const res = await fetch(`${baseURL}/contacts`);
   const data = await res.json();
 
   return {
@@ -67,12 +64,3 @@ export async function getStaticProps() {
     },
   };
 }
-
-/*
- <Image
-        src={image}
-        alt="main picture"
-        className={styles.carousel__image}
-        fill
-      />
-*/

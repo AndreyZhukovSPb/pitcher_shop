@@ -8,7 +8,7 @@
   z-index: 1;
   transition: right 1s;
   justify-content: flex-end;
-  color: black;
+  color: #000000;
 }
 
 .menu_active {
@@ -53,15 +53,15 @@
   font-size: 16px;
   line-height: 1.6;
   text-decoration: none;
-  color: black;
+  color: #000000;
 }
 
 .navigation__link_active {
-  border-bottom: 1.4px black solid;
+  border-bottom: 1.4px  #000000 solid;
 }
 
 .menu__navigation_active {
-  border-bottom: 1.4px black solid;
+  border-bottom: 1.4px #000000 solid;
 }
 
 .menu__navContainer {
@@ -69,8 +69,4 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.menu__closeButton_active {
-  
 }

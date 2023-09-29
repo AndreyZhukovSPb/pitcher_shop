@@ -34,6 +34,9 @@ const StoreData: React.FC<StoreDataProps> = ({ data }) => {
         <p className={styles.storeData__title}>{data.shcedule}</p>
       </div>
       <div className={styles.storeData__container}>
+        <div className={styles.storeData__imageContainer}>
+
+        
         <Image
           src={data.teamPhoto}
           alt="main picture"
@@ -41,6 +44,7 @@ const StoreData: React.FC<StoreDataProps> = ({ data }) => {
           fill
           priority
         />
+        </div>
         <div className={styles.storeData__map}>
           <iframe
             className={styles.storeData__iframe}

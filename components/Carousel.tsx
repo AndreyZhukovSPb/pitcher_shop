@@ -22,6 +22,7 @@ export const CarouselItem: React.FC<carouselItemProps> = ({
         alt="main picture"
         className={styles.carousel__image}
         fill
+        priority
       />
       {children}
     </div>
@@ -57,10 +58,8 @@ export const CarouselBox: React.FC<carouselBoxProps> = ({
         {currentSellPictures.map((item) => (
           <CarouselItem key={item.pictureId} image={item.image}>
             <Link href={"/shop"}>
-              <button className={styles.carousel_button}>
-                <p className={styles.carousel_buttonText}>
-                  {isMobile ? "перейти в магазин" : "купить"}
-                </p>
+              <button aria-label="перейти в магазин" className={styles.carousel_button}>
+                {isMobile ? "перейти в магазин" : "купить"}
               </button>
             </Link>
             <div
@@ -99,7 +98,7 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
       const interval = setInterval(() => {
         setCounter((counter) => (counter = counter + 1));
         updateIndex(activeIndex + 1);
-      }, 3500);
+      }, 2500);
       return () => {
         if (interval) {
           clearInterval(interval);
@@ -148,11 +147,8 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
     }
     if (diff < -5) {
       if (!leftButtonIsVisible) {
-        console.log("мотать некуда налево");
         return;
       } else {
-        console.log("налево");
-        console.log(currentTouch);
         updateIndex(activeIndex - 1);
       }
     }
@@ -172,6 +168,7 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
         })}
       </div>
       <button
+        aria-label="предыдущая картинка"
         className={`${styles.carousel__wrapButton} ${
           styles.carousel__wrapButton_type_prev
         } ${!leftButtonIsVisible ? styles.carousel__wrapButton_hidden : ""}`}
@@ -180,6 +177,7 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
         }}
       ></button>
       <button
+        aria-label="предыдущая картинка"
         className={`${styles.carousel__wrapButton} ${
           styles.carousel__wrapButton_type_next
         } ${!rightButtonIsVisible ? styles.carousel__wrapButton_hidden : ""}`}

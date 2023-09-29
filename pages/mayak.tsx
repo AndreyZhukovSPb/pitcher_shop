@@ -2,9 +2,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SectionLine from "../components/SectionLine";
 import Coffeeshop from "../components/Coffeeshop";
+import { baseURL } from "../utils/constatnts";
 
 const Mayak = ({ mayakData }) => {
-  //   <Header isMayak={true} />
   
   return (
     <>
@@ -26,12 +26,10 @@ const Mayak = ({ mayakData }) => {
   );
 };
 
-//<Coffeeshop isMayak={true} isPark={false}/>
-
 export default Mayak;
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:4001/mayak");
+  const res = await fetch(`${baseURL}/mayak`);
   const mayakData = await res.json();
 
   return {
