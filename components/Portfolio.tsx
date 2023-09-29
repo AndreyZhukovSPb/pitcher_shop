@@ -38,7 +38,7 @@ const Portfolio: React.FC<PortfolioProps> = ({instaPhoto}) => {
           Последние новости из жизни Picther
       </h2>
       <div className={styles.portfolio__photoContainer}>
-        {instaPhoto.slice(0, itemsToShow).map((item) => (
+        {instaPhoto && instaPhoto.slice(0, itemsToShow).map((item) => (
           <Photo
             key={item.id}
             item={item}

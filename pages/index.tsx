@@ -3,7 +3,6 @@ import Footer from "../components/Footer";
 import { baseURL } from "../utils/constatnts";
 
 const Index = ({ data }) => {
-  // <Header isMain={true} />
 
   return (
     <>

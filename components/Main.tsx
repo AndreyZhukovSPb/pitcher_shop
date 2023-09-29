@@ -11,7 +11,7 @@ interface MainProps {
   mainPicturesMobile: Array<MyTypeMainPhoto>,
   storesPictures: Array<string>,
   aboutInfo: MyTypeAboutProps,
-  instaPhoto: Array<MyTypeInstaPhoto>
+  instaPhoto?: Array<MyTypeInstaPhoto>
 }
 
 const Main: React.FC<MainProps> = ({mainPictures, mainPicturesMobile, storesPictures, aboutInfo, instaPhoto}) => {
