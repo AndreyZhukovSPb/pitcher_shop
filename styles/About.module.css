@@ -5,16 +5,15 @@
 .about {
   padding: 3vw 3vw;
   margin: 0 3vw;
-  background-color: rgba(128, 128, 128, 0.099);
+  background-color: rgb(128 128 128 / 0.099);
   background-image: url('https://i.ibb.co/sKpYKKn/texture-new-transformed.jpg');
   background-size: cover;
-  /* height: calc(100vh - 447px); */
   min-height: 550px;
   line-height: 1.4;
   letter-spacing: 0.8px;
   font-family: 'Mont-Regular';
   font-size: 13px;
-  color: white;
+  color: #FFFFFF;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,8 +48,8 @@
 }
 
 .about__container:nth-of-type(2) {
-  border-right: 1px solid rgba(255, 255, 255, 0.7);
-  border-left: 1px solid rgba(255, 255, 255, 0.7);
+  border-right: 1px solid rgb(255 255 255 / 0.7);
+  border-left: 1px solid rgb(255 255 255 / 0.7);
 }
 
 .about__title {
@@ -76,7 +75,7 @@
 }
 
 
-@media screen and (max-width: 1279px) {
+@media (width <= 1279px) {
   .about__context {
     font-size: 13px;
   }
@@ -92,7 +91,7 @@
   }
 }
 
-@media screen and (max-width: 1179px) {
+@media (width <= 1179px) {
   .about__context {
     font-size: 12px;
   }
@@ -109,7 +108,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media (width <= 1024px) {
   .about__context {
     font-size: 11px;
   }
@@ -126,7 +125,7 @@
   }
 }  
 
-@media screen and (max-width: 899px) {
+@media (width <= 899px) {
   .about__context {
     font-size: 9px;
   }
@@ -149,7 +148,7 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media (width <= 767px) {
   .about {
     min-height: 0;
     margin: 0 4vw;
@@ -157,7 +156,6 @@
   .about__box {
     grid-template-columns: none;
   }
-
   .about__context {
     font-size: 12px; 
   }
@@ -183,11 +181,10 @@
   }
   .about__context:first-of-type {
     margin-top: 12px;
-  }
-  
+  } 
 }
 
-@media screen and (max-width: 589px) {
+@media (width <= 589px) {
   .about__context_type_mobile {
     display: none;
   }

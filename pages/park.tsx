@@ -2,10 +2,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SectionLine from "../components/SectionLine";
 import Coffeeshop from "../components/Coffeeshop";
-
+import { baseURL } from "../utils/constatnts";
 
 const Park = ({ parkData }) => {
-//    <Header isPark={true} />
   return (
     <>
       <SectionLine isMain={false} />
@@ -28,7 +27,7 @@ const Park = ({ parkData }) => {
 export default Park;
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:4001/park");
+  const res = await fetch(`${baseURL}/park`);
   const parkData = await res.json();
 
   return {

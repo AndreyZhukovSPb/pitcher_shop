@@ -1,12 +1,9 @@
-import App from "../components/App";
-import Header from "../components/Header";
 import Main from "../components/Main";
 import Footer from "../components/Footer";
-import { useEffect } from "react";
+import { baseURL } from "../utils/constatnts";
 
-const Index = ({ data, switchOffIsMain }) => {
+const Index = ({ data }) => {
   // <Header isMain={true} />
-
 
   return (
     <>
@@ -25,7 +22,7 @@ const Index = ({ data, switchOffIsMain }) => {
 export default Index;
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:4001");
+  const res = await fetch(baseURL);
   const data = await res.json();
   return {
     props: {
@@ -34,17 +31,8 @@ export async function getStaticProps() {
   };
 }
 
-
-
-
 /*
 to-do: 
-FEATURE:
-скорость перелистывания карусели для мобилы увеличить
-
-REFACTOR
-baseURL вынести в константу и поменять во всех фетч запросах
-удалить шрифты из page
 
 WAITING FOR
 меню переделать и залить в облако - надпись "меню", белое или черное?
@@ -57,11 +45,18 @@ Barista about - add
 Menu popup?
 what does menu include?
 на мобиле есть ховер и курсор поинтер?
+clicable links in footer
 
 filally:
+Консоль ошибки
 удалить app и appOld
 ScrollToTop проверить
 favicon check?
 errors console
+убрать все каменты
+удалить шрифты из page
+
+readme
+написать как собирать проект + проверить собирается ли, убрать технологии
 */
 

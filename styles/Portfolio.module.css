@@ -28,28 +28,28 @@
   font-weight: 400;
 }
 
-@media screen and (max-width: 1279px) {
+@media (width <= 1279px) {
   .portfolio__title {
     font-size: 18px;
     width: 230px;
     margin: 26px 0 18px 0;
   }
 }
-@media screen and (max-width: 1024px) {
+@media (width <= 1024px) {
   .portfolio__title {
     font-size: 16px;
     width: 210px;
     margin: 22px 0 16px 0;
   }
 }
-  @media screen and (max-width: 899px) {
+  @media (width <= 899px) {
     .portfolio__title {
       font-size: 15px;
       width: 190px;
     }  
 }
 
-@media screen and (max-width: 767px) {
+@media (width <= 767px) {
   .portfolio__photoContainer {
     padding: 0 4vw 20px 4vw;
     gap: 3px;
@@ -59,5 +59,3 @@
     margin: 22px 0 14px 0;
   }
 }
-
-

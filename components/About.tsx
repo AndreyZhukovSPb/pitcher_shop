@@ -8,9 +8,9 @@ interface AboutProps {
 }
 
 const About: React.FC<AboutProps> = ({ aboutInfo }) => {
-  const iconCoffeePath = "/icon_coffee.png";
-  const iconNinjaPath = "/icon_ninja.png";
-  const iconTrustPath = "/icon_trust.png";
+  const iconCoffeePath = "/icon_coffee.svg";
+  const iconNinjaPath = "/icon_ninja.svg";
+  const iconTrustPath = "/icon_trust.svg";
 
   return (
     <section className={styles.about}>

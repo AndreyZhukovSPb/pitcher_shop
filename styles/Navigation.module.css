@@ -14,7 +14,7 @@
   font-style: normal;
   font-size: 12px;
   line-height: 1.29;
-  color: black;
+  color: #000000;
   text-decoration: none;
   transition: opacity 0.4s linear;
   margin-right: 40px;
@@ -26,11 +26,11 @@
 }
 
 .navigation__link_type_main {
-  color: white;
+  color: #FFFFFF;
 }
 
 .navigation__link_active {
-  border-bottom: 1.4px black solid;
+  border-bottom: 1.4px  #000000 solid;
 }
 
 .navigation__link:last-of-type {
@@ -61,27 +61,27 @@
   filter: invert(100%);
 }
 
-@media screen and (max-width: 1279px) {
+@media (width <= 1279px) {
   .navigation__link {
     font-size: 10px;
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media (width <= 1024px) {
   .navigation__link {
     font-size: 9px;
     margin-right: 15px;
   }
 }
 
-@media screen and (max-width: 899px) {
+@media (width <= 899px) {
   .navigation__link {
     font-size: 8px;
     margin-right: 10px;
   }
 }
 
-@media screen and (max-width: 767px) {
+@media (width <= 767px) {
   .navigation__link {
     display: none;
   }
@@ -92,6 +92,3 @@
     display: none;
   }
 }
-
-
-

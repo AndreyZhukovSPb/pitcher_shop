@@ -25,7 +25,7 @@ const Header: React.FC<headerProps> = ({
   return (
     <header className={`${styles.header} ${isMain? styles.header__type_main : ''} `}>
       <Navigation
-        firstTitle="Онлайн-магазин"
+        firstTitle="Онлайн магазин"
         secondTitle="Гайд по завариванию"
         fisrtLink="/shop"
         secondLink="/guide"

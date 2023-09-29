@@ -13,7 +13,7 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Specialty coffee</title>
-        <link rel="icon" href="/favicon.ico/" sizes="any" />
+        <link rel="icon" href="/favicon.ico/" sizes="any" lang="RU"/>
       </Head>
       <ScrollToTop />
       <div className='page'>

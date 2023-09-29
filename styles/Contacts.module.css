@@ -13,6 +13,7 @@
   height: 70vh;
   min-height: 550px;
   max-height: 700px;
+  
 }
 
 .contacts__data {
@@ -46,6 +47,7 @@
   line-height: 1.4;
   list-style: none;
   font-family: 'Mont-Regular';
+  color: #424242;
 }
 
 .contacts__message {
@@ -56,13 +58,13 @@
   text-transform: uppercase;
 }
 
-@media screen and (max-width: 1279px) {
+@media (width <= 1279px) {
   .contacts__container {
     height: 65vh;
   } 
 }
 
-@media screen and (max-width: 899px) {
+@media (width <= 899px) {
   .contacts {
     height: auto;
     padding: 0 3vw 20px;
@@ -76,14 +78,13 @@
   } 
   .contacts__data {
     width: 80vw;
-    
   }
   .contacts__message {
     margin-top: 30px;
   } 
 }
 
-@media screen and (max-width: 767px) {
+@media (width <= 767px) {
   .contacts__container {
     width: 94vw;
   }
@@ -96,8 +97,4 @@
   .contacts__contactbox {
     margin-top: 10px;
   }
-}
-
-@media screen and (max-width: 399px) {
-
 }

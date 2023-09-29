@@ -58,6 +58,7 @@ const Navigation: React.FC<navigationProps> = ({
           {secondTitle}
         </Link>
         <button
+          aria-label="меню для мобильного"
           onClick={handleBurgerClick}
           className={`${styles.navigation__button} ${
             isForBurger ? styles.navigation__button_active : ""
