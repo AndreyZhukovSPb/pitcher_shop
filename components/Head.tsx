@@ -1,6 +1,7 @@
+/*
 import Head from "next/head";
 
-const Head = () => {
+export default const Head = () => {
   return (
     <Head>
         <title>Specialty coffee</title>
@@ -8,3 +9,5 @@ const Head = () => {
       </Head>
   )
 }
+
+*/

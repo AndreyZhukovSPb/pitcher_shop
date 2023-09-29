@@ -1,3 +1,4 @@
+/* 
 import React from 'react';
 import { useState } from 'react';
 import { Routes, Route } from "react-router-dom";
@@ -71,22 +72,4 @@ function App() {
 
 export default App;
 
-/* 
-del insta api
-children: any CorouselBox
-плавное закрытие бургерного меню при переходе на другую страницу
-сделать чекбоксы индикаторы кружки сколько всего картинок и на какой находимся
-что лежит в headerType?
-типизировать useState, useEffect
-переписать carouselProps - для функций
-карусель разнести на несколько компонентов
-
-npm i cors - probably will be usefull
-553648129
-"homepage": "https://AndreyZhukovSPb.github.io/pitcher",
-git push origin level-1     
-    "typescript": "^5.1.6",
-    "private": true,
-    
 */
-
