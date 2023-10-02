@@ -89,6 +89,11 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
   const [rightButtonIsVisible, setRightButtonIsVisible] = React.useState(true);
 
   useEffect(() => {
+    const vhOffset = window.innerHeight - document.documentElement.clientHeight;
+    document.documentElement.style.setProperty('--vh-offset', `${vhOffset}px`);
+  }, []);
+
+  useEffect(() => {
     if (
       counter >= React.Children.count(children) - 1 ||
       !rightButtonIsVisible
