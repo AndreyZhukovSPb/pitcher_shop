@@ -59,7 +59,7 @@ export const CarouselBox: React.FC<carouselBoxProps> = ({
           <CarouselItem key={item.pictureId} image={item.image}>
             <Link href={"/shop"}>
               <button aria-label="перейти в магазин" className={styles.carousel_button}>
-                {isMobile ? "перейти в магазин" : "купить?"}
+                {isMobile ? "перейти в магазин?" : "купить"}
               </button>
             </Link>
             <div
@@ -91,6 +91,7 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
   useEffect(() => {
     const vhOffset = window.innerHeight - document.documentElement.clientHeight;
     document.documentElement.style.setProperty('--vh-offset', `${vhOffset}px`);
+    console.log(vhOffset)
   }, []);
 
   useEffect(() => {
