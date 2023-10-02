@@ -182,7 +182,8 @@
     font-size: 15px;
   }
   .carousel {
-    height: 100dvh;
+    height: 100vh;
+    min-height: -webkit-fill-available
   }
   .carousel_button {
     bottom: 50px;
