@@ -184,8 +184,6 @@
   .carousel {
     /* height: 100vh; */
     height: calc(100vh - var(--vh-offset));
-    min-height: -webkit-fill-available;
-    
   }
   .carousel_button {
     bottom: 50px;
