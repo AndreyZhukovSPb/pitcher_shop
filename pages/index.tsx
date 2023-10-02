@@ -32,7 +32,12 @@ export async function getStaticProps() {
 
 /*
 to-do: 
-del compomemst app, head
+contacts for mobile
+main last picture letters
+size of screen for iphone
+footer for mobile
+листалка на попапах мобила
+сделать чтобы отрисовывался без инсты
 
 
 WAITING FOR
