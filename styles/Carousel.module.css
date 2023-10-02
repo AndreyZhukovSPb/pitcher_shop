@@ -182,8 +182,10 @@
     font-size: 15px;
   }
   .carousel {
-    height: 100vh;
-    min-height: -webkit-fill-available
+    /* height: 100vh; */
+    height: calc(100vh - var(--vh-offset));
+    min-height: -webkit-fill-available;
+    
   }
   .carousel_button {
     bottom: 50px;
