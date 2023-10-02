@@ -89,12 +89,6 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
   const [rightButtonIsVisible, setRightButtonIsVisible] = React.useState(true);
 
   useEffect(() => {
-    const vhOffset = window.innerHeight - document.documentElement.clientHeight;
-    document.documentElement.style.setProperty('--vh-offset', `${vhOffset}px`);
-    console.log(vhOffset)
-  }, []);
-
-  useEffect(() => {
     if (
       counter >= React.Children.count(children) - 1 ||
       !rightButtonIsVisible
@@ -197,29 +191,3 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
 };
 
 export default Carousel;
-
-// export const CarouselBox: React.FC<{}> = () => {
-/*
-  interface MyTypeMainPhoto {
-    pictureId: number;
-    image: string;
-    text_1: string;
-    text_2: string;
-    text_3: string;
-    number: string;
-  }
-  const [mainPictures, setMainPictures] = React.useState<
-    Array<MyTypeMainPhoto>
-    >([]);
-  const [mainPicturesMobile, setMainPicturesMobile] = React.useState<
-    Array<MyTypeMainPhoto>
-    >([]);
-    useEffect(() => {
-    Api.getMainPhoto()
-      .then((res) => {
-        setMainPictures(res.desctopPhoto);
-        setMainPicturesMobile(res.mobilePhoto);
-        console.log(res.istaPhoto.data)
-      })
-  }, []);
-  */
