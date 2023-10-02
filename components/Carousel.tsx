@@ -155,7 +155,28 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
     setTouchPosition(null);
   };
 
+  const [vh, setVh] = useState(0);
+
+  useEffect(() => {
+      function handleResize() {
+          setVh(window.innerHeight);
+      }
+
+      // Add an event listener for window resize
+      window.addEventListener('resize', handleResize);
+
+      // Initial setup
+      handleResize();
+
+      // Cleanup the event listener on component unmount
+      return () => {
+          window.removeEventListener('resize', handleResize);
+      };
+  }, []);
+
   return (
+    <div className={styles.cont} style={{ height: `${vh}px`}}>
+      
     <section className={styles.carousel}>
       <div
         className={styles.carousel__inner}
@@ -187,6 +208,8 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
         }}
       ></button>
     </section>
+      
+    </div>
   );
 };
 
