@@ -163,7 +163,7 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
       }
 
       // Add an event listener for window resize
-      window.addEventListener('resize', handleResize);
+      // window.addEventListener('resize', handleResize);
 
       // Initial setup
       handleResize();
