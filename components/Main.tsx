@@ -28,9 +28,11 @@ const Main: React.FC<MainProps> = ({mainPictures, mainPicturesMobile, storesPict
       <About 
         aboutInfo={aboutInfo}
       />
-      <Portfolio 
-        instaPhoto={instaPhoto} 
-      />
+      {instaPhoto && 
+        <Portfolio 
+          instaPhoto={instaPhoto} 
+        />}
+      
       <SectionLine 
         isMain={true} 
       />
