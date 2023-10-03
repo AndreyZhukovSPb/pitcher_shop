@@ -35,12 +35,11 @@ export async function getStaticProps() {
 
 /*
 to-do: 
-+ carousel button
-+ carousel text container
-+ contacts for mobile
 + footer for mobile
-листалка на попапах мобила
-+ сделать чтобы отрисовывался без инсты
++ carousel button ближе к низу
++ contacts for mobile
++ контакты сделать "звонить" с иконки тоже
+- листалка на попапах мобила
 
 
 WAITING FOR
@@ -57,7 +56,6 @@ Nikita
 Menu popup?
 what does menu include?
 на мобиле есть ховер и курсор поинтер?
-clicable links in footer
 
 filally:
 Консоль ошибки

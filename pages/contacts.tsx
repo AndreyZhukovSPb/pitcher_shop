@@ -17,31 +17,48 @@ const Contacts = ({ data }) => {
         </div>
         <ul className={styles.contacts__data}>
           <li className={styles.contacts__contactbox}>
-            <Image
-              src={"/phone.svg"}
-              alt="icon phone"
-              className={styles.contacts__icon}
-              fill
-            />
-            <a href='tel:+79313393043' className={styles.contacts__content}>+7-931-339-30-43</a>
+            <a
+              href="tel:+79313393043"
+              className={styles.contacts__box}
+            >
+              <Image
+                src={"/phone.svg"}
+                alt="icon phone"
+                className={styles.contacts__icon}
+                fill
+              />
+              <p className={styles.contacts__content}>+7-931-339-30-43</p>
+            </a>
           </li>
           <li className={styles.contacts__contactbox}>
-            <Image
-              src={"/email.svg"}
-              alt="icon email"
-              className={styles.contacts__icon}
-              fill
-            />
-            <a href='mailto:pitcherbar@gmail.com' className={styles.contacts__content}>pitcherbar@gmail.com</a>
+            <a
+              href="mailto:pitcherbar@gmail.com"
+              target="_blank"
+              className={styles.contacts__box}
+            >
+              <Image
+                src={"/email.svg"}
+                alt="icon email"
+                className={styles.contacts__icon}
+                fill
+              />
+              <p className={styles.contacts__content}>pitcherbar@gmail.com</p>
+            </a>
           </li>
           <li className={styles.contacts__contactbox}>
-            <Image
-              src={"/instagram.svg"}
-              alt="icon email"
-              className={styles.contacts__icon}
-              fill
-            />
-            <a href='https://www.instagram.com/pitcherbar/' target='_blank' className={styles.contacts__content}>pitcherbar</a>
+            <a
+              href="https://www.instagram.com/pitcherbar/"
+              target="_blank"
+              className={styles.contacts__box}
+            >
+              <Image
+                src={"/instagram.svg"}
+                alt="icon email"
+                className={styles.contacts__icon}
+                fill
+              />
+              <p className={styles.contacts__content}>pitcherbar</p>
+            </a>
           </li>
         </ul>
         <p className={styles.contacts__message}>
