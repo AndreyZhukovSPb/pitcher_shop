@@ -110,6 +110,7 @@
   }
   .storeData__image {
     height: 250px !important;
+    position: relative !important;
   }
   .storeData__map {
     height: 180px;
@@ -137,10 +138,10 @@
     /* ;grid-template-rows: auto; */
   }
   .storeData__image {
-    height: 230px !important;
+    height: 220px !important;
   }
   .storeData__map {
-    height: 170px;
+    height: 165px;
   }
   .storeData__container {
     row-gap: 15px;
