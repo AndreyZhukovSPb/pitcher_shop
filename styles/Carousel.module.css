@@ -191,7 +191,7 @@
     /* height: calc(100vh - var(--vh-offset)); */
   }
   .carousel_button {
-    bottom: 6%;
+    bottom: 4%;
     right: 30px;
     left: 30px;
     height: 50px;

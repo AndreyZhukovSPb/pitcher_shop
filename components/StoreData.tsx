@@ -18,13 +18,12 @@ interface StoreDataProps {
 const StoreData: React.FC<StoreDataProps> = ({ data }) => {
   const isSmallMobile = useMediaQuery({ query: `(max-width: 599px)` });
 
-  const [currentSizeMap, setCurrentSizeMap] = React.useState<string>('');
+  const [currentSizeMap, setCurrentSizeMap] = React.useState<string>("");
 
   useEffect(() => {
-    isSmallMobile ?
-      setCurrentSizeMap(data.map_mobile)
-      : setCurrentSizeMap(data.map)
-  
+    isSmallMobile
+      ? setCurrentSizeMap(data.map_mobile)
+      : setCurrentSizeMap(data.map);
   }, [isSmallMobile]);
 
   return (
@@ -35,15 +34,13 @@ const StoreData: React.FC<StoreDataProps> = ({ data }) => {
       </div>
       <div className={styles.storeData__container}>
         <div className={styles.storeData__imageContainer}>
-
-        
-        <Image
-          src={data.teamPhoto}
-          alt="main picture"
-          className={styles.storeData__image}
-          fill
-          priority
-        />
+          <Image
+            src={data.teamPhoto}
+            alt="main picture"
+            className={styles.storeData__image}
+            fill
+            priority
+          />
         </div>
         <div className={styles.storeData__map}>
           <iframe
@@ -58,6 +55,3 @@ const StoreData: React.FC<StoreDataProps> = ({ data }) => {
 };
 
 export default StoreData;
-
-
-

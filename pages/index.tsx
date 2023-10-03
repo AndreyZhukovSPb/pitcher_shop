@@ -35,8 +35,6 @@ export async function getStaticProps() {
 
 /*
 to-do: 
-+ footer for mobile
-
 + contacts for mobile
 - листалка на попапах мобила
 
