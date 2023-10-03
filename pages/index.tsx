@@ -36,9 +36,8 @@ export async function getStaticProps() {
 /*
 to-do: 
 + footer for mobile
-+ carousel button ближе к низу
+
 + contacts for mobile
-+ контакты сделать "звонить" с иконки тоже
 - листалка на попапах мобила
 
 
@@ -53,6 +52,7 @@ Nikita
 почему бэк тупит?
 
 ??
+carousel button ближе к низу
 Menu popup?
 what does menu include?
 на мобиле есть ховер и курсор поинтер?
