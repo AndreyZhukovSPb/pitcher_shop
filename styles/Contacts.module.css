@@ -33,6 +33,12 @@
   position: relative;
 }
 
+.contacts__box {
+  width: 100%;
+  display: flex;
+  color: #424242;
+}
+
 .contacts__icon {
   width: 20px !important;
   height: 20px !important;

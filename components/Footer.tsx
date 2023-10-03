@@ -12,46 +12,56 @@ const Footer: React.FC = () => {
           </Link>
           <ul className={styles.footer__contacts}>
             <li className={styles.footer__contactbox}>
-              <Image
-                src={"/phone.svg"}
-                alt="icon phone"
-                className={styles.footer__icon}
-                fill
-              />
-              <a
-                href="tel:+79313393043"
-                className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
-              >
-                +7-931-339-30-43
+              <a href="tel:+79313393043" className={styles.footer__box}>
+                <Image
+                  src={"/phone.svg"}
+                  alt="icon phone"
+                  className={styles.footer__icon}
+                  fill
+                />
+                <p
+                  className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
+                >
+                  +7-931-339-30-43
+                </p>
               </a>
             </li>
             <li className={styles.footer__contactbox}>
-              <Image
-                src={"/email.svg"}
-                alt="icon email"
-                className={styles.footer__icon}
-                fill
-              />
               <a
                 href="mailto:pitcherbar@gmail.com"
-                className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
+                target="_blank"
+                className={styles.footer__box}
               >
-                pitcherbar@gmail.com
+                <Image
+                  src={"/email.svg"}
+                  alt="icon email"
+                  className={styles.footer__icon}
+                  fill
+                />
+                <p
+                  className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
+                >
+                  pitcherbar@gmail.com
+                </p>
               </a>
             </li>
             <li className={styles.footer__contactbox}>
-              <Image
-                src={"/instagram.svg"}
-                alt="icon instagram"
-                className={styles.footer__icon}
-                fill
-              />
               <a
                 href="https://www.instagram.com/pitcherbar/"
                 target="_blank"
-                className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
+                className={styles.footer__box}
               >
-                pitcherbar
+                <Image
+                  src={"/instagram.svg"}
+                  alt="icon instagram"
+                  className={styles.footer__icon}
+                  fill
+                />
+                <p
+                  className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
+                >
+                  pitcherbar
+                </p>
               </a>
             </li>
           </ul>
