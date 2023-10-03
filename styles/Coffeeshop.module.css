@@ -113,7 +113,6 @@
   .coffeeshop__title {
     font-size: 18px;
   }
-  
 }
 
 @media (width <= 1024px) {
@@ -159,10 +158,10 @@
     height: auto;
   }
   .coffeeshop__title {
-    font-size: 20px;
+    font-size: 18px;
   }
   .coffeeshop__title:nth-of-type(2) {
-    font-size: 18px;
+    font-size: 15px;
   }
   .coffeeshop__content {
     font-size: 14px;
