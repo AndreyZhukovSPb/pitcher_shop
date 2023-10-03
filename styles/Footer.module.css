@@ -33,8 +33,6 @@
   cursor: initial;
 }
 
-
-
 .footer__contactbox {
   width: 100%;
   display: flex;
@@ -210,8 +208,10 @@
 }
 
 @media (width <= 767px)  {
+  
   .footer__container {
     padding: 20px 4vw; 
+    gap: 20px;
   }
   .footer__contactbox {
     margin-top: 5px;
@@ -236,6 +236,12 @@
 }
 
 @media (width <= 589px)  {
+  .footer__contactsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
   .footer__container {
     flex-direction: column-reverse;
   }
@@ -252,7 +258,7 @@
   }
   .footer__contactsTitle {
     font-size: 14px;
-    margin-top: 20px;
+    margin: 0;
     text-align: center;
   }
   .footer__contactbox {

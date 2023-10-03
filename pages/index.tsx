@@ -4,6 +4,9 @@ import { baseURL } from "../utils/constatnts";
 
 const Index = ({ data }) => {
 
+  console.log(data.instaPhoto)
+  // data.instaPhoto.data
+
   return (
     <>
       <Main
@@ -11,7 +14,7 @@ const Index = ({ data }) => {
         mainPicturesMobile={data.sellPictures.mobilePhoto}
         storesPictures={data.storesPictures}
         aboutInfo={data.aboutInfo}
-        instaPhoto={data.instaPhoto.data}
+        instaPhoto={data.instaPhoto && data.instaPhoto.data}
       />
       <Footer/>
     </>
@@ -32,12 +35,12 @@ export async function getStaticProps() {
 
 /*
 to-do: 
-contacts for mobile
-main last picture letters
-size of screen for iphone
-footer for mobile
++ carousel button
++ carousel text container
++ contacts for mobile
++ footer for mobile
 листалка на попапах мобила
-сделать чтобы отрисовывался без инсты
++ сделать чтобы отрисовывался без инсты
 
 
 WAITING FOR
@@ -46,6 +49,9 @@ team photo парк - поменять
 main photo park new
 photo Kiri ot Kiri
 Barista about - add
+
+Nikita
+почему бэк тупит?
 
 ??
 Menu popup?

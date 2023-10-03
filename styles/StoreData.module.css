@@ -134,7 +134,7 @@
 
 @media (width <= 399px) {
   .storeData__container {
-    grid-template-rows: auto;
+    /* ;grid-template-rows: auto; */
   }
   .storeData__image {
     height: 220px;

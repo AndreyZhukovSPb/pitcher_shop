@@ -179,7 +179,7 @@
 
 @media (width <= 767px) {
   .carousel__textContainer {
-    top: 250px; 
+    top: 30%; 
     left: 25px;
   }
   .carousel__text {
@@ -191,7 +191,7 @@
     /* height: calc(100vh - var(--vh-offset)); */
   }
   .carousel_button {
-    bottom: 50px;
+    bottom: 10%;
     right: 30px;
     left: 30px;
     height: 50px;
