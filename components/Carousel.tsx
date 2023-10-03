@@ -155,6 +155,8 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
     setTouchPosition(null);
   };
 
+  const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
+
   const [vh, setVh] = useState(0);
 
   useEffect(() => {
@@ -172,7 +174,7 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
       return () => {
           window.removeEventListener('resize', handleResize);
       };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className={styles.cont} style={{ height: `${vh}px`}}>
