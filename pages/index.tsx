@@ -35,8 +35,9 @@ export async function getStaticProps() {
 
 /*
 to-do: 
-+ contacts for mobile
 - листалка на попапах мобила
+- поменять бейс юрл на облако
+- залить в облако токен через гитхаб
 
 
 WAITING FOR
@@ -68,7 +69,7 @@ readme
 написать как собирать проект + проверить собирается ли, убрать технологии
 
 
-
+в мобиле карта перемещается все таки, это не скрол а что-то дургое
 children: any CorouselBox
 что лежит в headerType?
 типизировать useState, useEffect
