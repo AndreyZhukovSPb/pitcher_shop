@@ -9,6 +9,7 @@ interface ImagePopupProps {
   item: string;
   onClose: () => void;
   arrayOfImages: Array<MyTypeImage>;
+  isMobile?: boolean,
 }
 
 const ImagePopup: React.FC<ImagePopupProps> = ({
@@ -17,6 +18,8 @@ const ImagePopup: React.FC<ImagePopupProps> = ({
   item,
   onClose = () => {},
 }) => {
+
+
   const [leftButtonIsVisible, setLeftButtonIsVisible] =
     React.useState<boolean>(true);
   const [rightButtonIsVisible, setRightButtonIsVisible] =
@@ -127,9 +130,7 @@ const ImagePopup: React.FC<ImagePopupProps> = ({
   }
 
   function handleCheckIsOverlay(e: any) {
-    console.log("clock");
     if (!overlayRef.current || e.target.contains(overlayRef.current)) {
-      console.log("here?");
       handleClose();
     }
   }

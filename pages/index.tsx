@@ -4,9 +4,6 @@ import { baseURL } from "../utils/constatnts";
 
 const Index = ({ data }) => {
 
-  console.log(data.instaPhoto)
-  // data.instaPhoto.data
-
   return (
     <>
       <Main
@@ -35,10 +32,10 @@ export async function getStaticProps() {
 
 /*
 to-do: 
-- листалка на попапах мобила
 - поменять бейс юрл на облако
 - залить в облако токен через гитхаб
-
+- Логгер ошибок бекэнд 
+- удалить кофекарусель
 
 WAITING FOR
 меню переделать и залить в облако - надпись "меню", белое или черное?
@@ -49,16 +46,18 @@ Barista about - add
 
 Nikita
 почему бэк тупит?
+timeout чтобы вернуть транзишн, так себе решение
 
 ??
 carousel button ближе к низу
 Menu popup?
 what does menu include?
 на мобиле есть ховер и курсор поинтер?
+плавное открытие карусели для кофешопа?
 
 filally:
 Консоль ошибки
-удалить app и appOld
+удалить app и appOld, popupContainer
 ScrollToTop проверить
 favicon check?
 errors console
