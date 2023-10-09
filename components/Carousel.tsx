@@ -13,7 +13,6 @@ interface carouselItemProps {
   onClose?: () => void;
 }
 
-
 export const CarouselItem: React.FC<carouselItemProps> = ({
   children,
   image,
@@ -21,20 +20,22 @@ export const CarouselItem: React.FC<carouselItemProps> = ({
   onClose
 }) => {
 
-  const overlayRef = React.useRef<HTMLDivElement>(null);
+
+  /* const overlayRef = React.useRef<HTMLDivElement>(null);
 
   const handleCheckIsOverlay = (e: any) => {
     if (!overlayRef.current || e.target.contains(overlayRef.current)) {
       onClose();
     }
   }
+  */
 
   return (
     <div
       className={`${styles.carousel__item}
       ${isCoffeeshop ? styles.carousel__item_type_coffeshop : ""}`}
-      ref={overlayRef}
-      onClick={isCoffeeshop ? handleCheckIsOverlay : null}
+      // ref={overlayRef}
+      // onClick={isCoffeeshop ? handleCheckIsOverlay : null}
     >
       <Image
         src={image}
@@ -151,6 +152,8 @@ const Carousel: React.FC<carouselProps> = ({
       return;
     } else {
       setCurrentCatouselItem(item.index);
+      console.log('debug 0')
+      console.log(item.index)
     }
   }, []);
 
@@ -309,7 +312,7 @@ const Carousel: React.FC<carouselProps> = ({
         ></button>
         <p className={`${styles.carousel__counter}
             ${!isCoffeeshop ? styles.carousel__counter_hidden : ""}`}>
-              {activeIndex} / {React.Children.count(children)}
+              {activeIndex + 1 } / {React.Children.count(children)}
         </p> 
       </section>
     </div>

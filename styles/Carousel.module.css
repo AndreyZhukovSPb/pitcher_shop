@@ -158,14 +158,14 @@
 }
 
 .carousel__wrapButton_type_CoffeshopNext {
-  right: calc(50% - 50px);
+  right: calc(50% - 60px);
   filter: invert(100%);
   bottom: 10px;
   top: auto;
 }
 
 .carousel__wrapButton_type_CoffeshopPrev {
-  left: calc(50% - 50px);
+  left: calc(50% - 60px);
   filter: invert(100%);
   bottom: 10px;
   top: auto;
@@ -226,10 +226,10 @@
   .carousel__counter {
     position: absolute;
     top: 27px;
-    left: calc(50% - 25px);
+    left: calc(50% - 30px);
     font-size: 18px;
     margin: 0;
-    width: 50px;
+    width: 60px;
     text-align: center;
   }
   .carousel__closeButton {
@@ -251,7 +251,8 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: rgb(0 0 0 / 0.9 );
+    /* background-color: rgb(0 0 0 / 0.9 ); */
+    background-color: rgb(0 0 0 );
     transition: opacity 1s ease;
   }
   .carousel__image_type_coffeshop {
