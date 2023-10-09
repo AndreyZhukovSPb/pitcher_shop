@@ -18,7 +18,6 @@ import { useMediaQuery } from "react-responsive";
 import { MyTypeImage } from "./SharedTypes";
 import React from "react";
 import { CarouselBox } from "./Carousel";
-import CoffeeCarousel from "./CoffeeCarousel";
 
 interface MyTypeImagesArray {
   image: string;
