@@ -2,25 +2,46 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/Carousel.module.css";
 // import { Link } from "react-router-dom";
 import Link from "next/link";
-import { MyTypeMainPhoto } from "./SharedTypes";
+import { MyTypeMainPhoto, MyTypeImage } from "./SharedTypes";
 import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
 
 interface carouselItemProps {
   children: any;
   image: string;
+  isCoffeeshop?: boolean;
+  onClose?: () => void;
 }
+
 
 export const CarouselItem: React.FC<carouselItemProps> = ({
   children,
   image,
+  isCoffeeshop,
+  onClose
 }) => {
+
+  const overlayRef = React.useRef<HTMLDivElement>(null);
+
+  const handleCheckIsOverlay = (e: any) => {
+    if (!overlayRef.current || e.target.contains(overlayRef.current)) {
+      onClose();
+    }
+  }
+
   return (
-    <div className={styles.carousel__item}>
+    <div
+      className={`${styles.carousel__item}
+      ${isCoffeeshop ? styles.carousel__item_type_coffeshop : ""}`}
+      ref={overlayRef}
+      onClick={isCoffeeshop ? handleCheckIsOverlay : null}
+    >
       <Image
         src={image}
         alt="main picture"
-        className={styles.carousel__image}
+        className={`
+          ${styles.carousel__image}
+          ${isCoffeeshop ? styles.carousel__image_type_coffeshop : ""}`}
         fill
         priority
       />
@@ -30,42 +51,62 @@ export const CarouselItem: React.FC<carouselItemProps> = ({
 };
 
 interface carouselBoxProps {
-  mainPictures: Array<MyTypeMainPhoto>;
-  mainPicturesMobile: Array<MyTypeMainPhoto>;
+  mainPictures?: Array<MyTypeMainPhoto>;
+  mainPicturesMobile?: Array<MyTypeMainPhoto>;
+  coffeeshopPictures?: Array<MyTypeImage>;
+  isCoffeeshop?: boolean;
+  item?: MyTypeImage;
+  onClose?: () => void;
 }
 
 export const CarouselBox: React.FC<carouselBoxProps> = ({
   mainPictures,
   mainPicturesMobile,
+  coffeeshopPictures,
+  isCoffeeshop,
+  item,
+  onClose,
 }) => {
   const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
-
   const [currentSellPictures, setCurrentSellPictures] = React.useState<
     Array<MyTypeMainPhoto>
   >([]);
 
   useEffect(() => {
-    if (isMobile) {
+    if (isMobile && isCoffeeshop) {
+      setCurrentSellPictures(coffeeshopPictures);
+    } else if (isMobile) {
       setCurrentSellPictures(mainPicturesMobile);
     } else {
       setCurrentSellPictures(mainPictures);
     }
-  }, [isMobile, mainPictures, mainPicturesMobile]);
+  }, [isMobile, mainPictures, mainPicturesMobile, isCoffeeshop]);
 
   return (
     <>
-      <Carousel>
+      <Carousel isCoffeeshop={isCoffeeshop} item={item} onClose={onClose}>
         {currentSellPictures.map((item) => (
-          <CarouselItem key={item.pictureId} image={item.image}>
+          <CarouselItem
+            key={item.image}
+            image={item.image}
+            isCoffeeshop={isCoffeeshop}
+            onClose={onClose}
+          >
             <Link href={"/shop"}>
-              <button aria-label="перейти в магазин" className={styles.carousel_button}>
+              <button
+                aria-label="перейти в магазин"
+                className={`
+                  ${styles.carousel__button}
+                  ${
+                    isCoffeeshop ? styles.carousel__button_type_coffeshop : ""
+                  }`}
+              >
                 {isMobile ? "перейти в магазин?" : "купить"}
               </button>
             </Link>
             <div
-              className={`${styles.carousel__textContainer} ${
-                styles[item.type]
-              }`}
+              className={`${styles.carousel__textContainer} 
+                ${styles[item.type]}`}
             >
               <p className={styles.carousel__text}>{item.text_1}</p>
               <p className={styles.carousel__text}>{item.text_2}</p>
@@ -80,30 +121,59 @@ export const CarouselBox: React.FC<carouselBoxProps> = ({
 
 interface carouselProps {
   children: any;
+  isCoffeeshop: boolean;
+  // coffeeshopPictures: Array<MyTypeMainPhoto>;
+  item: MyTypeImage;
+  onClose?: () => void;
 }
 
-const Carousel: React.FC<carouselProps> = ({ children }) => {
+const Carousel: React.FC<carouselProps> = ({
+  children,
+  isCoffeeshop,
+  item,
+  onClose
+}) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [counter, setCounter] = React.useState(0);
   const [leftButtonIsVisible, setLeftButtonIsVisible] = React.useState(false);
   const [rightButtonIsVisible, setRightButtonIsVisible] = React.useState(true);
+  const [isReadyForTransition, setIsReadyForTransition] = React.useState(false);
+
+  const setCurrentCatouselItem = (index: number) => {
+    updateIndex(index);
+    setTimeout(() => {
+      setIsReadyForTransition(true);
+    }, 500);
+  };
 
   useEffect(() => {
-    if (
-      counter >= React.Children.count(children) - 1 ||
-      !rightButtonIsVisible
-    ) {
+    if (!isCoffeeshop) {
       return;
     } else {
-      const interval = setInterval(() => {
-        setCounter((counter) => (counter = counter + 1));
-        updateIndex(activeIndex + 1);
-      }, 2500);
-      return () => {
-        if (interval) {
-          clearInterval(interval);
-        }
-      };
+      setCurrentCatouselItem(item.index);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isCoffeeshop) {
+      return;
+    } else {
+      if (
+        counter >= React.Children.count(children) - 1 ||
+        !rightButtonIsVisible
+      ) {
+        return;
+      } else {
+        const interval = setInterval(() => {
+          setCounter((counter) => (counter = counter + 1));
+          updateIndex(activeIndex + 1);
+        }, 2500);
+        return () => {
+          if (interval) {
+            clearInterval(interval);
+          }
+        };
+      }
     }
   });
 
@@ -112,7 +182,10 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
     if (newIndex <= 0) {
       setLeftButtonIsVisible(false);
       return;
-    } else if (newIndex >= React.Children.count(children) - 1) {
+    } else if (
+      React.Children.count(children) !== 0 &&
+      newIndex >= React.Children.count(children) - 1
+    ) {
       setRightButtonIsVisible(false);
     } else {
       if (!leftButtonIsVisible) {
@@ -160,59 +233,119 @@ const Carousel: React.FC<carouselProps> = ({ children }) => {
   const [vh, setVh] = useState(0);
 
   useEffect(() => {
-      function handleResize() {
-          setVh(window.innerHeight);
-      }
+    function handleResize() {
+      setVh(window.innerHeight);
+    }
 
-      // Add an event listener for window resize
-      // window.addEventListener('resize', handleResize);
+    // Add an event listener for window resize
+    // window.addEventListener('resize', handleResize);
 
-      // Initial setup
-      handleResize();
+    // Initial setup
+    handleResize();
 
-      // Cleanup the event listener on component unmount
-      return () => {
-          window.removeEventListener('resize', handleResize);
-      };
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [isMobile]);
 
   return (
-    <div className={styles.cont} style={{ height: `${vh}px`}}>
-      
-    <section className={styles.carousel}>
-      <div
-        className={styles.carousel__inner}
-        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-      >
-        {React.Children.map(children, (child, index) => {
-          return React.cloneElement(child);
-        })}
-      </div>
-      <button
-        aria-label="предыдущая картинка"
-        className={`${styles.carousel__wrapButton} ${
-          styles.carousel__wrapButton_type_prev
-        } ${!leftButtonIsVisible ? styles.carousel__wrapButton_hidden : ""}`}
-        onClick={() => {
-          updateIndex(activeIndex - 1);
-        }}
-      ></button>
-      <button
-        aria-label="предыдущая картинка"
-        className={`${styles.carousel__wrapButton} ${
-          styles.carousel__wrapButton_type_next
-        } ${!rightButtonIsVisible ? styles.carousel__wrapButton_hidden : ""}`}
-        onClick={() => {
-          updateIndex(activeIndex + 1);
-          setCounter((counter) => (counter = counter + 1));
-        }}
-      ></button>
-    </section>
-      
+    <div
+      className={`${styles.cont} ${
+        isCoffeeshop ? styles.cont_type_coffeshop : ""
+      }`}
+      style={{ height: `${vh}px` }}
+    >
+      <section className={styles.carousel}>
+        <div
+          className={`${styles.carousel__inner} 
+            ${
+              isCoffeeshop
+                ? styles.carousel__inner_type_coffeshop
+                : styles.carousel__inner_type_transition
+            }
+            ${
+              isReadyForTransition ? styles.carousel__inner_type_transition : ""
+            }
+            `}
+          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+        >
+          {React.Children.map(children, (child, index) => {
+            return React.cloneElement(child);
+          })}
+        </div>
+        <button
+          aria-label="предыдущая картинка"
+          className={`${styles.carousel__wrapButton} 
+            ${styles.carousel__wrapButton_type_prev} 
+            ${!leftButtonIsVisible ? styles.carousel__wrapButton_hidden : ""} 
+            ${
+              isCoffeeshop ? styles.carousel__wrapButton_type_CoffeshopPrev : ""
+            }`}
+          onClick={() => {
+            updateIndex(activeIndex - 1);
+          }}
+        ></button>
+        <button
+          aria-label="слудующая картинка"
+          className={`${styles.carousel__wrapButton} 
+            ${styles.carousel__wrapButton_type_next} 
+            ${!rightButtonIsVisible ? styles.carousel__wrapButton_hidden : ""} 
+            ${
+              isCoffeeshop ? styles.carousel__wrapButton_type_CoffeshopNext : ""
+            }`}
+          onClick={() => {
+            updateIndex(activeIndex + 1);
+            setCounter((counter) => (counter = counter + 1));
+          }}
+        ></button>
+        <button
+          aria-label="закрыть"
+          className={`${styles.carousel__closeButton}
+            ${!isCoffeeshop ? styles.carousel__closeButton_hidden : ""}`}
+            onClick={onClose}
+        ></button>
+        <p className={`${styles.carousel__counter}
+            ${!isCoffeeshop ? styles.carousel__counter_hidden : ""}`}>
+              {activeIndex} / {React.Children.count(children)}
+        </p> 
+      </section>
     </div>
   );
 };
 
+
+
 export default Carousel;
+
+/*
+  useEffect(() => {
+    if (isCoffeeshop) {
+      console.log('debug0');
+      setCurrentCatouselItem(item.index);
+      return;
+    } else {
+      if (
+        counter >= React.Children.count(children) - 1 ||
+        !rightButtonIsVisible
+      ) {
+        return;
+      } else {
+        const interval = setInterval(() => {
+          setCounter((counter) => (counter = counter + 1));
+          updateIndex(activeIndex + 1);
+        }, 2500);
+        return () => {
+          if (interval) {
+            clearInterval(interval);
+          }
+        };
+      }
+    }
+
+<section className={`${styles.carousel} ${
+                  isOpen! ? styles.carousel_hidden : ""
+                }`}>
+*/

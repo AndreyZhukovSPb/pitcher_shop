@@ -17,6 +17,8 @@ import Team from "./Team";
 import { useMediaQuery } from "react-responsive";
 import { MyTypeImage } from "./SharedTypes";
 import React from "react";
+import { CarouselBox } from "./Carousel";
+import CoffeeCarousel from "./CoffeeCarousel";
 
 interface MyTypeImagesArray {
   image: string;
@@ -47,6 +49,7 @@ const Coffeeshop: React.FC<coffeeshopProps> = ({
   const [currentSize, setCurrentSize] = React.useState<number>();
   const [isPopupOpen, setIsPopupOpen] = React.useState<boolean>(false);
   const [currentPhoto, setCurrentPhoto] = React.useState<string>("");
+  const [currentCatouselItem, setCurrentCatouselItem] = React.useState<MyTypeImage>({});
 
   const isTablet = useMediaQuery({
     query: `(max-width: 899px) and (min-width: 768px)`,
@@ -84,6 +87,8 @@ const Coffeeshop: React.FC<coffeeshopProps> = ({
   >([]);
 
   const [currentShopData, setCurrentShopData] = React.useState<MyTypeData>({});
+
+  const [isCarouselOpen, setIsCarouselOpen] = React.useState<boolean>(false);
 
   function setCoffeeShopData(
     imageArray: Array<MyTypeImage>,
@@ -132,6 +137,15 @@ const Coffeeshop: React.FC<coffeeshopProps> = ({
   function openPopup(image: string) {
     setCurrentPhoto(image);
     setIsPopupOpen(true);
+  }
+  
+  function openCarousel(item: MyTypeImage) {
+    setIsCarouselOpen(true)
+    setCurrentCatouselItem(item)
+  }
+
+  function closeCarousel() {
+    setIsCarouselOpen(false)
   }
 
   function closePopup() {
@@ -223,7 +237,11 @@ const Coffeeshop: React.FC<coffeeshopProps> = ({
                       cols={item.cols || 1}
                       rows={item.rows || 1}
                       onClick={() => {
-                        openPopup(item.image);
+                        if(!isMobile) {
+                          openPopup(item.image);
+                        } else {
+                          openCarousel(item);
+                        }
                       }}
                       className={styles.coffeeshop__picture}
                     >
@@ -250,6 +268,14 @@ const Coffeeshop: React.FC<coffeeshopProps> = ({
           onClose={closePopup}
           arrayOfImages={currentPictures}
         />
+        {isCarouselOpen && 
+          <CarouselBox 
+            coffeeshopPictures={currentPictures}      
+            isCoffeeshop={isCarouselOpen}
+            onClose={closeCarousel}
+            item={currentCatouselItem}
+          />} 
+          
       </>
     );
 };
@@ -257,6 +283,13 @@ const Coffeeshop: React.FC<coffeeshopProps> = ({
 export default Coffeeshop;
 
 /*
-        
 
+
+                  {isCarouselOpen && 
+          <CoffeeCarousel
+            coffeeshopPictures={currentPictures}      
+            isCoffeeshop={isCarouselOpen}
+            onClose={closeCarousel}
+            item={currentCatouselItem}
+          />} 
 */

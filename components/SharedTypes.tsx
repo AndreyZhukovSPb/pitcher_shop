@@ -1,7 +1,8 @@
 interface MyTypeImage {
-  image: string;
-  cols: number;
-  rows: number;
+  image?: string;
+  cols?: number;
+  rows?: number;
+  index?: number
 }
 
 interface MyTypeTeam {
@@ -15,12 +16,12 @@ interface MyTypeTeam {
 }
 
 interface MyTypeMainPhoto {
-  pictureId: number;
-  image: string;
-  text_1: string;
-  text_2: string;
-  text_3: string;
-  number: string;
+  pictureId?: number;
+  image?: string;
+  text_1?: string;
+  text_2?: string;
+  text_3?: string;
+  number?: string;
   type?: string;
 }
 
