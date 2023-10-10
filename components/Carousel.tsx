@@ -236,13 +236,13 @@ const Carousel: React.FC<carouselProps> = ({
   const touchPositionRef = useRef(null);
 
   const handleTouchStart = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const touchDown = e.touches[0].clientX;
     touchPositionRef.current = touchDown;
   };
 
   const handleTouchMove = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (touchPositionRef.current === null) {
       return;
     }
@@ -251,7 +251,7 @@ const Carousel: React.FC<carouselProps> = ({
     const diff = touchPositionRef.current - currentTouch;
 
     // Adjust the threshold as needed for your application
-    const swipeThreshold = 30;
+    const swipeThreshold = 20;
 
     if (diff > swipeThreshold) {
       if (!rightButtonIsVisible) {
@@ -319,7 +319,9 @@ const Carousel: React.FC<carouselProps> = ({
               isReadyForTransition ? styles.carousel__inner_type_transition : ""
             }
             `}
-          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+          style=
+            {{ transform: `translateX(-${activeIndex * 100}%)`,
+              touchAction: 'pan-x'  }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}

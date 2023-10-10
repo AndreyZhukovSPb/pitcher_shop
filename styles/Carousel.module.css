@@ -46,7 +46,7 @@
 }
 
 .carousel__inner_type_coffeshop {
-  background-color: rgb(0 0 0 / 0.9 );
+  background-color: rgb(0 0 0 / 0.7 );
 }
 
 .carousel__button {
@@ -251,8 +251,8 @@
     position: relative;
     width: 100%;
     height: 100%;
-    /* background-color: rgb(0 0 0 / 0.9 ); */
-    background-color: rgb(0 0 0 );
+    background-color: rgb(0 0 0 / 0.5 );
+    /* background-color: rgb(0 0 0 ); */
     transition: opacity 1s ease;
   }
   .carousel__image_type_coffeshop {
