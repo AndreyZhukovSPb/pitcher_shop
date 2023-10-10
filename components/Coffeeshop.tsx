@@ -156,11 +156,11 @@ const Coffeeshop: React.FC<coffeeshopProps> = ({
   useEffect(() => {
     setMounted(true);
   }, []);
-
+  
   if (mounted)
     return (
       <>
-        <section className={styles.coffeeshop}>
+        <section className={styles.coffeeshop} >
           <div className={styles.coffeeshop__infoContainer}>
             <Image src={menu} priority alt="menu" className={styles.coffeeshop__menu} />
             <div className={styles.coffeeshop__info}>
