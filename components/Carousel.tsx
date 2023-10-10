@@ -300,6 +300,17 @@ const Carousel: React.FC<carouselProps> = ({
     };
   }, [isMobile]);
 
+  const desktopStyles = {
+    transform: `translateX(-${activeIndex * 100}%)`
+  };
+
+  const mobileStyles = {
+    transform: `translateX(-${activeIndex * 100}%)`,
+    touchAction: 'pan-x'
+  };
+
+  const stylesToApply = isCoffeeshop ? mobileStyles : desktopStyles;
+
   return (
     <div
       className={`${styles.cont} ${
@@ -319,9 +330,10 @@ const Carousel: React.FC<carouselProps> = ({
               isReadyForTransition ? styles.carousel__inner_type_transition : ""
             }
             `}
-          style=
-            {{ transform: `translateX(-${activeIndex * 100}%)`,
-              touchAction: 'pan-x'  }}
+            style={stylesToApply}
+          // style= 
+          //  {{ transform: `translateX(-${activeIndex * 100}%)`,
+          //    touchAction: 'pan-x'  }} 
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
