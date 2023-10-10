@@ -102,7 +102,7 @@ export const CarouselBox: React.FC<carouselBoxProps> = ({
                     isCoffeeshop ? styles.carousel__button_type_coffeshop : ""
                   }`}
               >
-                {isMobile ? "перейти в магазин?" : "купить"}
+                {isMobile ? "перейти в магазин" : "купить"}
               </button>
             </Link>
             <div
@@ -214,14 +214,14 @@ const Carousel: React.FC<carouselProps> = ({
     }
     const currentTouch = e.touches[0].clientX;
     const diff = touchDown - currentTouch;
-    if (diff > 5) {
+    if (diff > 2) {
       if (!rightButtonIsVisible) {
         return;
       } else {
         updateIndex(activeIndex + 1);
       }
     }
-    if (diff < -5) {
+    if (diff < -3) {
       if (!leftButtonIsVisible) {
         return;
       } else {
