@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "../styles/Carousel.module.css";
 // import { Link } from "react-router-dom";
 import Link from "next/link";
@@ -200,6 +200,7 @@ const Carousel: React.FC<carouselProps> = ({
     }
   };
 
+  /*
   const [touchPosition, setTouchPosition] = useState(null);
 
   const handleTouchStart = (e: any) => {
@@ -229,6 +230,53 @@ const Carousel: React.FC<carouselProps> = ({
       }
     }
     setTouchPosition(null);
+  };
+  */
+
+  const touchPositionRef = useRef(null);
+
+  const handleTouchStart = (e) => {
+    e.preventDefault();
+    const touchDown = e.touches[0].clientX;
+    touchPositionRef.current = touchDown;
+  };
+
+  const handleTouchMove = (e) => {
+    e.preventDefault();
+    if (touchPositionRef.current === null) {
+      return;
+    }
+
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchPositionRef.current - currentTouch;
+
+    // Adjust the threshold as needed for your application
+    const swipeThreshold = 30;
+
+    if (diff > swipeThreshold) {
+      if (!rightButtonIsVisible) {
+        return;
+      } else {
+        updateIndex(activeIndex + 1);
+        touchPositionRef.current = null;
+      }
+      // Swipe to the right
+      // Add your logic here
+    } else if (diff < -swipeThreshold) {
+      if (!leftButtonIsVisible) {
+        return;
+      } else {
+        updateIndex(activeIndex - 1);
+      // Swipe to the left
+      // Add your logic here
+    }
+
+    touchPositionRef.current = null;
+  };
+  }
+
+  const handleTouchEnd = () => {
+    touchPositionRef.current = null;
   };
 
   const isMobile = useMediaQuery({ query: `(max-width: 767px)` });
@@ -274,6 +322,7 @@ const Carousel: React.FC<carouselProps> = ({
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           {React.Children.map(children, (child, index) => {
             return React.cloneElement(child);
