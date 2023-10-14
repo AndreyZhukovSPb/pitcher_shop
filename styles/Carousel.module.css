@@ -70,7 +70,7 @@
   font-family: 'Mont-Regular';
 }
 
-.carousel__button_type_coffeshop {
+.carousel__button_hidden {
   display: none;
 }
 
@@ -196,9 +196,11 @@
   .carousel__text {
     font-size: 14px;
   }
+  /*
   .carousel {
     height: 55vh;
   }
+  */
   .carousel__textContainer {
     top: 90px; 
   }
@@ -213,6 +215,14 @@
   .carousel_button {
     bottom: 65px;
     right: 80px;
+  }
+  .carousel__button {
+    bottom: 4%;
+    right: 30px;
+    left: 30px;
+    height: 50px;
+    opacity: 0.9;
+    width: calc(100vw - 60px);
   }
 }
 
@@ -277,14 +287,6 @@
     height: 100%;
     /* height: 100dvh; */
     /* height: calc(100vh - var(--vh-offset)); */
-  }
-  .carousel__button {
-    bottom: 4%;
-    right: 30px;
-    left: 30px;
-    height: 50px;
-    opacity: 0.9;
-    width: calc(100vw - 60px);
   }
   .carousel_buttonText {
     letter-spacing: 1.2px;

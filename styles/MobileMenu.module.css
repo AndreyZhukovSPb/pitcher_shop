@@ -41,9 +41,10 @@
   filter: invert(100%);
 }
 
-.menu__closeButton:hover {
+/* .menu__closeButton:hover {
   opacity: 0.5;
 }
+*/
 
 .menu__navigation {
   margin: 0;

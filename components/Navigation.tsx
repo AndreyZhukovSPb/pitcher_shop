@@ -15,6 +15,7 @@ interface navigationProps {
   isMain?: boolean;
   isForBurger: boolean;
   isContacts?: boolean;
+  isGuideReady?: boolean
 }
 
 const Navigation: React.FC<navigationProps> = ({
@@ -27,6 +28,7 @@ const Navigation: React.FC<navigationProps> = ({
   isPark,
   isMain,
   isForBurger,
+  isGuideReady
 }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
 
@@ -37,6 +39,8 @@ const Navigation: React.FC<navigationProps> = ({
   function handleCloseMenu() {
     setIsMenuOpen(false);
   }
+
+  console.log(isGuideReady)
 
   return (
     <>
@@ -53,7 +57,7 @@ const Navigation: React.FC<navigationProps> = ({
           href={secondLink}
           className={`${styles.navigation__link} ${
             isMayak ? styles.navigation__link_active : ""
-          } ${isMain ? styles.navigation__link_type_main : ""}`}
+          } ${isMain ? styles.navigation__link_type_main : ""} ${!isGuideReady ? styles.navigation__link_hidden : ''}`}
         >
           {secondTitle}
         </Link>
