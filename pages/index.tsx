@@ -4,6 +4,9 @@ import { baseURL } from "../utils/constatnts";
 
 const Index = ({ data }) => {
 
+  console.log(data)
+  console.log(data.instaPhoto)
+
   return (
     <>
       <Main
@@ -32,42 +35,31 @@ export async function getStaticProps() {
 
 /*
 to-do: 
-- поменять бейс юрл на облако
-- залить в облако токен через гитхаб
 - Логгер ошибок бекэнд 
+- main photo park new
++ проверить что ховеры ушли с мобилы и остались на десктопе
 
 WAITING FOR
-меню переделать и залить в облако - надпись "меню", белое или черное?
+меню переделать и залить в облако - надпись "меню", белое или черное? что есть в меню
 team photo парк - поменять
-main photo park new
 photo Kiri ot Kiri
 Barista about - add
+гид по завариванию
 
 Nikita
 почему бэк тупит?
 timeout чтобы вернуть транзишн, так себе решение
 
-??
-carousel button ближе к низу
-Menu popup?
-what does menu include?
-на мобиле есть ховер и курсор поинтер?
-плавное открытие карусели для кофешопа?
-
 filally:
+- поменять бейс юрл на облако
 Консоль ошибки
-удалить app и appOld, popupContainer
-ScrollToTop проверить
-favicon check?
-errors console
+favicon check
 убрать все каменты
 удалить шрифты из page
+убрать гид по завариванию, открыть ссылку на shop
 
 readme
 написать как собирать проект + проверить собирается ли, убрать технологии
-
-
-в мобиле карта перемещается все таки, это не скрол а что-то дургое
 children: any CorouselBox
 что лежит в headerType?
 типизировать useState, useEffect
@@ -76,11 +68,7 @@ children: any CorouselBox
 
 npm i cors - probably will be usefull
 553648129
-"homepage": "https://AndreyZhukovSPb.github.io/pitcher",
-git push origin level-1     
-    "typescript": "^5.1.6",
-    "private": true,
-    
+"homepage": "https://AndreyZhukovSPb.github.io/pitcher",    
 */
 
 

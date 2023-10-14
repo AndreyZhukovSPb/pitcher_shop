@@ -27,10 +27,11 @@ const Header: React.FC<headerProps> = ({
       <Navigation
         firstTitle="Онлайн магазин"
         secondTitle="Гайд по завариванию"
-        fisrtLink="/shop"
-        secondLink="/guide"
+        fisrtLink="/"
+        secondLink="/"
         isMain={isMain}
         isForBurger={false}
+        isGuideReady={false}
       />
       <Link href={"/"} className={styles.header__logoContainer}>
         <Image
@@ -56,6 +57,7 @@ const Header: React.FC<headerProps> = ({
         isMain={isMain}
         isContacts={isContacts}
         isForBurger={true}
+        isGuideReady={true}
       />
     </header>
   );

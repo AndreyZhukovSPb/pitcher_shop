@@ -111,10 +111,6 @@
   height: 100%;
 }
 
-.stores__photo:hover {
-  opacity: 0.7;
-  box-shadow: 0 0 2px 3px rgb(0 0 0 / 0.5);
-}
 
 .store__legend {
   font-style: normal;
@@ -127,6 +123,13 @@
   cursor: pointer;
   letter-spacing: 0.8px;
   font-family: 'Mont-Regular';
+}
+
+@media (width > 767px) {
+  .stores__photo:hover {
+    opacity: 0.7;
+    box-shadow: 0 0 2px 3px rgb(0 0 0 / 0.5);
+  }  
 }
 
 @media (width <= 1279px) {

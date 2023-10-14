@@ -30,9 +30,6 @@
   transition: opacity 0.4s linear;
 }
 
-.header__logo:hover{
-  opacity: 0.5;
-}
 
 .header__logo_mobile {
   margin: 0;
@@ -42,6 +39,12 @@
 
 .header__logo_type_main {
   filter: invert(100%);
+}
+
+@media (width > 767px) {
+  .header__logo:hover{
+    opacity: 0.5;
+  }
 }
 
 @media (width <= 1023px) {
