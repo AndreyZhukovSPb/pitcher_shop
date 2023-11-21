@@ -40,8 +40,6 @@ const Navigation: React.FC<navigationProps> = ({
     setIsMenuOpen(false);
   }
 
-  console.log(isGuideReady)
-
   return (
     <>
       <nav className={styles.navigation}>

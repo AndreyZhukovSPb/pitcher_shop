@@ -1,10 +1,11 @@
 .photo {
   width: 100%;
-  height: 24vw;
+  height: 24vw !important;
   object-fit: cover;
   cursor: pointer;
   transition: opacity 0.7s ease, box-shadow linear 0.3s;
   border-radius: 1px;
+  position: relative !important;
 }
 
 
@@ -18,6 +19,6 @@
 
 @media (width <= 767px) {
   .photo {
-    height: 31.7vw;
+    height: 31.7vw !important;
   }
 }

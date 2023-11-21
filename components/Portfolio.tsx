@@ -13,9 +13,9 @@ const Portfolio: React.FC<PortfolioProps> = ({instaPhoto}) => {
 
   const [itemsToShow, setItemsToShow] = React.useState<number>();
 
-  const [allPhoto, setallPhoto] = React.useState<
-    Array<MyTypeInstaPhoto>
-  >([]);
+  // const [allPhoto, setAllPhoto] = React.useState<
+  //  Array<MyTypeInstaPhoto>
+  // >([]);
 
   useEffect(() => {
     if (!isMobile) {
@@ -25,9 +25,9 @@ const Portfolio: React.FC<PortfolioProps> = ({instaPhoto}) => {
     }
   }, [isMobile]);
 
-  useEffect(() => {
-      setallPhoto(instaPhoto);
-  }, [instaPhoto]);
+  // useEffect(() => {
+  //      setAllPhoto(instaPhoto);
+  // }, [instaPhoto]);
 
   return (
     <section className={styles.portfolio}>
@@ -42,11 +42,9 @@ const Portfolio: React.FC<PortfolioProps> = ({instaPhoto}) => {
           <Photo
             key={item.id}
             item={item}
-            
           />
         ))}
       </div>
-
       
     </section>
   );

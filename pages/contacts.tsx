@@ -51,12 +51,7 @@ const Contacts = ({ data }) => {
               target="_blank"
               className={styles.contacts__box}
             >
-              <Image
-                src={"/instagram.svg"}
-                alt="icon email"
-                className={styles.contacts__icon}
-                fill
-              />
+              <p className={`${styles.contacts__icon} ${styles.contacts__icon_type_insta}`}>@</p>
               <p className={styles.contacts__content}>pitcherbar</p>
             </a>
           </li>
@@ -81,3 +76,12 @@ export async function getStaticProps() {
     },
   };
 }
+
+/*
+<Image
+                src={"/instagram.svg"}
+                alt="icon email"
+                className={styles.contacts__icon}
+                fill
+              />
+*/

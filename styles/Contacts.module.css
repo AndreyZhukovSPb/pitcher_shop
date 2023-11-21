@@ -46,6 +46,13 @@
   margin-right: 8px;
 }
 
+.contacts__icon_type_insta {
+  margin: 0 8px 0 1px;
+  font-size: 18px;
+  font-family: 'Montserrat-Regular';
+  line-height: 16px;
+}
+
 .contacts__content {
   margin: 0;
   font-style: normal;

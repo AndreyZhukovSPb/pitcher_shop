@@ -27,12 +27,13 @@ interface MyTypeMainPhoto {
 
 interface MyTypeInstaPhoto {
   id: string;
-  media_type: string;
-  media_url: string;
-  caption: string;
-  timestamp: string;
-  permalink: string;
-  thumbnail_url?: string;
+  // media_type: string;
+  // media_url: string;
+  // caption: string;
+  // timestamp: string;
+  permaLink: string;
+  // thumbnail_url?: string;
+  storageLink: string;
 }
 
 interface MyTypeAboutProps {
