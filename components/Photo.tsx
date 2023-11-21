@@ -1,12 +1,8 @@
 import styles from '../styles/Photo.module.css'
 import { MyTypeInstaPhoto } from "./SharedTypes";
+import Image from "next/image";
 
 interface photoProps {
-  // image: string;
-  // type: string;
-  // key: string;
-  // videoImage?: string;
-  // permalink: string;
   item: MyTypeInstaPhoto;
 }
 
@@ -17,31 +13,33 @@ const Photo: React.FC<photoProps> = ({
     window.open(link, "_blank");
   }
 
-  if (item.media_type === "IMAGE" || item.media_type === "CAROUSEL_ALBUM") {
-    return (
-      <img
-        src={item.media_url}
-        alt="foto from insta"
-        className={styles.photo}
-        onClick={() => {
-          onClick(item.permalink);
-        }}
-      />
-    );
-  } else if (item.media_type === "VIDEO") {
-    return (
-      <img
-        src={item.thumbnail_url}
-        alt="foto from insta"
-        className={styles.photo}
-        onClick={() => {
-          onClick(item.permalink);
-        }}
-      />
-    );
-  } else {
-    return <div></div>;
-  }
+  // console.log(item.storageLink)
+
+  return (
+    <Image
+      src={item.storageLink}
+      alt='foto from insta'
+      className={styles.photo}
+      fill
+      unoptimized={false}
+      onClick={() => {
+            onClick(item.permaLink);
+          }}
+
+    />
+
+    // <Image src={storesPictures[0]} alt="coffeshop photo" className={styles.stores__photo} fill  sizes="20vw"/>
+    // <img
+    //   src={item.storageLink}
+    //   alt="foto from insta"
+    //   className={styles.photo}
+    //   unoptimized={true}
+    //   onClick={() => {
+    //     onClick(item.permaLink);
+    //   }}
+    // />
+  );
+
 };
 
 export default Photo;

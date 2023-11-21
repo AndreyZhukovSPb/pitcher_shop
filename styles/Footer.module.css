@@ -60,6 +60,13 @@
   margin-right: 8px;
 }
 
+.footer__icon_type_insta {
+  margin: 0 8px 0 1px;
+  font-size: 18px;
+  font-family: 'Montserrat-Regular';
+  line-height: 16px;
+}
+
 .footer__content {
   margin: 0;
   font-size: 13px;
@@ -231,6 +238,11 @@
     height: 18px !important;
     margin-right: 8px;
   }
+  .footer__icon_type_insta {
+    font-size: 16px;
+    line-height: 15px;
+  }
+  
   .footer__content_type_contacts {
     line-height: 18px;
   }

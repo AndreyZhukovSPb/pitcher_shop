@@ -51,12 +51,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 className={styles.footer__box}
               >
-                <Image
-                  src={"/instagram.svg"}
-                  alt="icon instagram"
-                  className={styles.footer__icon}
-                  fill
-                />
+                <p className={`${styles.footer__icon} ${styles.footer__icon_type_insta}`}>@</p>
                 <p
                   className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
                 >
@@ -122,3 +117,13 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
+/*
+&#64;
+<Image
+                  src={"/instagram.svg"}
+                  alt="icon instagram"
+                  className={styles.footer__icon}
+                  fill
+                />
+*/
