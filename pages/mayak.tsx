@@ -28,7 +28,7 @@ const Mayak = ({ mayakData }) => {
 
 export default Mayak;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(`${baseURL}/mayak`);
   const mayakData = await res.json();
 

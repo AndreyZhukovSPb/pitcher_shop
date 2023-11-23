@@ -26,7 +26,7 @@ const Park = ({ parkData }) => {
 
 export default Park;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(`${baseURL}/park`);
   const parkData = await res.json();
 
