@@ -66,7 +66,7 @@ const Contacts = ({ data }) => {
 
 export default Contacts;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(`${baseURL}/contacts`);
   const data = await res.json();
 
