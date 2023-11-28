@@ -109,7 +109,6 @@ export const CarouselBox: React.FC<carouselBoxProps> = ({
 interface carouselProps {
   children: any;
   isCoffeeshop: boolean;
-  // coffeeshopPictures: Array<MyTypeMainPhoto>;
   item: MyTypeImage;
   onClose?: () => void;
 }
@@ -233,14 +232,7 @@ const Carousel: React.FC<carouselProps> = ({
     function handleResize() {
       setVh(window.innerHeight);
     }
-
-    // Add an event listener for window resize
-    // window.addEventListener('resize', handleResize);
-
-    // Initial setup
     handleResize();
-
-    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
