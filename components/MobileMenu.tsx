@@ -66,15 +66,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
           >
             Онлайн магазин
           </Link>
-          <Link
-            href={'/'}
-            className={`${styles.menu__navigation} ${
-              isGuide ? styles.menu__navigation_active : ""
-            } }`}
-            onClick={onCloseClick}
-          >
-            Гид по завариванию
-          </Link>
+          
           <Link
             href={'/park'}
             className={`${styles.menu__navigation} ${
@@ -109,3 +101,15 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
 };
 
 export default MobileMenu;
+
+/*
+<Link
+            href={'/'}
+            className={`${styles.menu__navigation} ${
+              isGuide ? styles.menu__navigation_active : ""
+            } }`}
+            onClick={onCloseClick}
+          >
+            Гид по завариванию
+          </Link>
+*/
