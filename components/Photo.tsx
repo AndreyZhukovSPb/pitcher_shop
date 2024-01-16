@@ -10,34 +10,24 @@ const Photo: React.FC<photoProps> = ({
   item
 }) => {
   function onClick(link: string) {
+    // console.log(item.permaLink);
+    // console.log(item.storageLink);
     window.open(link, "_blank");
   }
 
-  // console.log(item.storageLink)
+  const randomParam = Math.random().toString(36).substring(7);
 
   return (
     <Image
-      src={item.storageLink}
+      src={`${item.storageLink}?random=${randomParam}`}
       alt='foto from insta'
       className={styles.photo}
       fill
-      unoptimized={false}
+      unoptimized={true}
       onClick={() => {
             onClick(item.permaLink);
           }}
-
     />
-
-    // <Image src={storesPictures[0]} alt="coffeshop photo" className={styles.stores__photo} fill  sizes="20vw"/>
-    // <img
-    //   src={item.storageLink}
-    //   alt="foto from insta"
-    //   className={styles.photo}
-    //   unoptimized={true}
-    //   onClick={() => {
-    //     onClick(item.permaLink);
-    //   }}
-    // />
   );
 
 };
