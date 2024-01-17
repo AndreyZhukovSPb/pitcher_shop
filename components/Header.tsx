@@ -27,8 +27,8 @@ const Header: React.FC<headerProps> = ({
       <Navigation
         firstTitle="Онлайн магазин"
         secondTitle="Гайд по завариванию"
-        fisrtLink="/"
-        secondLink="/"
+        fisrtLink="https://shop.pitcherbar.ru"
+        secondLink="https://shop.pitcherbar.ru"
         isMain={isMain}
         isForBurger={false}
         isGuideReady={false}
