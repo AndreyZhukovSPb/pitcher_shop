@@ -13,6 +13,7 @@ interface mobileMenuProps {
   isShop?: boolean;
   isGuide?: boolean;
   isContacts?: boolean;
+  shopLink: string;
 }
 
 const MobileMenu: React.FC<mobileMenuProps> = ({
@@ -24,8 +25,11 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
   isShop,
   isGuide,
   isContacts,
+  shopLink
 }) => {
   const overlayRef = React.useRef<HTMLDivElement>(null);
+
+  // console.log(shopLink);
 
   function handleCheckIsOverlay(e: any) {
     if (!overlayRef.current || e.target.contains(overlayRef.current)) {
@@ -58,7 +62,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             Главная
           </Link>
           <Link
-            href={'/'}
+            href={shopLink}
             className={`${styles.menu__navigation} ${
               isShop ? styles.menu__navigation_active : ""
             } }`}
@@ -66,7 +70,6 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
           >
             Онлайн магазин
           </Link>
-          
           <Link
             href={'/park'}
             className={`${styles.menu__navigation} ${

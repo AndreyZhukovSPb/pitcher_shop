@@ -74,6 +74,7 @@ const Navigation: React.FC<navigationProps> = ({
         isPark={isPark}
         isMain={isMain}
         isContacts={isContacts}
+        shopLink={'https://shop.pitcherbar.ru'}
       />
     </>
   );
