@@ -17,17 +17,19 @@
     grid-template-rows: 2fr 3fr;
     margin: 6px 0 16px;
     height: calc(44.3vw - 11px);
+    position: relative;
 }
 
 .coffeeshop__menu {
   grid-area: menu;
   width: 100%;
   height: 100%;
+  position: relative !important;
 }
 
 .coffeeshop__info {
   grid-area: info;
-  width: 85%;
+  width: 90%;
   margin: 16px auto 16px;
   height: 100%;
 }
@@ -71,7 +73,7 @@
 }
 
 .coffeeshop__iframe {
-  width: 85%;
+  width: 90%;
   height: 100%;
   border: none;
   box-sizing: border-box;

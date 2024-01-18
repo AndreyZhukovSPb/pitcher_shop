@@ -162,7 +162,7 @@ const Coffeeshop: React.FC<coffeeshopProps> = ({
       <>
         <section className={styles.coffeeshop} >
           <div className={styles.coffeeshop__infoContainer}>
-            <Image src={menu} priority alt="menu" className={styles.coffeeshop__menu} />
+            <Image src={data.menu} priority alt="menu" className={styles.coffeeshop__menu} fill/>
             <div className={styles.coffeeshop__info}>
               <p className={styles.coffeeshop__title}>
                 {currentShopData.title}
