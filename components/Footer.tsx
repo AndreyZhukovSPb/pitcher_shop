@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-      <p className={styles.footer__copyright}>2014 - 2023 Picther loves you</p>
+      <p className={styles.footer__copyright}>2014 - 2024 Picther loves you</p>
     </footer>
   );
 };

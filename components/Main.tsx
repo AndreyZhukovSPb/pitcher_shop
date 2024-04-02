@@ -1,74 +1,60 @@
+// import SectionLine from "../components_OLD/SectionLine";
+import styles from "../styles/Main.module.css";
+import {
+  MyTypeMainPhoto,
+  MyTypeInstaPhoto,
+  MyTypeAboutProps,
+} from "../components_OLD/SharedTypes";
+// import { CarouselBox } from "../components_OLD/Carousel";
+// import Stores from "../components_OLD/Stores";
+// import About from "../components_OLD/About";
+// import Portfolio from "../components_OLD/Portfolio";
+import Image from "next/image";
+import Catalog from "./Catalog";
 import SectionLine from "./SectionLine";
-import { MyTypeMainPhoto, MyTypeInstaPhoto, MyTypeAboutProps } from "./SharedTypes";
-
-import { CarouselBox } from "./Carousel";
-import Stores from "./Stores";
-import About from "./About";
-import Portfolio from "./Portfolio";
 
 interface MainProps {
-  mainPictures: Array<MyTypeMainPhoto>,
-  mainPicturesMobile: Array<MyTypeMainPhoto>,
-  storesPictures: Array<string>,
-  aboutInfo: MyTypeAboutProps,
-  instaPhoto?: Array<MyTypeInstaPhoto>
+  // mainPictures: Array<MyTypeMainPhoto>;
+  // mainPicturesMobile: Array<MyTypeMainPhoto>;
+  // storesPictures: Array<string>;
+  // aboutInfo: MyTypeAboutProps;
+  // instaPhoto?: Array<MyTypeInstaPhoto>;
+  data: any; // ПЕРЕДАЛАТЬ
 }
 
-const Main: React.FC<MainProps> = ({mainPictures, mainPicturesMobile, storesPictures, aboutInfo, instaPhoto}) => {
-
+const Main: React.FC<MainProps> = (
+  {
+    data
+    // mainPictures,
+    // mainPicturesMobile,
+    // storesPictures,
+    // aboutInfo,
+    // instaPhoto,
+  }
+) => {
   return (
     <>
-      <CarouselBox
-        mainPictures={mainPictures}
-        mainPicturesMobile={mainPicturesMobile}
+    <section className={styles.main}>
+      <div className={styles.main__container}>
+        <Image
+          src={"/main1.jpg"}
+          alt="main banner"
+          className={styles.main__banner}
+          fill
+        />
+        <div className={styles.main__overlay}>
+          <div className={styles.main__textContainer}>
+            <p className={styles.main__text}>доставляем</p>
+          </div>
+        </div>
+      </div>
+      <Catalog
+        categoryList={data}
       />
-      <Stores 
-        storesPictures={storesPictures} 
-      />
-      <About 
-        aboutInfo={aboutInfo}
-      />
-      {instaPhoto && 
-        <Portfolio 
-          instaPhoto={instaPhoto} 
-        />}
-      
-      <SectionLine 
-        isMain={true} 
-      />
-
+    </section>
+    <SectionLine/>
     </>
   );
 };
 
 export default Main;
-
-  /* 
-  const [mainPictures, setMainPictures] = React.useState<
-    Array<MyTypeMainPhoto>
-  >([]);
-
-  const [mainPicturesMobile, setMainPicturesMobile] = React.useState<
-    Array<MyTypeMainPhoto>
-  >([]);
-
-  const [instaPhoto, setInstaPhoto] = React.useState<Array<MyTypeInstaPhoto>>(
-    []
-  );
-
-  const [storesPictures, setStoresPictures] = React.useState<Array<string>>([]);
-
-  const [aboutTexts, setAboutTexts] = React.useState<{}>({});
-
-  
-  useEffect(() => {
-    Api.getMainPhoto().then((res) => {
-      setMainPictures(res.sellPictures.desctopPhoto);
-      setMainPicturesMobile(res.sellPictures.mobilePhoto);
-      // setInstaPhoto(res.instaPhoto.data);
-      setStoresPictures(res.storesPictures);
-      setAboutTexts(res.aboutTexts);
-    });
-  }, []);
-  */
-

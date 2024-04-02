@@ -1,12 +1,14 @@
-// import React from "react";
 import logo from "../public/logo.svg";
 import logoMobile from "../public/logo_mobile.svg";
-// import "./Header.css"
 import styles from '../styles/Header.module.css'
-// import { Link } from "react-router-dom";
 import Link from "next/link";
 import Image from 'next/image'
 import Navigation from "./Navigation";
+import { mainWebUrl } from "../utils/constatnts";
+import { CartContext } from "./Context";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+// import SectionLine from "./SectionLine";
 
 interface headerProps {
   onClick?: () => void;
@@ -14,6 +16,9 @@ interface headerProps {
   isMayak?: boolean;
   isMain?: boolean;
   isContacts?: boolean;
+  isShop?: boolean;
+  isFullCard?: boolean;
+  isCart: boolean 
 }
 
 const Header: React.FC<headerProps> = ({
@@ -21,19 +26,79 @@ const Header: React.FC<headerProps> = ({
   isPark,
   isMain,
   isContacts,
+  isShop,
+  isFullCard,
+  isCart
 }) => {
+  const router = useRouter();
+  const Context = React.useContext(CartContext);
+  const currentOrder = Context.orderData;
+  const [itemsInCart, setItemsInCart] = useState(0);
+  // const resetMilling = Context.resetMilling;
+  // const resetPriceType = Context.resetPriceType;
+  const resetProductFeatures = Context.setInitialProductList;
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollPosition = window.scrollY;
+  //     if (scrollPosition > 0) {
+  //       setIsScrolled(true);
+  //     } else {
+  //       setIsScrolled(false);
+  //     }
+  //   };
+  // })
+
+  useEffect(()=> {
+    setItemsInCart(currentOrder.reduce((total, item) => total + item.price.quantity, 0));
+  }, [currentOrder])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const hanldeOnCartClick = () => {
+    router.push(`/cart`);
+    resetProductFeatures();
+  }
+
+  // console.log(isCart)
+
   return (
-    <header className={`${styles.header} ${isMain? styles.header__type_main : ''} `}>
+    // ${isMain? styles.header__type_main : ''} 
+    <header className=
+      {`${styles.header} 
+      ${isCart? styles.header__type_cart : ''} 
+      ${isScrolled? styles.header__type_scrolled : ''}`}
+    >      
       <Navigation
-        firstTitle="Онлайн магазин"
-        secondTitle="Гайд по завариванию"
-        fisrtLink="https://shop.pitcherbar.ru"
-        secondLink="https://shop.pitcherbar.ru"
-        isMain={isMain}
-        isForBurger={false}
-        isGuideReady={false}
+        firstTitle="Парк Победы"
+        secondTitle="Маяковская"
+        fisrtLink="/park"
+        secondLink="/mayak"
+        isMayak={false}
+        isPark={false}
+        isMain={false}
+        isContacts={false}
+        isForBurger={true}
+        isGuideReady={true}
+        mainWebUrl={mainWebUrl}
+        isFullCard={isFullCard}
+        isCart={isCart}
+        // isShop={isShop}
       />
-      <Link href={"/"} className={styles.header__logoContainer}>
+      <Link href={mainWebUrl} className={styles.header__logoContainer}>
         <Image
           src={logo}
           priority={true}
@@ -47,36 +112,23 @@ const Header: React.FC<headerProps> = ({
           className={`${styles.header__logo} ${isMain ? styles.header__logo_type_main : ''} ${styles.header__logo_mobile} }`}
         />
       </Link>
-      <Navigation
-        firstTitle="Парк Победы"
-        secondTitle="Маяковская"
-        fisrtLink="/park"
-        secondLink="/mayak"
-        isMayak={isMayak}
-        isPark={isPark}
-        isMain={isMain}
-        isContacts={isContacts}
-        isForBurger={true}
-        isGuideReady={true}
-      />
+      <div className={styles.header__cartContainer}>
+        <Image
+          src={"/cart.svg"}
+          alt="main cart"
+          className={styles.header__cart}
+          fill
+          onClick={hanldeOnCartClick}
+        />
+        <div className={`${styles.header__cartCounter} ${itemsInCart === 0 ? styles.header__cartCounter_empty : ''}`}>
+          <p className={styles.header__counter}>{itemsInCart}</p>
+        </div>
+      </div>
+      {/* {isCart && (
+        <SectionLine/>
+      )} */}
     </header>
   );
 };
 
 export default Header;
-
-
-/* 
-<img
-          src={logo}
-          alt="logo"
-          className={`header__logo ${isMain ? "header__logo_type_main" : ""}`}
-        />
-        <img
-          src={logoMobile}
-          alt="logo"
-          className={`header__logo header__logo_mobile ${
-            isMain ? "header__logo_type_main" : ""
-          }`}
-          />
-*/

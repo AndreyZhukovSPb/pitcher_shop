@@ -14,6 +14,7 @@ interface mobileMenuProps {
   isGuide?: boolean;
   isContacts?: boolean;
   shopLink: string;
+  mainWebUrl: string
 }
 
 const MobileMenu: React.FC<mobileMenuProps> = ({
@@ -25,7 +26,8 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
   isShop,
   isGuide,
   isContacts,
-  shopLink
+  shopLink,
+  mainWebUrl
 }) => {
   const overlayRef = React.useRef<HTMLDivElement>(null);
 
@@ -53,7 +55,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
         ></button>
         <div className={styles.menu__navContainer}>
           <Link
-            href={'/'}
+            href={mainWebUrl}
             className={`${styles.menu__navigation} ${
               isMain ? styles.menu__navigation_active : ""
             } }`}
@@ -62,7 +64,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             Главная
           </Link>
           <Link
-            href={shopLink}
+            href={'/'}
             className={`${styles.menu__navigation} ${
               isShop ? styles.menu__navigation_active : ""
             } }`}
@@ -71,7 +73,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             Онлайн магазин
           </Link>
           <Link
-            href={'/park'}
+            href={`${mainWebUrl}/park`}
             className={`${styles.menu__navigation} ${
               isPark ? styles.menu__navigation_active : ""
             } }`}
@@ -80,7 +82,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             Парк Победы
           </Link>
           <Link
-            href={'/mayak'}
+            href={`${mainWebUrl}/mayak`}
             className={`${styles.menu__navigation} ${
               isMayak ? styles.menu__navigation_active : ""
             } }`}
@@ -89,7 +91,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             Маяковская
           </Link>
           <Link
-            href={'/contacts'}
+            href={`${mainWebUrl}/contacts`}
             className={`${styles.menu__navigation} ${
               isContacts ? styles.menu__navigation_active : ""
             } }`}

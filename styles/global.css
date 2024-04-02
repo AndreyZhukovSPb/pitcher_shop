@@ -5,21 +5,62 @@
   align-items: center;
   position: relative;
   width: 100%;
+  overflow: hidden;
   /* max-width: 1440px; 
   margin: 0 auto; */
   background-color: #FFFFFF;
-  font-family: sans-serif; 
+  /* font-family: sans-serif; 
   font-family: 'Inter'; 
   font-family: 'Mont-Light';
   font-family: 'Mont-Regular';
   font-family: 'Mont-SemiBold';
   font-family: 'Montserrat-Regular';
   font-family: 'Montserrat-Light';
-  font-family: 'Montserrat-Medium';
+  font-family: 'Montserrat-Medium'; */
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%; 
+}
+
+:root {
+  --titles-font: 'Montserrat-Medium';
+  --titles-font-size-mobile: 18px;
+  --titles-font-size-tablet: 16px;
+  --titles-font-size-laptop: 18px;
+  --titles-font-size-desctop: 20px;
+  
+  --h-font-size-mobile: 20px;
+  --h-font-size-tablet: 18px;
+  --h-font-size-laptop: 20px;
+  --h-font-size-desctop: 22px;
+
+  --subtitles-font: 'Montserrat-Regular';
+  --subtitles-font-size-mobile: 16px;
+  --subtitles-font-size-tablet: 12px;
+  --subtitles-font-size-laptop: 13px;
+  --subtitles-font-size-desctop: 16px;
+  --paragpaph-font: 'Mont-Regular';
+  --paragpaph-font-size-mobile: 14px;
+  --paragpaph-font-size-tablet: 13px;
+  --paragpaph-font-size-laptop: 14px;
+  --paragpaph-font-size-desctop: 16px;
+  --letter-spacing-global: .8px;
+  /* --font-color: black; */
+  --font-color: #272A31;
+  --font-color-gray: #9d9d9d;
+  --bg-color-1: rgb(249 246 240);
+  --bg-color-2: #F5F5F5;
+  --span-font: 'Mont-Light';
+  --span-font-size-mobile: 13px;
+  --span-font-size-tablet: 12px;
+  --span-font-size-laptop: 14px;
+  --span-font-size-desctop: 16px;
+  --extra-font-size-mobile: 12px;
+  --extra-font-size-tablet: 12px;
+  --extra-font-size-laptop: 12px;
+  --extra-font-size-desctop: 14px;
+
 }
 

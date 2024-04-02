@@ -3,17 +3,20 @@
   display: flex;
   width: 100%;
   height: 100%;
-  right: -100%;
+  /* right: -100%; */
+  left: -100%;
   top: 0;
   z-index: 1;
-  transition: right 1s;
-  justify-content: flex-end;
-  color: #000000;
+  transition: left 1s;
+  justify-content: flex-start;
+  /* color: #000000; */
+  color: white;
 }
 
 .menu_active {
-  right: 0%;
-  transition: right 1s;
+  /* right: 0%; */
+  left: 0%;
+  transition: left 1s;
 }
 
 .menu__container{
@@ -22,6 +25,20 @@
   background-color: white;
   display: flex;
   justify-content: center;
+  position: relative;
+  background-image: url('https://i.ibb.co/sKpYKKn/texture-new-transformed.jpg');
+  background-size: cover;
+}
+
+.menu__container::before {
+  content: "";
+  background: rgba(0,0,0,.4);
+  opacity: .2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .menu__closeButton {
@@ -38,7 +55,7 @@
   cursor: pointer;
   transition: opacity 1s ease;
   background-color: transparent;
-  filter: invert(100%);
+  /* filter: invert(100%); */
 }
 
 /* .menu__closeButton:hover {
@@ -49,20 +66,21 @@
 .menu__navigation {
   margin: 0;
   font-family: 'Montserrat-Regular';
-  font-family: 'Montserrat-Light';
+  /* font-family: 'Montserrat-Light'; */
   margin-top: 10px;
   font-size: 16px;
   line-height: 1.6;
   text-decoration: none;
-  color: #000000;
+  /* color: #000000; */
+  color: white;
 }
 
-.navigation__link_active {
+/* .navigation__link_active {
   border-bottom: 1.4px  #000000 solid;
-}
+} */
 
 .menu__navigation_active {
-  border-bottom: 1.4px #000000 solid;
+  border-bottom: 1.4px white solid;
 }
 
 .menu__navContainer {
@@ -70,4 +88,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  z-index: 1;
 }
+
+@media (width > 767px) {
+  .menu__navigation {
+    margin-top: 12px;
+    font-size: 24px;
+  }
+  .menu__navigation_active {
+    border-bottom: 1.6px white solid;
+  }
+}
+
