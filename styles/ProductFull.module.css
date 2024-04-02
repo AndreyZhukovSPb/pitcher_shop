@@ -1,0 +1,101 @@
+.productFull {
+  margin-top: 70px;
+  width: 100%;
+  padding: 0 6vw;
+  /* background-color: bisque; */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--font-color);
+  background-color: rgb(249 246 240);
+}
+
+.productFull__image {
+  width: 55% !important;
+  position: relative !important;
+  height: auto !important;
+  margin-top: 25px;
+}
+
+.productFull__titleContainer {
+  margin: 10px 0 5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.productFull__title {
+  margin: 0;
+  font-family: var(--titles-font);
+  font-size: var(--titles-font-size-mobile);
+  font-weight: normal;
+  max-width: 80%;
+  text-align: center;
+}
+
+.productFull__subtitle {
+  color: var(--font-color-gray);
+  margin: 0 0 5px;
+  font-family: var(--span-font);
+  font-size: var(--span-font-size-mobile);
+}
+
+.productFull__aboutContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 20px; */
+  margin: 20px 0 10px;
+}
+
+.productFull__featureContainer {
+  display: flex;
+  margin-bottom: 10px;
+  /* font-family: var(--span-font);
+  font-size: var(--span-font-size-mobile); */
+}
+
+.productFull__aboutTitle {
+  color: var(--font-color-gray);
+  margin: 0 5px 0 0;
+  font-family: var(--span-font);
+  font-size: var(--span-font-size-mobile);
+}
+
+.productFull__about {
+  margin: 0;
+  font-family: var(--span-font);
+  font-size: var(--span-font-size-mobile);
+}
+
+.productFull__descriptionContainer {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.productFull__descriptionTitle {
+  font-family: var(--span-font);
+  font-size: var(--span-font-size-mobile);
+  color: var(--font-color-gray);
+  margin: 0 0 10px;
+  /* margin: 0; */
+  align-self: flex-start;
+}
+
+.productFull__description {
+  margin: 10px 0 0 0;
+  font-family: var(--span-font);
+  font-size: var(--span-font-size-mobile);
+  line-height: 1.5;
+}
+
+.productFull__cartContainer {
+  width: 100%;
+  display: flex;
+  padding: 20px 0 20px 0;
+  box-sizing: border-box;
+}

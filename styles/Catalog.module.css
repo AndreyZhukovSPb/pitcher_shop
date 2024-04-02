@@ -1,0 +1,10 @@
+.catalog__list {
+  list-style: none;
+  margin: 10px 0 25px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  /* padding: 0 3.5vw; */
+  padding: 0 5.5vw;
+  box-sizing: border-box;
+}

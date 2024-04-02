@@ -1,82 +1,52 @@
 import Header from "./Header";
+import Footer from "./Footer";
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from "react";
 import React from "react";
 
 export default function Layout({ children }) {
   const pathname = usePathname();
-  const [isMain, setIsMain] = React.useState<boolean>(true);
-  const [isPark, setIsPark] = React.useState<boolean>(false);
-  const [isMayak, setIsMayak] = React.useState<boolean>(false);
-  const [isContacts, setIsContacts] = React.useState<boolean>(false);
+  // const [isPark, setIsPark] = React.useState<boolean>(false);
+  // const [isMayak, setIsMayak] = React.useState<boolean>(false);
+  // const [isContacts, setIsContacts] = React.useState<boolean>(false);
+  const [isFullCard, setIsFullCard] = React.useState<boolean>(false);
+  const [isCart, setIsCart] = React.useState<boolean>(false);
   
   function setMainPageProps() {
-    setIsMain(true);
-    setIsContacts(false)
-    setIsMayak(false)
-    setIsPark(false)
+    setIsFullCard(false);
+    setIsCart(false)
   }
 
-  function setContactsPageProps() {
-    setIsMain(false);
-    setIsContacts(true)
-    setIsMayak(false)
-    setIsPark(false)
+  function setFullPageProps() {
+    setIsFullCard(true);
+    setIsCart(false)
   }
 
-  function setMayakPageProps() {
-    setIsMain(false);
-    setIsContacts(false)
-    setIsMayak(true)
-    setIsPark(false)
-  }
-
-  function setParkPageProps() {
-    setIsMain(false);
-    setIsContacts(false)
-    setIsMayak(false)
-    setIsPark(true)
+  function setCartPageProps() {
+    setIsFullCard(false);
+    setIsCart(true)
   }
 
   useEffect(() => {
-    if (pathname === "/") {
+    if (pathname === "/" ) {
       setMainPageProps()
-    } else if (pathname === "/contacts") {
-      setContactsPageProps()
-    } else if (pathname === "/park") {
-      setParkPageProps()
-    } else if (pathname === "/mayak") {
-      setMayakPageProps()
-    } 
+    } else if (pathname === "/cart") {
+      setCartPageProps();
+    } else {
+      setFullPageProps()
+    }
   }, [pathname]);
 
   return (
     <>
       <Header 
-        isMain={isMain}
-        isContacts={isContacts}
-        isMayak={isMayak}
-        isPark={isPark}
+        isMain={false} // DEL?
+        isFullCard={isFullCard}
+        isCart={isCart}
       />
       {children}
+      <Footer/>
     </>
   )
 }
 
-
-/*
-
-
-
-  function switchOnIsMain() {
-    setIsMain(true)
-  }
-
-  function switchOffIsMain() {
-    setIsMain(false)
-    console.log('??')
-  }
-
-  function showPageAtNav() {
-  }
-*/
