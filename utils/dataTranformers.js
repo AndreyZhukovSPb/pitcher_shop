@@ -34,3 +34,26 @@ export const changeArrayForCart = (array) => {
   return arrayForState;
 }
 
+export const getWordForCart = (summ) => {
+  const num = summ % 100;
+  let ending;
+  if (num >= 11 && num <= 20) {
+    ending = ' товаров ';
+  } else {
+    const lastDigit = num % 10;
+      if (lastDigit === 1) {
+      ending = ' товар ';
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+    ending = ' товара ';
+    } else {
+    ending = ' товаров ';
+    }
+  }
+  return(ending);
+}
+
+
+
+
+
+

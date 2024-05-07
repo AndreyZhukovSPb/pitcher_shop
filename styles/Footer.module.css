@@ -124,6 +124,29 @@
   text-transform: uppercase;
 }
 
+.footer__conditionsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.footer__conditions {
+  display: inline; /* Измените display на inline */
+  font-family: 'Mont-Regular';
+  font-size: 12px;
+  /* margin: 0; */
+  color: var(--font-color);
+  text-decoration: none;
+  border-bottom: 0.8px solid var(--font-color);
+  /* padding-bottom: 1px; */
+  /* text-align: center; */
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+
+
 @media (width >= 1024px)  {
   .footer__contactsTitle:hover {
     opacity: 0.5;

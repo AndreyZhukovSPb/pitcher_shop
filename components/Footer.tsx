@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
                 <p
                   className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
                 >
-                  +7-931-339-30-43
+                  +7-981-039-79-12
                 </p>
               </a>
             </li>
@@ -110,6 +110,13 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
+        <div className={styles.footer__conditionsBox}>
+          <a className={styles.footer__conditions} target="blank" href="/delivery">Доставка и оплата</a>
+          <a className={styles.footer__conditions} target="blank" href="/">Оферта</a>
+          <a className={styles.footer__conditions} target="blank" href="/">Обработка персональных данных</a>
+          
+          
+        </div>
       </div>
       <p className={styles.footer__copyright}>2014 - 2024 Picther loves you</p>
     </footer>
@@ -117,13 +124,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
-/*
-&#64;
-<Image
-                  src={"/instagram.svg"}
-                  alt="icon instagram"
-                  className={styles.footer__icon}
-                  fill
-                />
-*/

@@ -35,6 +35,7 @@ interface cartProps {
   updateMillingCart: (product: OrderType | ProductType, value: string) => void;
   updateQuantutyInCart: (product: OrderType, value: string) => void;
   removeFromCart: (product: OrderType) => void;
+  resetCart: () => void;
 }
 
 export const CartContext = createContext<cartProps>({
@@ -53,6 +54,7 @@ export const CartContext = createContext<cartProps>({
   updateMillingCart: () => {},
   updateQuantutyInCart: () => {},
   removeFromCart: () => {},
+  resetCart: () => {}
 });
 
 export const CartContextProvider = ({
@@ -113,9 +115,9 @@ export const CartContextProvider = ({
     );
   }
 
-  useEffect(()=> {
-    console.log(orderData);
-    console.log(currentProductFeatures);
+  useEffect(()=> { // DEL?
+    // console.log(orderData);
+    // console.log(currentProductFeatures);
   }, [orderData, currentProductFeatures])
 
   const resetPriceType = (newId: string) => {
@@ -158,6 +160,10 @@ export const CartContextProvider = ({
         : item
         ))
     }
+  }
+
+  const resetCart = () => {
+    setOrderData([]);
   }
 
   const updateQuantity = (newId: string, value: string ) => {
@@ -215,7 +221,7 @@ export const CartContextProvider = ({
   const ProductList = React.useContext(ProductsContext).productsData;
 
   const setInitialProductList = () => {
-    console.log(ProductList);
+    // console.log(ProductList);
     if (ProductList.length >= 1) {
       setCurrentProductFeatures(() => 
         ProductList.map(item => {
@@ -306,7 +312,7 @@ export const CartContextProvider = ({
   const addToOrder = (product: ProductType) => {
     console.log('here?')
     const itemForAdd = currentProductFeatures.find(item => item.itemId === product._id)
-    console.log(itemForAdd);
+    // console.log(itemForAdd);
     const addedItem = {
       name: itemForAdd.name,
       name_2: itemForAdd.name_2 ? itemForAdd.name_2 : undefined,
@@ -377,7 +383,8 @@ export const CartContextProvider = ({
           setInitialProductList,
           updateMillingCart,
           updateQuantutyInCart,
-          removeFromCart
+          removeFromCart,
+          resetCart
         }}
       >
       {children}

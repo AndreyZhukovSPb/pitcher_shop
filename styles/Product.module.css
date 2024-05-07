@@ -392,8 +392,7 @@
 .product__button {
   width: 100%;
   height: 50px;
-  /* background-color: #9d9d9d; */
-  background-color: rgb(84 84 84);
+  background-color: var(--btn-color);
   border: none;
   font-family: var(--paragpaph-font);
   /* letter-spacing: var(--letter-spacing-global); */

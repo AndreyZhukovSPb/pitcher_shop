@@ -74,12 +74,14 @@ const Header: React.FC<headerProps> = ({
   }
 
   // console.log(isCart)
+  // ${isCart? styles.header__type_cart : ''} 
 
   return (
     // ${isMain? styles.header__type_main : ''} 
     <header className=
       {`${styles.header} 
-      ${isCart? styles.header__type_cart : ''} 
+      
+      ${styles.header__type_cart} 
       ${isScrolled? styles.header__type_scrolled : ''}`}
     >      
       <Navigation

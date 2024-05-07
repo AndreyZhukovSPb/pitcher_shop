@@ -52,6 +52,7 @@
   --font-color-gray: #9d9d9d;
   --bg-color-1: rgb(249 246 240);
   --bg-color-2: #F5F5F5;
+  --btn-color: rgb(84 84 84);
   --span-font: 'Mont-Light';
   --span-font-size-mobile: 13px;
   --span-font-size-tablet: 12px;
@@ -61,6 +62,8 @@
   --extra-font-size-tablet: 12px;
   --extra-font-size-laptop: 12px;
   --extra-font-size-desctop: 14px;
+
+  
 
 }
 
