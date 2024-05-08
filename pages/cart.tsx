@@ -256,7 +256,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
             </button>
             <p className={styles.cart__contidions}>
               Переходя к оплате вы выражаете согласие с условиями
-              <a className={styles.cart__link} target="blank" href="/"> обработки персональных данных</a>
+              <a className={styles.cart__link} target="blank" href="/conditions"> обработки персональных данных</a>
               , и
               <a className={styles.cart__link} target="blank" href="/"> публичной оферты.</a>
             </p>

@@ -113,7 +113,7 @@ const Footer: React.FC = () => {
         <div className={styles.footer__conditionsBox}>
           <a className={styles.footer__conditions} target="blank" href="/delivery">Доставка и оплата</a>
           <a className={styles.footer__conditions} target="blank" href="/">Оферта</a>
-          <a className={styles.footer__conditions} target="blank" href="/">Обработка персональных данных</a>
+          <a className={styles.footer__conditions} target="blank" href="/conditions">Обработка персональных данных</a>
           
           
         </div>
