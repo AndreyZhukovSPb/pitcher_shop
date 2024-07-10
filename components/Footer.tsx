@@ -7,9 +7,9 @@ const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <div className={styles.footer__container}>
         <div className={styles.footer__contactsContainer}>
-          <Link href={"/contacts"} className={styles.footer__contactsTitle}>
+          <p className={styles.footer__contactsTitle}>
             Контакты
-          </Link>
+          </p>
           <ul className={styles.footer__contacts}>
             <li className={styles.footer__contactbox}>
               <a href="tel:+79313393043" className={styles.footer__box}>
@@ -111,11 +111,10 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className={styles.footer__conditionsBox}>
-          <a className={styles.footer__conditions} target="blank" href="/delivery">Доставка и оплата</a>
-          <a className={styles.footer__conditions} target="blank" href="/">Оферта</a>
-          <a className={styles.footer__conditions} target="blank" href="/conditions">Обработка персональных данных</a>
-          
-          
+          <Link className={styles.footer__conditions} href="/delivery">Доставка и оплата</Link>
+          <Link className={styles.footer__conditions} href="/oferta">Оферта</Link>
+          <Link className={styles.footer__conditions} href="/conditions">Обработка персональных данных</Link>
+          <Link className={styles.footer__conditions} href="/about">Реквизиты компании</Link>
         </div>
       </div>
       <p className={styles.footer__copyright}>2014 - 2024 Picther loves you</p>

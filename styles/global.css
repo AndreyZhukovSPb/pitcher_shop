@@ -25,12 +25,33 @@
 }
 
 :root {
+  --titles-h-font: 'Montserrat-Medium';
+  --titles-h-font-size: 20px;
+  --titles-h-large-font-size: 24px;
+
+  --subtitles-font: 'Montserrat-Regular';
+  --subtitles-font-size: 18px;
+
+  --paragpaph-font: 'Mont-Regular';
+  --paragpaph-title-font: 'Mont-SemiBold';
+  --paragpaph-font-size: 14px;
+  --paragpaph-large-font-size: 16px;
+
+  --span-font: 'Mont-Light';
+  --span-font-size: 12px;
+  --span-font-large-size: 13px;
+
+  --btn-font: 'Mont-Regular';
+  --btn-font-size: 16px;
+
+
+  
   --titles-font: 'Montserrat-Medium';
   --titles-font-size-mobile: 18px;
   --titles-font-size-tablet: 16px;
   --titles-font-size-laptop: 18px;
   --titles-font-size-desctop: 20px;
-  
+
   --h-font-size-mobile: 20px;
   --h-font-size-tablet: 18px;
   --h-font-size-laptop: 20px;
@@ -41,7 +62,7 @@
   --subtitles-font-size-tablet: 12px;
   --subtitles-font-size-laptop: 13px;
   --subtitles-font-size-desctop: 16px;
-  --paragpaph-font: 'Mont-Regular';
+  
   --paragpaph-font-size-mobile: 14px;
   --paragpaph-font-size-tablet: 13px;
   --paragpaph-font-size-laptop: 14px;
@@ -62,8 +83,5 @@
   --extra-font-size-tablet: 12px;
   --extra-font-size-laptop: 12px;
   --extra-font-size-desctop: 14px;
-
-  
-
 }
 

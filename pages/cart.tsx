@@ -6,10 +6,14 @@ import { type OrderType } from '../utils/sharedTypes';
 import SectionLine from "../components/SectionLine";
 import CartItem from "../components/CartItem";
 import CartContacts from "../components/CartContacts";
+import Preloader from "../components/Preloader";
 import { getWordForCart } from "../utils/dataTranformers";
 import { useRouter } from "next/router";
+import { postOrder } from "../utils/api";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Popup from "../components/Popup";
 
 interface cartProps {
 } // DEL?
@@ -23,13 +27,20 @@ const Cart: React.FC<cartProps> = ({  }) => {
   const [currentTotal, setCurentTotal] = React.useState<number>(0);
   const [deliveryPrice, setDeliveryPrice] = React.useState<number>(0);
   const [deliveryType, setDeliveryType] = React.useState<string>('');
-  const [deliveryPoint, setDeliveryPoint] = React.useState<string>('Парк');
+  const [deliveryPoint, setDeliveryPoint] = React.useState<string>('Бассейная 12');
   const [isDeliveryChosen, setIsDeliveryChosen] = React.useState<boolean>(false);
   const [isDelivery, setIsDelivery] = React.useState<boolean>(false);
   const [isContactsValid, setIsContactsValid] = React.useState<boolean>(false);
   const [contactsErrors, setContactsErrors] = React.useState<string[]>([]);
   const [isReadyToPay, setIsReadyToPay] = React.useState<boolean>(false);
   const [showContactsErr, setShowContactsErr] = React.useState<boolean>(false);
+  const [isOrderPayed, setIsOrderPayed] = React.useState<boolean>(false);
+  const [isPopupOpened, setIsPopupOpened] = React.useState<boolean>(false);
+  const [isPreloaderOpened, setIsPreloaderOpened] = React.useState<boolean>(false);
+  const [orderNumber, setOrderNumber] = React.useState<string>('');
+  const [orderEmail, setOrderEmail] = React.useState<string>('');
+  
+  console.log(orderData)
 
   useEffect(() => {
     if (deliveryType !== 'Самовывоз') {
@@ -80,25 +91,87 @@ const Cart: React.FC<cartProps> = ({  }) => {
     setDeliveryPoint('');
     setIsDeliveryChosen(false);
   }
+
+  const sendOrder = 
+    (order: OrderType[], 
+      deliveryData: { [key: string]: string }, 
+      pickUpPoint: string,
+      deliveryPrice: number,
+      currentTotal: number,
+      isDelivery: boolean,
+      deliveryType: string
+      ) => {
+    // console.log(data);
+    console.log(isDelivery);
+    let fullDeliveryData = {}
+    if (isDelivery) {
+      fullDeliveryData = {
+        name: deliveryData.name,
+        phone: deliveryData.phone,
+        address: deliveryData.adress,
+        comment: deliveryData.comment,
+        email: deliveryData.email,
+        deliveryType: deliveryType,
+        deliveryPrice: deliveryPrice
+      }
+    } else {
+      fullDeliveryData = {
+        name: deliveryData.name,
+        phone: deliveryData.phone,
+        comment: deliveryData.comment,
+        email: deliveryData.email,
+        deliveryPoint: pickUpPoint,
+        deliveryType: deliveryType,
+        };
+    }
+    
+    const total = deliveryPrice + currentTotal;
+    postOrder(fullDeliveryData, order, total)
+      .then((data) => {
+        if (data.client) {
+          // console.log(data)
+          resetOrder();
+          setOrderNumber(data.number)
+          setOrderEmail(data.client.email)
+          setIsOrderPayed(true) // нужно потом обратно менять?
+          setIsPreloaderOpened(false);
+          setIsPopupOpened(true);
+          // router.push(`/`);
+        } else {
+          console.log('что-то пошло не так попробуйте еще раз')
+          setIsPreloaderOpened(false);
+          setIsReadyToPay(false);
+          setIsPopupOpened(true);
+        }
+      })
+      .catch(()=> {
+        setIsPreloaderOpened(false);
+        setIsReadyToPay(false);
+        console.log('что-то пошло не так попробуйте еще раз')
+        setIsPopupOpened(true);
+      })
+  }
   
   const handleCustomerData = (contacts: { [key: string]: string }) => {
-    console.log(`данные покупателя`);
-    console.log(contacts);
-    console.log(`заказ`);
-    console.log(orderData);
-    console.log(deliveryPoint)
-    resetOrder();
+    setIsPreloaderOpened(true)
+    sendOrder(orderData, contacts, deliveryPoint, deliveryPrice, currentTotal, isDelivery, deliveryType)
   }
 
   const handleSubmit = () => {
     if (isContactsValid) {
       setIsReadyToPay(true);
       setShowContactsErr(false);
-      // console.log(customerData);
+      // console.log('pushed?')
     } else {
       setIsReadyToPay(false);
       setShowContactsErr(true);
     }
+  }
+
+  const handleClosePopup = () => {
+    setIsPopupOpened(false);
+    setOrderNumber('')
+    setOrderEmail('')
   }
 
   const handleDeliveryClick = () => {
@@ -148,11 +221,8 @@ const Cart: React.FC<cartProps> = ({  }) => {
             className={styles.cart__deliveryType_type_invisible}
             onClick={() => handleChooseDelivery('Курьер')}
           />
-          
           {/* <span className={styles.cart__deliveryType_type_visible}></span> */}
           <div className={styles.cart__deliveryType_type_visible}></div>
-          
-          
           <p className={styles.cart__deliveryName}>
             Доставка по Санкт-Петербургу
             <span className={styles.cart__deliveryComment}>
@@ -220,6 +290,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
             passErrors={handleContactsErrors}
             passContacts={handleCustomerData}
             isSubmiyClicked={isReadyToPay}
+            isPaymentReceived={isOrderPayed}
           />
           <div className={styles.cart__totalContainer}>
             <h2 className={styles.cart__title}>Ваш заказ</h2>
@@ -256,14 +327,23 @@ const Cart: React.FC<cartProps> = ({  }) => {
             </button>
             <p className={styles.cart__contidions}>
               Переходя к оплате вы выражаете согласие с условиями
-              <a className={styles.cart__link} target="blank" href="/conditions"> обработки персональных данных</a>
+              <Link className={styles.cart__link} href="/conditions"> обработки персональных данных</Link>
               , и
-              <a className={styles.cart__link} target="blank" href="/"> публичной оферты.</a>
+              <Link className={styles.cart__link} target="blank" href="/oferta"> публичной оферты.</Link>
             </p>
           </div>
         </>
       )}
-      
+      <Popup
+        onClose={handleClosePopup}
+        isPayed = {isOrderPayed}
+        orderNumber={orderNumber}
+        isOpen={isPopupOpened}
+        orderEmail={orderEmail}
+      />
+      <Preloader
+        isOpen={isPreloaderOpened}
+      />
     </section>
     <SectionLine/>
     </>
@@ -271,3 +351,6 @@ const Cart: React.FC<cartProps> = ({  }) => {
 };
 
 export default Cart;
+
+
+// закрытие по оверлею

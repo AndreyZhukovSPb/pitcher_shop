@@ -122,43 +122,148 @@ export default function conditions () {
         </div>
         
 
-        {/* <div className={styles.conditions__chapter}>
-          <h3 className={styles.conditions__subTitle}></h3>
-          <p className={styles.conditions__text}>            
-          </p>
+        <div className={styles.conditions__chapter}>
+          <h3 className={styles.conditions__subTitle}>4. Цели сбора персональной информации пользователя</h3>
           <ul className={`${styles.conditions__text} ${styles.conditions__text_type_listTitle}`}>
+            4.1. Персональные данные Пользователя Администрация сайта shop.pitcherbar.ru может использовать в целях:
             <li className={styles.conditions__text_type_listItem}>
-              -
+              - Идентификации Пользователя, зарегистрированного на cайте shop.pitcherbar.ru, для оформления заказа.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Предоставления Пользователю доступа к персонализированным внутренним ресурсам и функционалу cайта shop.pitcherbar.ru.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Установления с Пользователем обратной связи, включая направление уведомлений, запросов, касающихся использования Сайта shop.pitcherbar.ru, оказания услуг, обработка запросов и заявок от Пользователя.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Определения места нахождения Пользователя для обеспечения безопасности, предотвращения мошенничества.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Подтверждения достоверности и полноты персональных данных, предоставленных Пользователем.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Создания учетной записи для совершения покупок, если Пользователь дал согласие на создание учетной записи путем ее создения с помощью интерфейса сайта shop.pitcherbar.ru.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Уведомления Пользователя Сайта shop.pitcherbar.ru о состоянии Заказа.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Обработки и получения платежей.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Предоставления Пользователю эффективной клиентской и технической поддержки при возникновении проблем, связанных с использованием Сайта shop.pitcherbar.ru.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Предоставления Пользователю обновлений продукции, специальных предложений, информации о ценах, новостной рассылки и иных сведений от имени shop.pitcherbar.ru.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Осуществления рекламной деятельности с согласия Пользователя.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Предоставления доступа Пользователю на сайты или сервисы партнеров shop.pitcherbar.ru с целью получения продуктов, обновлений и услуг.
             </li>
           </ul>
         </div>
 
         <div className={styles.conditions__chapter}>
-          <h3 className={styles.conditions__subTitle}></h3>
-          <p className={styles.conditions__text}>            
+          <h3 className={styles.conditions__subTitle}>5. Способы и сроки обработки персональной информации</h3>
+          <p className={styles.conditions__text}>
+            5.1. Обработка персональных данных Пользователя осуществляется без ограничения срока, любым законным способом, в том числе в информационных системах персональных данных с использованием средств автоматизации или без использования таких средств.
           </p>
+          <p className={styles.conditions__text}>
+            5.2. Пользователь соглашается с тем, что Администрация сайта вправе передавать персональные данные третьим лицам, в частности, курьерским службам, организациями почтовой связи, операторам электросвязи, исключительно в целях выполнения заказа Пользователя, оформленного на Сайте shop.pitcherbar.ru.            
+          </p>
+          <p className={styles.conditions__text}>
+            5.3. Персональные данные Пользователя могут быть переданы уполномоченным органам государственной власти Российской Федерации только по основаниям и в порядке, установленным законодательством Российской Федерации.        
+          </p>
+          <p className={styles.conditions__text}>
+            5.4. При утрате или разглашении персональных данных Администрация сайта информирует Пользователя об утрате или разглашении персональных данных.
+          </p>
+          <p className={styles.conditions__text}>
+            5.5. Администрация сайта принимает необходимые организационные и технические меры для защиты персональной информации Пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.
+          </p>
+          <p className={styles.conditions__text}>
+            5.6. Администрация сайта совместно с Пользователем принимает все необходимые меры по предотвращению убытков или иных отрицательных последствий, вызванных утратой или разглашением персональных данных Пользователя.
+          </p>
+        </div>
+        <div className={styles.conditions__chapter}>
+          <h3 className={styles.conditions__subTitle}>6. обязательства сторон</h3>
           <ul className={`${styles.conditions__text} ${styles.conditions__text_type_listTitle}`}>
+            6.1. Пользователь обязан:
             <li className={styles.conditions__text_type_listItem}>
-              -
+              - Предоставить информацию о персональных данных, необходимую для пользования Сайтом shop.pitcherbar.ru.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Обновить, дополнить предоставленную информацию о персональных данных в случае изменения данной информации.
             </li>
           </ul>
-        </div> */}
+          <ul className={`${styles.conditions__text} ${styles.conditions__text_type_listTitle}`}>
+            6.2. Администрация сайта обязана:
+            <li className={styles.conditions__text_type_listItem}>
+              - Использовать полученную информацию исключительно для целей, указанных в п. 4 настоящей Политики.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Обеспечить хранение конфиденциальной информации в тайне, не разглашать без предварительного письменного разрешения Пользователя, а также не осуществлять продажу, обмен, опубликование, либо разглашение иными возможными способами переданных персональных данных Пользователя, за исключением п.п. 5.2. и 5.3. настоящей Политики.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Принимать меры предосторожности для защиты конфиденциальности персональных данных Пользователя согласно порядку, обычно используемого для защиты такого рода информации в существующем деловом обороте.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Осуществить блокирование персональных данных, относящихся к соответствующему Пользователю, с момента обращения или запроса Пользователя или его законного представителя либо уполномоченного органа по защите прав субъектов персональных данных на период проверки, в случае выявления недостоверных персональных данных или неправомерных действий.
+            </li>
+          </ul>
+        </div>
+        <div className={styles.conditions__chapter}>
+          <h3 className={styles.conditions__subTitle}>7. Ответственность сторон</h3>
+          <p className={styles.conditions__text}>
+            7.1. Администрация сайта, не исполнившая свои обязательства, несет ответственность за убытки, понесенные Пользователем в связи с неправомерным использованием персональных данных, в соответствии с законодательством Российской Федерации, за исключением случаев, предусмотренных п.п. 5.2., 5.3. и 7.2. настоящей Политики.
+          </p>
+          <ul className={`${styles.conditions__text} ${styles.conditions__text_type_listTitle}`}>
+            7.2. В случае утраты или разглашения Конфиденциальной информации Администрация сайта не несет ответственность, если данная конфиденциальная информация:
+            <li className={styles.conditions__text_type_listItem}>
+              - Стала публичным достоянием до ее утраты или разглашения.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Была получена от третьей стороны до момента ее получения Администрацией сайта.
+            </li>
+            <li className={styles.conditions__text_type_listItem}>
+              - Была разглашена с согласия Пользователя.
+            </li>
+          </ul>
+        </div>
+        <div className={styles.conditions__chapter}>
+          <h3 className={styles.conditions__subTitle}>8. Разрешение споров</h3>
+          <p className={styles.conditions__text}>
+            8.1. До обращения в суд с иском по спорам, возникающим из отношений между Пользователем сайта shop.pitcherbar.ru и Администрацией сайта, обязательным является предъявление претензии (письменного предложения о добровольном урегулировании спора).
+          </p>
+          <p className={styles.conditions__text}>
+            8.2. Получатель претензии в течение 30 календарных дней со дня получения претензии, письменно уведомляет заявителя претензии о результатах рассмотрения претензии.
+          </p>
+          <p className={styles.conditions__text}>
+            8.3. При не достижении соглашения спор будет передан на рассмотрение в Арбитражный суд города Санкт-Петербурга и Ленинградской области.
+          </p>
+          <p className={styles.conditions__text}>
+            8.4. К настоящей Политике и отношениям между Пользователем и Администрацией сайта применяется действующее законодательство Российской Федерации.
+          </p>
+        </div>
+        <div className={styles.conditions__chapter}>
+          <h3 className={styles.conditions__subTitle}>9. Дополнительные условия</h3>
+          <p className={styles.conditions__text}>
+            9.1. Администрация сайта вправе вносить изменения в настоящую Политику без согласия Пользователя.
+          </p>
+          <p className={styles.conditions__text}>
+            9.2. Новая Политика вступает в силу с момента ее размещения на Сайте shop.pitcherbar.ru, если иное не предусмотрено новой редакцией Политики.
+          </p>
+          <p className={styles.conditions__text}>
+            9.3. Все предложения или вопросы по настоящей Политике следует сообщать через указанные на сайте shop.pitcherbar.ru контакты.
+          </p>
+          <p className={styles.conditions__text}>
+            Дата публикации: 30/05/2024г.
+          </p>
+        </div>
+
       </section>
     <SectionLine/>
     </>
   )
 }
-
-// !!! проверить на слова конфиденц !!!
-
-// <div className={styles.conditions__chapter}>
-//           <h3 className={styles.conditions__subTitle}></h3>
-//           <p className={styles.conditions__text}>            
-//           </p>
-//           <ul className={`${styles.conditions__text} ${styles.conditions__text_type_listTitle}`}>
-//             <li className={styles.conditions__text_type_listItem}>
-//               -
-//             </li>
-//           </ul>
-//         </div>
-

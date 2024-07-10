@@ -5,7 +5,7 @@
 
 .main__container {
   position: relative;
-  height: 200px;
+  height: 250px;
   width: 100%;
 }
 
@@ -27,7 +27,7 @@
 
 .main__overlay {
   position: relative;
-  background: rgba(0,0,0,.4);
+  background: rgba(0,0,0,.25);
   width: 100%;
   height: 100%;
 }
@@ -39,8 +39,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .main__text {
   margin: 0;
+  width: 70%;
+  font-family: var(--titles-h-font);
+  font-size: var(--titles-h-font-size);
+  text-align: center;
+}
+
+.main__text:first-child {
+  margin-bottom: 10px;
+  font-size: var(--titles-h-large-font-size);
 }
