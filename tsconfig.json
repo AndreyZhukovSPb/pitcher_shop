@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "utils/yandexMetrika.js"  ],
   "exclude": [
     "node_modules"
   ]

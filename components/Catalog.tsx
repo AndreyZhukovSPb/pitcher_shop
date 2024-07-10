@@ -28,7 +28,6 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
   // };
 
   const categoryListTransformed = filterCats(categoryList);
-  // console.log(categoryListTransformed);
 
   return (
     <ul className={styles.catalog__list}>

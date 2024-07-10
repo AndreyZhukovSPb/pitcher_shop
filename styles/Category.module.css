@@ -39,8 +39,8 @@
 .category__name {
   text-align: start;
   margin: 0;
-  font-family: var(--titles-font);
-  font-size: var(--h-font-size-mobile);
+  font-family: var(--titles-h-font);
+  font-size: var(--titles-h-font-size);
   font-weight: normal;
 }
 

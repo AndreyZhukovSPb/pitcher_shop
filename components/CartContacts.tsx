@@ -11,10 +11,11 @@ interface cartContactsProps {
   passErrors?: (isValid: boolean, errors: string[]) => void;
   passContacts?: (contacts: { [key: string]: string }) => void;
   isSubmiyClicked: boolean;
+  isPaymentReceived: boolean
   // isTimeToReset: boolean // DEL?
 }
 
-const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, passContacts, isSubmiyClicked }) => {
+const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, passContacts, isSubmiyClicked, isPaymentReceived }) => {
   // const { isLoggedIn, currentUser, onProfile, onNavMenuClick, onExitProfile } = props;
   // const [isDataNew, setIsDataNew] = React.useState(false);
   const {
@@ -31,7 +32,6 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
     mode: "onChange"
   });
 
-  // useEffect(()=>{
   //   const compare = watch((data) => {
   //     if (data.profileName === data.name && data.profileEmail === data.email) {
   //       setIsDataNew(false)
@@ -53,12 +53,6 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
 
   // async function test() {
   const test = async () => {
-    // console.log(getValues());
-    // const errorsArray = []
-    // const nameError = errors.name?.message;
-    // const phoneError = errors.phone?.message;
-    // const emailError = errors.email?.message;
-    // const addressError = errors.address?.message;
     console.log(errors)
     const errorsArray = [
       errors.name && errors.name.message,
@@ -67,7 +61,6 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
       errors.adress && errors.adress.message
     ].filter(Boolean);
 
-    // console.log(errors.name);
     const check = await trigger(); // Возвращает true, если форма валидна
     if (!check) {
       console.log(errors); // Выводит объект ошибок в консоль
@@ -76,15 +69,21 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
   }
 
   useEffect(()=> {
+    if(!isPaymentReceived) {
+      return
+    } else {
+      reset()
+    }
+  }, [isPaymentReceived])
+
+  useEffect(()=> {
     // console.log('а здесь были')
     if (!isValid) {
       return
     } else if (isSubmiyClicked) {
-      // console.log('здесь были')
-      // console.log(getValues());
       const data = getValues()
       passContacts(data);
-      reset();
+      // reset();
     } else {
       return;
     }

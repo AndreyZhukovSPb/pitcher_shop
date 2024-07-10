@@ -13,15 +13,15 @@
 
 .delivery__title {
   margin: 0;
-  font-family: var(--titles-font);
-  font-size: var(--h-font-size-mobile);
+  font-family: var(--titles-h-font);
+  font-size: var(--titles-h-font-size);
   font-weight: normal;
 }
 
 .delivery__text {
   margin: 10px 0 0;
   font-family: var(--paragpaph-font);
-  font-size: var(--paragpaph-font-size-mobile);
+  font-size: var(--paragpaph-font-size);
   line-height: 1.5;
 }
 
