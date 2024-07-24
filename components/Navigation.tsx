@@ -44,14 +44,28 @@ const Navigation: React.FC<navigationProps> = ({
   const resetMilling = Context.resetMilling;
   const resetPriceType = Context.resetPriceType;
   const resetQuantity = Context.resetQuantity;
+  const [isScrolled, setIsScrolled] = useState(false);
   const { query }  = useRouter();
 
   const [fullCardId, setFullCardId] = useState<string>('')
   const router = useRouter();
 
   useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
     if (!isFullCard) {
-      console.log('здесь?')
       return
     } else {
       if (query.linkName === undefined) {
@@ -110,8 +124,10 @@ const Navigation: React.FC<navigationProps> = ({
           aria-label="меню для мобильного"
           onClick={handleBurgerClick}
           className={`${styles.navigation__button} ${
-            isForBurger ? styles.navigation__button_active : ""
-          } ${!isMain ? styles.navigation__button_type_store : ""}`}
+            isForBurger ? styles.navigation__button_active : ""} 
+            ${!isMain ? styles.navigation__button_type_store : ""}
+            ${isScrolled? styles.navigation__button_type_scrolled : ''}
+          `}
         ></button>
     </nav>
     )}

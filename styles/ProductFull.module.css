@@ -1,14 +1,30 @@
 .productFull {
   margin-top: 70px;
   width: 100%;
-  padding: 0 6vw;
+  /* padding: 0 6vw; */
   /* background-color: bisque; */
   box-sizing: border-box;
+  display: grid;
+  align-items: center;
+  color: var(--font-color);
+  /* background-color: rgb(249 246 240); */
+  background-color: var(--bg-color-card);
+}
+
+.productFull__imageContainer {
+  padding: 0 6vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--font-color);
-  background-color: rgb(249 246 240);
+  /* width: calc(100% - 12vw); */
+}
+
+.productFull__infoContainer {
+  padding: 0 6vw;
+  /* width: calc(100% - 12vw); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .productFull__image {
@@ -16,6 +32,7 @@
   position: relative !important;
   height: auto !important;
   margin-top: 25px;
+  max-width: 120px;
 }
 
 .productFull__titleContainer {
@@ -99,3 +116,61 @@
   padding: 20px 0 20px 0;
   box-sizing: border-box;
 }
+
+.productFull__cartContainer_bigScreen {
+  width: 100%;
+}
+
+.productFull__balanceContainer {
+  width: 100%;
+}
+
+@media (width > 1023px) {
+  .productFull {
+    grid-template-columns: 1.2fr 1fr;
+    padding: 50px 100px 50px 50px;
+    column-gap: 40px;
+  }
+  .productFull__imageContainer {
+    padding: 0 100px;
+    /* border-right: 1px solid rgb(104 100 100 / 0.4); */
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .productFull__infoContainer {
+    padding: 0 130px;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    grid-column: 2;
+    grid-row: 1;
+    border-left: 1px solid rgb(104 100 100 / 0.4);
+    /* border-left: 1px solid gray; */
+  }
+  .productFull__image {
+    max-width: 250px;
+  }
+  .productFull__cartContainer {
+    padding-bottom: 10px;
+  }
+  .productFull__cartContainer_bigScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .productFull__aboutContainer_bigScreen {
+    grid-column: 1 / span 2; /* Занимает обе колонки */
+    grid-row: 2;
+    /* height: 50px; */
+    /* background-color: aqua; */
+    margin-top: 40px;
+    padding: 0 100px 0 100px;
+  }
+  .productFull__description_bigScreen {
+    font-family: var(--paragpaph-font);
+    font-size: var(--paragpaph-font-size);
+    text-align: justify;
+  }
+  
+}
+

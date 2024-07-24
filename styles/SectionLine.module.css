@@ -8,9 +8,35 @@
   width: calc(100vw - 30px);
 }
 
-@media (width <= 767px) {
+.sectionLine_type_catalog {
+  display: none;
+  width: 100%;
+  margin: 0 0 30px;
+}
+
+.sectionLine_type_bigScreen {
+  width: 100%;
+}
+
+
+@media (width > 1023) {
+  /* .sectionLine_type_catalog {
+    display: flex;
+  } */
   .sectionLine {
-    width: 94vw;
+    border-top: 1px solid red;
   }
+}
+
+@media (width > 1023px) {
+  .sectionLine_type_catalog {
+    display: flex;
+  }
+  /* .sectionLine_type_bigScreen {
+    width: 100%;
+  } */
   
+  /* .sectionLine {
+    border-top: 1px solid red;
+  } */
 }

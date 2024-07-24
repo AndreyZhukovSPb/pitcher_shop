@@ -4,12 +4,23 @@
   box-sizing: border-box;
   /* background-color: #fafafa; */
   background-color: rgb(249 246 240);
+  background-color: rgb(253 251 247);
+  background-color: var(--bg-color-card);
+  /* background-color: rgb(260 251 247); */
   /* background-color: #f3f1f2; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   /* letter-spacing: var(--letter-spacing-global); */
+}
+
+.product__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  /* cursor: pointer; */
 }
 
 .product:last-child {
@@ -27,6 +38,7 @@
   width: 33% !important;
   height: auto !important;
   margin-top: 25px;
+  max-width: 107px;
 }
 
 .product__titleContainer {
@@ -259,6 +271,7 @@
   font-size: 26px;
   font-family: var(--paragpaph-font);
   font-size: var(--titles-h-large-font-size);
+  cursor: auto;
 }
 
 .product__extra_cart {
@@ -278,6 +291,7 @@
   height: 14px;
   background-position: center;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .product__counterButton_cart {
@@ -338,6 +352,7 @@
   display: flex;
   width: 50%;
   align-items: center;
+  cursor: pointer;
 }
 
 .product__deliveryType_type_invisible {
@@ -431,6 +446,57 @@
   visibility: visible;
 }
 
+@media (width > 699px) {
+  .product {
+    height: 510px;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  .product:hover {
+    /* cursor: pointer; */
+    box-shadow: 0 0 1.5px 1.5px rgb(0 0 0 / 0.5);
+  }
+  .product__button {
+    /* margin-top: auto; */
+  }
+  .product__spanContainer {
+    /* margin-top: auto; */
+  }
+  .product__cartContainer {
+    margin-top: auto;
+  }
+  /* .product:last-child {
+    margin-bottom: 0;
+  } */
+}
+
+@media (width > 1023px) {
+  .product__button {
+    cursor: pointer;
+  }
+  .product__container:hover {
+    cursor: pointer;
+  }
+  .product:last-child {
+    margin-bottom: 30px;
+    }
+  .product__image {
+    max-width: 150px;
+    max-width: 110px;
+    }
+  .product {
+    /* height: 570px; */
+    /* height: 550px; */
+    height: 520px;
+    box-shadow: 0 0 0.5px 0.5px rgb(249 246 240 / 0.7);
+    box-sizing: border-box;
+  }
+  .product__button_fullCard {
+    /* margin: 0 130px; */
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
 
 
+/* background-color: rgb(260 251 247); */
 

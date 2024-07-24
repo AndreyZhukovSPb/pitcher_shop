@@ -15,6 +15,27 @@ const millingTableNew = [
   'для гейзера'
 ]
 
+const regOrderError = [
+  'При регистрации заказа возникла ошибка',
+  'Пожалуйста, попробуйте еще раз'
+]
+
+const paymentFailed = [
+  'Ваш заказ не оплачен', 
+  'Пожалуйста, попробуйте еще раз'
+]
+
+const paymentCheckError = [
+  'При проверке оплаты произошла ошибка', 
+  'Пожалуйста, свяжитесь с нами по телефону +7-981-039-79-12 или по электронной почте dasha@pitcherbar.ru',
+]
+
+const paymentChecking = [
+  'Проверяем ваш платеж', 
+  'Пожалуйста, не покидайте страницу', 
+]
+
+
 const mapSrc = "https://yandex.ru/map-widget/v1/?scroll=false&um=constructor%3A37a493ba0d534859391bcced906d752064b18c0040fab40833b83ba8019fb9bf&amp;source=constructor" 
 
 
@@ -23,5 +44,9 @@ export {
   baseURL,
   mainWebUrl,
   millingTableNew,
-  mapSrc
+  mapSrc,
+  regOrderError,
+  paymentFailed,
+  paymentCheckError,
+  paymentChecking
 }

@@ -3,18 +3,50 @@ import Main from "../components/Main";
 import { baseURL } from "../utils/constatnts";
 import { ProductsContext, CartContext } from "../components/Context";
 import React, { useEffect } from "react";
+// import useCheckStorage from '../utils/checkStorage'
 // import { changeArrayForCart } from "../utils/dataTranformers";
 
 const Index = ({ data }) => {
   const ContextProduct = React.useContext(ProductsContext);
   const passInitialProducts = ContextProduct.getInitialProducts;
   const ProductList = ContextProduct.productsData;
+  const ContextCart = React.useContext(CartContext);
+  const currentProductFeatures = ContextCart.currentProductFeatures;
+  const setCartFromStorage = ContextCart.setOrderFromStorage;
+  // const addToCart = ContextCart.addToOrder;
+  const [isCartSet, setIsCartSet] = React.useState(false)
 
   useEffect(()=> {
-    if (ProductList.length < 2 ) {
+    if (ProductList.length < 1 ) {
       passInitialProducts(data);
+    } else {
+      // console.log('не сетим данные')
     }
   }, [data])
+
+  // useCheckStorage();
+
+  // useEffect(()=>{
+  //   if (isCartSet) {
+  //     console.log('корзина УЖЕ установлена из LS, не устанавливаем повторно')
+  //     return
+  //   } else {
+  //     if (currentProductFeatures.length > 0) {
+  //       useCheckStorage();
+  //       setIsCartSet(true)
+  //       // if (localStorage.getItem('orderData') !== null) {
+  //       //   console.log(`Элемент с ключом orderData существует в localStorage`);
+  //       //   // const cartFromStorageString = localStorage.getItem('orderData');
+  //       //   // const cartFromStorageArray = JSON.parse(cartFromStorageString);
+  //       //   // setCartFromStorage(cartFromStorageArray);
+  //       //   setIsCartSet(true)
+  //       // } else {
+  //       //   console.log(`Элемент с ключом orderData не существует в localStorage`);
+  //       //   return
+  //       // }
+  //     }
+  //   }
+  // },[currentProductFeatures])
 
   return (
       <Main

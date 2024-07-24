@@ -45,7 +45,7 @@
   --btn-font-size: 16px;
 
 
-  
+
   --titles-font: 'Montserrat-Medium';
   --titles-font-size-mobile: 18px;
   --titles-font-size-tablet: 16px;
@@ -72,6 +72,7 @@
   --font-color: #272A31;
   --font-color-gray: #9d9d9d;
   --bg-color-1: rgb(249 246 240);
+  --bg-color-card: rgb(253 251 247);
   --bg-color-2: #F5F5F5;
   --btn-color: rgb(84 84 84);
   --span-font: 'Mont-Light';

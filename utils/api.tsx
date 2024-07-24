@@ -1,7 +1,20 @@
+import axios from 'axios';
 import { baseURL } from "./constatnts";
 
 export async function getItemByLinkName(linkName: string) {
   const url = `${baseURL}link/${linkName}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data 
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getItems() {
+  const url = `${baseURL}`;
   try {
     const res = await fetch(url);
     const data = await res.json();
@@ -40,27 +53,116 @@ export async function getItemByLinkName(linkName: string) {
 // };
 
 
+// export async function postOrder(client, orderData, total) {
+//   const url = `${baseURL}orders`;
+//   try {
+//     const res = await fetch(url, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({client, orderData, total}),
+//     });
+//     const data = await res.json();
+//     // console.log(data)
+//     return (
+//       data
+//     );
+//   } catch (error) {
+//     console.log(error)
+//     throw error;
+//   }
+// }
+
 export async function postOrder(client, orderData, total) {
-  // console.log(client, orderData, total)
   const url = `${baseURL}orders`;
   try {
-    const res = await fetch(url, {
-      method: 'POST',
+    const res = await axios.post(url, {
+      client,
+      orderData,
+      total
+    }, {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({client, orderData, total}),
+      timeout: 40000
     });
-    const data = await res.json();
-    return (
-      data
-      // console.log(data)
-    );
+    return res.data;
   } catch (error) {
-    console.log(error)
     throw error;
   }
 }
+
+export async function checkOrder(bankOrderId) {
+  const url = `${baseURL}order/payment`;
+  try {
+    const res = await axios.post(url, {
+      bankOrderId
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      timeout: 40000
+      // timeout: 3
+    });
+    console.log(res.data.message) // оставить для того чтобы дебажить боевой
+    return { success: true, status: true, data: res.data }
+  } catch (error) {
+    if (error.response) {
+      if (error.response.status === 400) {
+        return {
+          success: true,
+          status: false
+        };
+      } else if (error.response.status === 500) {
+        return {
+          success: false,
+          status: undefined,
+        };
+      } else {
+        return {
+          success: false,
+          status: undefined,
+        }
+      } 
+    } else if (error.request) {
+      return {
+        success: false,
+        status: undefined,
+      }
+    } else {
+      return {
+        success: false,
+        status: undefined,
+      }
+    }
+  }
+}
+
+
+// export async function checkOrder(bankOrderId) {
+//   console.log('debug')
+//   const url = `${baseURL}order/payment`;
+//   try {
+//     const res = await fetch(url, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({bankOrderId}),
+//     });
+//     console.log(res.status)
+//     const data = await res.json();
+//     console.log(data)
+//     console.log(`ответ после проверки успешности платежа${data.order}`)
+//     return (
+//       data
+//     );
+//   } catch (error) {
+//     console.log(error)
+//     throw error;
+//   }
+// }
 
 // export async function postOrder1(data) {
 //   const url = `${baseURL}orders`;

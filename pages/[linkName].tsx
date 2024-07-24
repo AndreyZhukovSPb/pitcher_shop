@@ -12,31 +12,35 @@ import Milling from "../components/ProductMilling";
 import Counter from "../components/ProductCounter";
 import Size from "../components/ProductSize";
 import SubmitBtn from "../components/ProductSubmitBtn";
+import { useMediaQuery } from "react-responsive";
+// import useCheckStorage from '../utils/checkStorage'
 
 const LinkNamePage: React.FC = () => {
   const Context = useContext(ProductsContext);
   const productsList = Context.productsData;
   const passToProductList = Context.addToProducts;
-  const { query }  = useRouter();
+  const { query } = useRouter();
   const [currentItem, setCurrentItem] = useState<ProductType>();
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1024px)" });
   // const [millingType, setMillingType] = useState(millingTableNew[0]);
-  
+
+  // useCheckStorage();
+
   const [productToAdd, setProductToAdd] = useState({}); // DELETE?
-  
+
   const fetchCurrentItem = async (linkName: string) => {
-      // console.log('получили продукт с сервера');
-      const item = await getItemByLinkName(linkName);
-      // setCurrentItem(item);
-      passToProductList([item]);
+    // console.log('получили продукт с сервера');
+    const item = await getItemByLinkName(linkName);
+    // setCurrentItem(item);
+    passToProductList([item]);
   };
 
   useEffect(() => {
     // console.log(productsList);
     if (query.linkName === undefined) {
       // console.log('query  еще не готов')
-      return
+      return;
     } else {
-      
       const linkName = query.linkName.toString();
       if (productsList.length > 0) {
         // console.log('забрали продукт из контекста');
@@ -49,85 +53,143 @@ const LinkNamePage: React.FC = () => {
 
   useEffect(() => {
     if (currentItem) {
-      setProductToAdd({size: currentItem.price[0].title, price: currentItem.price[0].priceItem})
+      setProductToAdd({
+        size: currentItem.price[0].title,
+        price: currentItem.price[0].priceItem,
+      });
     } else {
-      return
+      return;
     }
-    
   }, [currentItem]);
 
   const router = useRouter();
   const handleTestBack = () => {
-    router.push('/');
-  }
+    router.push("/");
+  };
 
   return (
     <>
       {currentItem && (
         <section className={styles.productFull}>
-          <Image className={styles.productFull__image} src={img2} alt="фото пачки" onClick={handleTestBack}/>
-          <div className={styles.productFull__titleContainer}>
-            <h2 className={styles.productFull__title}>{currentItem.name}</h2>
+          <div className={styles.productFull__imageContainer}>
+            <Image
+              className={styles.productFull__image}
+              src={img2}
+              alt="фото пачки"
+              onClick={handleTestBack}
+            />
+            <div className={styles.productFull__titleContainer}>
+              <h2 className={styles.productFull__title}>{currentItem.name}</h2>
               {currentItem.name_2 && (
-                <h2 className={styles.productFull__title}>{currentItem.name_2}</h2>
+                <h2 className={styles.productFull__title}>
+                  {currentItem.name_2}
+                </h2>
               )}
+            </div>
+            {currentItem.subtitle && (
+              <p className={styles.productFull__subtitle}>
+                {currentItem.subtitle}
+              </p>
+            )}
           </div>
-          {currentItem.subtitle && (
-            <p className={styles.productFull__subtitle}>{currentItem.subtitle}</p>
-          )}
-          <div className={styles.productFull__aboutContainer}>
-            {currentItem.description.roastingType && (
-              <div className={styles.productFull__featureContainer}>
-                <p className={styles.productFull__aboutTitle}>Тип обжарки: </p>
-                <p className={styles.productFull__about}>{currentItem.description.roastingType}</p>
-              </div>  
-            )}
-            {currentItem.description.variaty && (
-              <div className={styles.productFull__featureContainer}>
-                <p className={styles.productFull__aboutTitle}>Обработка: </p>
-                <p className={styles.productFull__about}>{currentItem.description.variaty}</p>
-              </div>  
-            )}
+          <div className={styles.productFull__infoContainer}>
             {currentItem.description.flavour && (
-              <div className={styles.productFull__featureContainer}>
-                <p className={styles.productFull__aboutTitle}>Вкусовой профиль: </p>
-                <p className={styles.productFull__about}>{currentItem.description.flavour}</p>
-              </div>  
+              <div className={styles.productFull__aboutContainer}>
+                {currentItem.description.roastingType && (
+                  <div className={styles.productFull__featureContainer}>
+                    <p className={styles.productFull__aboutTitle}>
+                      Тип обжарки:{" "}
+                    </p>
+                    <p className={styles.productFull__about}>
+                      {currentItem.description.roastingType}
+                    </p>
+                  </div>
+                )}
+                {currentItem.description.variaty && (
+                  <div className={styles.productFull__featureContainer}>
+                    <p className={styles.productFull__aboutTitle}>
+                      Обработка:{" "}
+                    </p>
+                    <p className={styles.productFull__about}>
+                      {currentItem.description.variaty}
+                    </p>
+                  </div>
+                )}
+                {currentItem.description.flavour && (
+                  <div className={styles.productFull__featureContainer}>
+                    <p className={styles.productFull__aboutTitle}>
+                      Вкусовой профиль:{" "}
+                    </p>
+                    <p className={styles.productFull__about}>
+                      {currentItem.description.flavour}
+                    </p>
+                  </div>
+                )}
+              </div>
             )}
+
+            {currentItem.balance && (
+              <div className={styles.productFull__balanceContainer}>
+                <p className={styles.productFull__descriptionTitle}>Баланс:</p>
+                <Balance item={currentItem} isShortCard={false} />
+              </div>
+            )}
+            {currentItem.aboutFull &&
+              (!isBigScreen ||
+                (!(currentItem.cat_id === 1 || currentItem.cat_id === 2) &&
+                  !currentItem.balance)) && (
+                <div className={styles.productFull__descriptionContainer}>
+                  <p className={styles.productFull__descriptionTitle}>
+                    Описание:{" "}
+                  </p>
+                  {currentItem.aboutFull.map((item, number) => {
+                    return (
+                      <p
+                        key={number}
+                        className={styles.productFull__description}
+                      >
+                        {item}
+                      </p>
+                    );
+                  })}
+                </div>
+              )}
+            {(currentItem.cat_id === 1 || currentItem.cat_id === 2) && (
+              <Milling currentProduct={currentItem} isShotCard={false} />
+            )}
+            <div className={styles.productFull__cartContainer_bigScreen}>
+              <div className={styles.productFull__cartContainer}>
+                <Size
+                  product={currentItem}
+                  // weightToAdd={weightToAdd}
+                  // onSizeClick={handleSizeChoise}
+                />
+                <Counter currentProduct={currentItem} />
+              </div>
+
+              {isBigScreen ? (
+                <SubmitBtn currentProduct={currentItem} isFullCard={true} />
+              ) : (
+                ""
+              )}
+            </div>
           </div>
-          {currentItem.balance && (
-            <>
-              <p className={styles.productFull__descriptionTitle}>Баланс:</p>
-              <Balance
-                item={currentItem}
-                isShortCard={false}
-              />
-            </>
+          {!isBigScreen ? (
+            <SubmitBtn currentProduct={currentItem} isFullCard={true} />
+          ) : (
+            ""
           )}
-          {currentItem.aboutFull && (
-            <div className={styles.productFull__descriptionContainer}>
-              <p className={styles.productFull__descriptionTitle}>Описание: </p>
-              {currentItem.aboutFull.map((item, number)=> {
-                return <p key={number} className={styles.productFull__description}>{item}</p>
+          {currentItem.aboutFull && isBigScreen && currentItem.balance && (
+            <div className={styles.productFull__aboutContainer_bigScreen}>
+              {currentItem.aboutFull.map((item, number) => {
+                return (
+                  <p key={number} className={`${styles.productFull__description} ${styles.productFull__description_bigScreen}`}>
+                    {item}
+                  </p>
+                );
               })}
-          </div>
+            </div>
           )}
-          {(currentItem.cat_id === 1 ||
-            currentItem.cat_id === 2) && (<Milling currentProduct={currentItem} isShotCard={false}/>)}
-          <div className={styles.productFull__cartContainer}>
-            <Size
-              product={currentItem}
-              // weightToAdd={weightToAdd}
-              // onSizeClick={handleSizeChoise}
-            />
-            <Counter
-              currentProduct={currentItem}
-            />
-          </div>
-          <SubmitBtn
-            currentProduct={currentItem}
-            isFullCard={true}
-          />
         </section>
       )}
     </>

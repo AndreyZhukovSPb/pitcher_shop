@@ -17,7 +17,7 @@ interface productProps {
 }
 
 const Product: React.FC<productProps> = ({ product }) => {
-  const Context = React.useContext(CartContext); 
+  const Context = React.useContext(CartContext);
   const resetMilling = Context.resetMilling;
   const resetPriceType = Context.resetPriceType;
   const resetQuantity = Context.resetQuantity;
@@ -36,7 +36,7 @@ const Product: React.FC<productProps> = ({ product }) => {
   // const [productToAdd, setProductToAdd] = useState({size: product.price[0].title, price: product.price[0].priceItem});
 
   // useEffect (()=> {
-  //       currentCart.some(item => item.id === product._id) ? 
+  //       currentCart.some(item => item.id === product._id) ?
   //       setIsSpanVisible(true) :
   //       setIsSpanVisible(false)
   // }, [currentCart])
@@ -54,8 +54,8 @@ const Product: React.FC<productProps> = ({ product }) => {
   // const onAddHandler = () => {
   //   setItemsToAdd(1);
   //   // setWeightToAdd(0);
-  //   currentCart.some(item => item.id === product._id) ? 
-  //     updateCart(product._id, itemsToAdd) : 
+  //   currentCart.some(item => item.id === product._id) ?
+  //     updateCart(product._id, itemsToAdd) :
   //     addToCartHandler();
   // };
 
@@ -64,7 +64,7 @@ const Product: React.FC<productProps> = ({ product }) => {
   //   const addedItem = {
   //     name: product.name,
   //     name_2: product.name_2,
-  //     price: 
+  //     price:
   //       {title: productToAdd.size,
   //         priceItem: productToAdd.price}
   //     ,
@@ -84,49 +84,45 @@ const Product: React.FC<productProps> = ({ product }) => {
     resetMilling(product._id);
     resetPriceType(product._id);
     resetQuantity(product._id, true);
+    console.log("click?");
   };
 
   return (
     <div className={styles.product}>
-      <Image 
-        className={styles.product__image} 
-        src={img2} 
-        alt="фото пачки" 
-        onClick={handleProductClick}
-      />
-      <div className={styles.product__titleContainer}>
-        <h2 className={styles.product__title}>{product.name}</h2>
-        {product.name_2 && (
-          <h2 className={styles.product__title}>{product.name_2}</h2>
+      <div className={styles.product__container} onClick={handleProductClick}>
+        <Image
+          className={styles.product__image}
+          src={img2}
+          alt="фото пачки"
+          onClick={handleProductClick}
+        />
+        <div className={styles.product__titleContainer}>
+          <h2 className={styles.product__title}>{product.name}</h2>
+          {product.name_2 && (
+            <h2 className={styles.product__title}>{product.name_2}</h2>
+          )}
+        </div>
+        {product.description.variaty && (
+          <p className={styles.product__scaleTitle}>
+            {product.description.variaty}
+          </p>
         )}
+        {product.subtitle && (
+          <p className={styles.product__scaleTitle}>{product.subtitle}</p>
+        )}
+        <p className={styles.product__about}>{product.description.flavour}</p>
+        <p className={styles.product__about}>{product.description.about}</p>
+        {product.balance && <Balance item={product} isShortCard={true} />}
       </div>
-      {product.description.variaty && (
-        <p className={styles.product__scaleTitle}>{product.description.variaty}</p>
+
+      {(product.cat_id === 1 || product.cat_id === 2) && (
+        <Milling currentProduct={product} isShotCard={true} />
       )}
-      {product.subtitle && (
-        <p className={styles.product__scaleTitle}>{product.subtitle}</p>
-      )}
-      <p className={styles.product__about}>{product.description.flavour}</p>
-      <p className={styles.product__about}>{product.description.about}</p>
-      {product.balance && (
-        <Balance
-          item={product}
-          isShortCard={true}
-        />
-      )}
-      {(product.cat_id === 1 ||
-        product.cat_id === 2) && (<Milling currentProduct={product} isShotCard={true}/>)}
       <div className={styles.product__cartContainer}>
-        <Size
-          product={product}
-        />
-        <Counter
-          currentProduct={product}
-        />
+        <Size product={product} />
+        <Counter currentProduct={product} />
       </div>
-      <SubmitBtn
-          currentProduct={product}
-      />
+      <SubmitBtn currentProduct={product} />
     </div>
   );
 };

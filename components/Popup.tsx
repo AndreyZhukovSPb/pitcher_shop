@@ -6,9 +6,13 @@ import { isTimeInInterval } from '../utils/timeHandler'
 interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
+  onCloseSuccess?: () => void;
   orderNumber?: string;
   isPayed: boolean;
-  orderEmail?: string
+  orderEmail?: string;
+  message?: string[];
+  isPaymentError?: boolean;
+  isPaymentPending: boolean
 }
 
 const Popup: React.FC<PopupProps> = ({
@@ -16,22 +20,50 @@ const Popup: React.FC<PopupProps> = ({
   onClose,
   orderNumber,
   isPayed,
-  orderEmail
+  orderEmail,
+  message,
+  onCloseSuccess,
+  isPaymentError,
+  isPaymentPending
 }) => {
-  
+
+  const overlayRef = React.useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const currentPath = router.asPath;
+
+  const handleCheckIsOverlay = (e: any) => {
+    if (isPaymentPending) {
+      return
+    } else {
+      if (!overlayRef.current || e.target.contains(overlayRef.current)) {
+        handleClose();
+      }
+    }
+  }
 
   const handleClose = (): void => {
-    if (isPayed) {
-      router.push('/')
-      onClose();
+    if (isPayed || isPaymentError) {
+      onCloseSuccess;
+      router.push('/');
+      // onClose();
     } else {
-      onClose();
+      if (currentPath !== '/cart' && currentPath.startsWith('/cart')) {
+        router.push('/cart')
+        onClose();
+      } else {
+        onClose();
+      }
     }
   };
 
+  console.log(message)
+
   return (
-    <section className={`${styles.popup} ${isOpen ? styles.popup_opened : ''}`}>
+    <section 
+      className={`${styles.popup} ${isOpen ? styles.popup_opened : ''}`}
+      onClick={handleCheckIsOverlay}
+      ref={overlayRef}  
+    >
       <div className={`${styles.popup__container} ${!isPayed ? styles.popup__container_failed : ''}`}>
         <div className={styles.popup__info}>
           
@@ -62,12 +94,11 @@ const Popup: React.FC<PopupProps> = ({
               )}
               {!isPayed && (
                 <>
-                  <p className={styles.popup__text}>
-                    При оплате заказа проиошла ошибка
-                  </p>
-                  <p className={styles.popup__text}>
-                    Пожалуйста, попробуйте еще раз
-                  </p>
+                  {Array.isArray(message) && message.map((item, index) => (
+                    <p key={index} className={styles.popup__text}>
+                      {item}
+                    </p>    
+                  ))}
                 </>
               )}
               
@@ -86,3 +117,14 @@ const Popup: React.FC<PopupProps> = ({
 };
 
 export default Popup;
+
+// {!isPayed && (
+//   <>
+//     <p className={styles.popup__text}>
+//       При оплате заказа проиошла ошибка
+//     </p>
+//     <p className={styles.popup__text}>
+//       Пожалуйста, попробуйте еще раз
+//     </p>
+//   </>
+// )}

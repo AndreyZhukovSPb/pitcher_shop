@@ -67,6 +67,10 @@
 }
 
 .navigation__button_type_store {
+  /* filter: invert(100%); */
+}
+
+.navigation__button_type_scrolled {
   filter: invert(100%);
 }
 
