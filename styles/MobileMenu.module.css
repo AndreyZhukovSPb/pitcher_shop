@@ -99,5 +99,23 @@
   .menu__navigation_active {
     border-bottom: 1.6px white solid;
   }
+  .menu__container{
+    width: 30%;
+    background-image: none;
+    background-color: white;
+    /* border-right: 0.5px black solid; */
+  }
+  .menu__navigation {
+    color: black;
+  }
+  .menu__container::before {
+    background: none;
+  }
+  .menu__closeButton {
+    filter: invert(100%);
+  }
+  .menu__navigation_active {
+    border-bottom: 1.4px black solid;
+  }
 }
 

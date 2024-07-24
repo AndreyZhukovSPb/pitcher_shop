@@ -80,7 +80,7 @@ const Header: React.FC<headerProps> = ({
     // ${isMain? styles.header__type_main : ''} 
     <header className=
       {`${styles.header} 
-      
+      ${isMain? styles.header__type_main : ''} 
       ${styles.header__type_cart} 
       ${isScrolled? styles.header__type_scrolled : ''}`}
     >      
@@ -100,7 +100,7 @@ const Header: React.FC<headerProps> = ({
         isCart={isCart}
         // isShop={isShop}
       />
-      <Link href={mainWebUrl} className={styles.header__logoContainer}>
+      <Link href={'/'} className={styles.header__logoContainer}>
         <Image
           src={logo}
           priority={true}
@@ -118,7 +118,7 @@ const Header: React.FC<headerProps> = ({
         <Image
           src={"/cart.svg"}
           alt="main cart"
-          className={styles.header__cart}
+          className={`${styles.header__cart} ${isMain ? styles.header__cart_type_main : ''}`}
           fill
           onClick={hanldeOnCartClick}
         />

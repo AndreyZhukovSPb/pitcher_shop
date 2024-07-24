@@ -1,29 +1,17 @@
 .main {
-  margin-top: 70px;
+  /* margin-top: 70px; */
   width: 100%;
 }
 
 .main__container {
   position: relative;
-  height: 250px;
+  height: 300px;
   width: 100%;
 }
 
 .main__banner {
   object-fit: cover;
-  /* position: relative !important; */
 }
-
-/* .main__banner::after {
-  content: "";
-  background: rgba(0,0,0,.4);
-  opacity: .2;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-} */
 
 .main__overlay {
   position: relative;
@@ -55,3 +43,10 @@
   margin-bottom: 10px;
   font-size: var(--titles-h-large-font-size);
 }
+
+@media (width > 1023px) {
+  .main__container {
+    height: 550px;
+  }
+}
+

@@ -14,6 +14,7 @@
   box-sizing: border-box;
   width: 100%;
   justify-content: space-between;
+  flex-direction: row-reverse;
 }
 
 .footer__contacts {
@@ -31,6 +32,7 @@
   color: #424242;
   transition: opacity linear 0.5s;
   cursor: initial;
+  margin: 0;
 }
 
 .footer__contactbox {
@@ -133,7 +135,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
+  margin: auto 0;
 }
 
 .footer__conditions {
@@ -225,14 +227,8 @@
 }
 
 @media (width <= 899px)  {
-  /* .footer__coffeshopsTitle {
-    font-size: 11px;
-  } */
-  .footer__content {
-    /* font-size: 9px; */
-  }
-  .footer__contactsTitle {
-    font-size: 11px;
+  .footer__conditionsBox {
+    margin-bottom: 20px;
   }
   .footer__content_type_adres {
     margin-top: 8px;
@@ -252,16 +248,20 @@
 @media (width <= 767px)  {
   .footer__container {
     padding: 20px 4vw; 
+    flex-direction: column-reverse;    
+    align-items: center;
+    padding-top: 26px;
+    padding-bottom: 26px;
   }
-  .footer__contactbox {
+  /* .footer__contactbox {
     margin-top: 5px;
   }
   .footer__contactbox:first-of-type {
     margin-top: 7px;
-  }
-  .footer__content_type_adres:first-of-type {
+  } */
+  /* .footer__content_type_adres:first-of-type {
     margin-top: 7px;
-  }
+  } */
   .footer__icon {
     width: 18px !important;
     height: 18px !important;
@@ -275,21 +275,15 @@
   .footer__content_type_contacts {
     line-height: 18px;
   }
-  .footer__coffeshopsBox {
+  /* .footer__coffeshopsBox {
     width: 210px;
-  }
-}
+  } */
 
-@media (width <= 589px)  {
   .footer__contactsContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: center;
-  }
-  .footer__container {
-    flex-direction: column-reverse;
-    
   }
   .footer__coffeshopsTitle {
     /* font-size: 14px; */
@@ -316,12 +310,40 @@
   .footer__content_type_adres:first-of-type {
     margin-top: 10px;
   }
-  .footer__container {
-    align-items: center;
-    padding-top: 26px;
-    padding-bottom: 26px;
-  }
-  .footer__copyright {
-    /* font-size: 11px; */
-  }
+  
 }
+
+/* @media (width <= 589px)  {
+  .footer__contactsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+  .footer__coffeshopsTitle {
+    
+    text-align: center;
+  }
+  .footer__content {
+    
+  }
+  .footer__coffeshopsBox {
+    width: 270px;
+    justify-content: space-between;
+  }
+  .footer__contactsTitle {
+    font-size: 14px;
+    margin: 20px 0 0;
+    text-align: center;
+  }
+  .footer__contactbox {
+    margin-top: 8px;
+  }
+  .footer__contactbox:first-of-type {
+    margin-top: 10px;
+  }
+  .footer__content_type_adres:first-of-type {
+    margin-top: 10px;
+  }
+
+} */

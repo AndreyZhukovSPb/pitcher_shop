@@ -45,6 +45,7 @@
   margin: 0 0 10px;
   font-size: var(--paragpaph-font-size-mobile);
   text-align: center;
+  line-height: 1.4;
 }
 
 .popup__text:last-of-type {
@@ -71,4 +72,11 @@
   border: none;
   background-color: transparent;
   filter: invert(100%);
+}
+
+@media (width > 1023px) {
+  .popup__container {
+    width: 350px;
+    height: 230px;
+  }
 }

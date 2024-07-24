@@ -1,8 +1,10 @@
 import SectionLine from '../components/SectionLine'
 import styles from '../styles/Delivery.module.css'
 import { mapSrc } from '../utils/constatnts'
+// import useCheckStorage from '../utils/checkStorage'
 
 export default function delivery () {
+  // useCheckStorage();
   return (
     <>
       <section className={styles.delivery}>

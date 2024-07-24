@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import { OrderType, ProductType } from "../utils/sharedTypes";
+import { getItems } from '../utils/api';
 import { millingTableNew } from '../utils/constatnts';
 
 interface ICurrentProductFeatures {
@@ -36,11 +37,13 @@ interface cartProps {
   updateQuantutyInCart: (product: OrderType, value: string) => void;
   removeFromCart: (product: OrderType) => void;
   resetCart: () => void;
+  setOrderFromStorage: (products: OrderType[]) => void;
 }
 
 export const CartContext = createContext<cartProps>({
   orderData: undefined,
-  addToOrder: () => {}, // Пустая функция по умолчанию
+  addToOrder: () => {}, 
+  setOrderFromStorage: () => {},
   removeFromOrder: () => {}, 
   updateProductQuantity: () => {},
   updateMillingType:() => {},
@@ -62,9 +65,65 @@ export const CartContextProvider = ({
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  const [orderData, setOrderData] = useState<OrderType[]>([]); // Устанавливаем начальное значение orderData как пустой массив OrderType
+  // const [orderData, setOrderData] = useState<OrderType[]>([]);
+
+  // const [orderData, setOrderData] = useState<OrderType[]>(() => {
+  //   if (typeof window !== 'undefined') { // Проверка, чтобы избежать ошибок на сервере (например, при SSR)
+  //     const storedData = localStorage.getItem('orderData');
+  //     return storedData ? JSON.parse(storedData) : [];
+  //   }
+  //   return [];
+  // });
+
+  const [orderData, setOrderData] = useState<OrderType[]>([]);
+  const ProductList = React.useContext(ProductsContext).productsData;
+
+  // Используем useEffect для инициализации состояния из localStorage на клиенте
+  useEffect(() => {
+    const checkOldGoods = (catalogIds, cart) => {
+      return cart.every(cartItem => catalogIds.includes(cartItem._id));
+    }
+
+    const removeOldGoods = (catalogIds, cart) => {
+        const updatedCart = cart.filter(cartItem => 
+        catalogIds.some(catalogId => catalogId === cartItem._id)
+      );
+      return updatedCart
+    }
+
+    if (ProductList.length < 1) {
+      return
+    } else {
+      if (typeof window !== 'undefined') { // Проверка, чтобы убедиться, что это выполняется только на клиенте
+        const storedData = localStorage.getItem('orderData');
+        const storedDataArray = JSON.parse(storedData)
+        const catalogIds = ProductList.map(item => item._id);
+        if (storedData) {
+          if (checkOldGoods(catalogIds, storedDataArray)) {
+            console.log('в корзине нет старых товаров')
+            setOrderData(storedDataArray);
+          } else {
+            console.log('в корзине были старые товары')
+            setOrderData(removeOldGoods(catalogIds, storedDataArray));
+          }
+        }
+      }
+    }
+  }, [ProductList]);
+
+  // console.log(ProductList)
+
+
   // const [currentMillingType, setCurrentMillingType] = useState<IMillingList[]>([]);
   const [currentProductFeatures, setCurrentProductFeatures] = useState<ICurrentProductFeatures[]>([]);
+
+  // console.log (currentProductFeatures)
+
+  const setOrderFromStorage = (products: OrderType[]) => {
+    console.log(products)
+    // добавить проверку на старые продукты, если товара уже нет, то удалить его из LS и не добавлять в корзину
+    setOrderData(products);
+  }
 
   const updateMillingType = (newId: string, value: string) => {
     setCurrentProductFeatures(prevState => 
@@ -75,7 +134,6 @@ export const CartContextProvider = ({
   };
 
   const updateMillingCart = (product: OrderType, value: string) => {
-    // console.log(id);
     setOrderData(prevState => 
       prevState.map(item => 
         (item._id === product._id && item.currentSize === product.currentSize) ? 
@@ -110,15 +168,19 @@ export const CartContextProvider = ({
   }
 
   const removeFromCart = (product: OrderType) => {
-    setOrderData(prevState => 
-      prevState.filter(item => !(item._id === product._id && item.currentSize === product.currentSize))
-    );
+    if (orderData.length === 1) {
+      console.log('это был последний заказа в корзине')
+      localStorage.removeItem('orderData');
+      setOrderData(prevState => 
+        prevState.filter(item => !(item._id === product._id && item.currentSize === product.currentSize))
+      );
+    } else {
+      console.log('это НЕ последний заказа в корзине')
+      setOrderData(prevState => 
+        prevState.filter(item => !(item._id === product._id && item.currentSize === product.currentSize))
+      );
+    }
   }
-
-  useEffect(()=> { // DEL?
-    // console.log(orderData);
-    // console.log(currentProductFeatures);
-  }, [orderData, currentProductFeatures])
 
   const resetPriceType = (newId: string) => {
     setCurrentProductFeatures(prevState => 
@@ -164,6 +226,7 @@ export const CartContextProvider = ({
 
   const resetCart = () => {
     setOrderData([]);
+    localStorage.removeItem('orderData');
   }
 
   const updateQuantity = (newId: string, value: string ) => {
@@ -218,8 +281,6 @@ export const CartContextProvider = ({
     );
   }
 
-  const ProductList = React.useContext(ProductsContext).productsData;
-
   const setInitialProductList = () => {
     // console.log(ProductList);
     if (ProductList.length >= 1) {
@@ -261,7 +322,6 @@ export const CartContextProvider = ({
         })
       );
     }
-    
   } 
 
   useEffect(() => {
@@ -305,9 +365,28 @@ export const CartContextProvider = ({
     // );
   }, [ProductList]);
   
-  // useEffect(()=> {
-  //   console.log(orderData);
-  // }, [orderData])
+  useEffect(()=> {
+    // console.log(orderData)
+    if (orderData.length === 0) {
+      // localStorage.removeItem('orderData');
+      // console.log('корзина пуста')
+      return
+    } else {
+      const storedData = localStorage.getItem('orderData');
+      const orderDataForStorage = JSON.stringify(orderData);
+      if (!storedData) {
+        localStorage.setItem('orderData', orderDataForStorage);
+      } else {
+        if (storedData === JSON.stringify(orderData)) {
+          console.log('данные в корзине и LS совадают, не обновляем LS')
+          return
+        } else {
+          console.log('данные в корзине и LS  НЕ совадают, обновляем LS')
+          localStorage.setItem('orderData', orderDataForStorage);
+        }
+      }
+    }
+  }, [orderData])
 
   const addToOrder = (product: ProductType) => {
     console.log('here?')
@@ -331,12 +410,18 @@ export const CartContextProvider = ({
 
   const removeFromOrder = (product: OrderType) => {
     console.log('or here')
-    setOrderData(prevOrderData =>
-      prevOrderData.filter(item => item._id !== product._id)
-    );
+    // if (orderData.length === 1) {
+    //   console.log('debu')
+    //   localStorage.removeItem('orderData');
+    //   setOrderData(prevOrderData =>
+    //     prevOrderData.filter(item => item._id !== product._id)
+    //   );
+    // } else {
+      setOrderData(prevOrderData =>
+        prevOrderData.filter(item => item._id !== product._id)
+      );
+    // }
   };
-
-  
 
   // const updateProductQuantity = (productId: string, delta: number) => {
   //   console.log('or here')
@@ -384,7 +469,8 @@ export const CartContextProvider = ({
           updateMillingCart,
           updateQuantutyInCart,
           removeFromCart,
-          resetCart
+          resetCart,
+          setOrderFromStorage
         }}
       >
       {children}
@@ -394,13 +480,13 @@ export const CartContextProvider = ({
 
 interface ProductsProps {
   productsData: ProductType[] | undefined;
-  addToProducts: (products: ProductType[]) => void;
+  // addToProducts: (products: ProductType[]) => void;
   getInitialProducts: (products: ProductType[]) => void;
 }
 
 export const ProductsContext = createContext<ProductsProps>({
   productsData: undefined,
-  addToProducts: () => {},
+  // addToProducts: () => {},
   getInitialProducts: () => {},
 });
 
@@ -411,23 +497,51 @@ export const ProductsContextProvider = ({
 }): JSX.Element => {
   const [productsData, setProductsData] = useState<ProductType[]>([]);
 
-  const addToProducts = (products: ProductType[]) => {
-    // console.log('добавили продукт в контекст')
-    setProductsData(products);
-  };
+  // const addToProducts = (products: ProductType[]) => {
+  //   // console.log('добавили продукт в контекст')
+  //   setProductsData(products);
+  // };
 
   const getInitialProducts = (products: ProductType[]) => {
-    setProductsData(products);
+    if (productsData.length < 1) {
+      // console.log('сетим каталог из индкеса')
+      setProductsData(products); }
+    else {
+      // console.log('НЕ сетим каталог из индкеса')
+      return
+    }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getItems();
+        if (productsData.length < 1) {
+          setProductsData(data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (productsData.length < 1) {
+      console.log('debug')
+      fetchData();
+      // console.log('counter')
+    } else {
+      return
+    }
+  }, [productsData]);
 
   // console.log('установили продакт лист')
   // console.log(productsData);
 
   return (
-    <ProductsContext.Provider value={{ productsData, addToProducts, getInitialProducts }}>
+    <ProductsContext.Provider value={{ productsData, getInitialProducts }}>
       {children}
     </ProductsContext.Provider>
   );
 };
+
+// addToProducts убрал
 
 

@@ -11,20 +11,24 @@ export default function Layout({ children }) {
   // const [isContacts, setIsContacts] = React.useState<boolean>(false);
   const [isFullCard, setIsFullCard] = React.useState<boolean>(false);
   const [isCart, setIsCart] = React.useState<boolean>(false);
+  const [isMain, setIsMain] = React.useState<boolean>(false);
   
   function setMainPageProps() {
     setIsFullCard(false);
-    setIsCart(false)
+    setIsCart(false);
+    setIsMain(true);
   }
 
   function setFullPageProps() {
     setIsFullCard(true);
-    setIsCart(false)
+    setIsCart(false);
+    setIsMain(false);
   }
 
   function setCartPageProps() {
     setIsFullCard(false);
-    setIsCart(true)
+    setIsCart(true);
+    setIsMain(false);
   }
 
   useEffect(() => {
@@ -40,7 +44,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Header 
-        isMain={false} // DEL?
+        isMain={isMain}
         isFullCard={isFullCard}
         isCart={isCart}
       />

@@ -1,7 +1,9 @@
 import SectionLine from '../components/SectionLine'
 import styles from '../styles/Conditions.module.css'
+// import useCheckStorage from '../utils/checkStorage'
 
 export default function conditions () {
+  // useCheckStorage();
   return (
     <>
       <section className={styles.conditions}>

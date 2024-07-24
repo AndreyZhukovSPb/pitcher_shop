@@ -8,6 +8,7 @@ import Counter from "./ProductCounter";
 import SectionLine from "./SectionLine";
 import { CartContext } from "./Context";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "react-responsive";
 
 interface cartItemProps {
   item: OrderType;
@@ -17,6 +18,7 @@ const CartItem: React.FC<cartItemProps> = ({ item }) => {
   const Context = React.useContext(CartContext);
   const removeFromCart = Context.removeFromCart;
   const router = useRouter();
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1024px)" });
   // const orderData = Context.orderData;
 
   // const [currentCart, setCurentCart] = React.useState<OrderType[]>([]); // DEL?
@@ -76,7 +78,10 @@ const CartItem: React.FC<cartItemProps> = ({ item }) => {
           <p className={styles.cart__subTotal}>{item.price.quantity * item.price.priceItem} &#8381;</p>
         </div>
       </div>
-      <SectionLine/>
+      <SectionLine
+        isBigScreen={isBigScreen}
+        // isBigScreen={true}
+      />
     </li>
   );
 };
