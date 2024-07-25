@@ -6,7 +6,7 @@ import { ProductsContext } from "../components/Context";
 import { getItemByLinkName } from "../utils/api";
 import { ProductType } from "../utils/sharedTypes";
 import styles from "../styles/ProductFull.module.css";
-import img2 from "../public/pack_2.png";
+// import img2 from "../public/pack_2.png";
 import Balance from "../components/ProductBalance";
 import Milling from "../components/ProductMilling";
 import Counter from "../components/ProductCounter";
