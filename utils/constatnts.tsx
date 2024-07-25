@@ -1,4 +1,6 @@
-const baseURL = 'http://localhost:4003/api/'
+// const baseURL = 'http://localhost:4003/api/'
+const baseURL = 'http://89.169.169.206:4003/api/'
+
 
 const mainWebUrl = 'https://pitcherbar.ru'
 // const baseURL = 'https://pitcherbar.ru/api'
