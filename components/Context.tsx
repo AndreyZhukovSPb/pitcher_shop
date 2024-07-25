@@ -480,13 +480,13 @@ export const CartContextProvider = ({
 
 interface ProductsProps {
   productsData: ProductType[] | undefined;
-  // addToProducts: (products: ProductType[]) => void;
+  addToProducts: (products: ProductType[]) => void;
   getInitialProducts: (products: ProductType[]) => void;
 }
 
 export const ProductsContext = createContext<ProductsProps>({
   productsData: undefined,
-  // addToProducts: () => {},
+  addToProducts: () => {},
   getInitialProducts: () => {},
 });
 
@@ -497,10 +497,10 @@ export const ProductsContextProvider = ({
 }): JSX.Element => {
   const [productsData, setProductsData] = useState<ProductType[]>([]);
 
-  // const addToProducts = (products: ProductType[]) => {
-  //   // console.log('добавили продукт в контекст')
-  //   setProductsData(products);
-  // };
+  const addToProducts = (products: ProductType[]) => {
+    // console.log('добавили продукт в контекст')
+    setProductsData(products);
+  };
 
   const getInitialProducts = (products: ProductType[]) => {
     if (productsData.length < 1) {
@@ -536,7 +536,7 @@ export const ProductsContextProvider = ({
   // console.log(productsData);
 
   return (
-    <ProductsContext.Provider value={{ productsData, getInitialProducts }}>
+    <ProductsContext.Provider value={{ productsData, getInitialProducts, addToProducts }}>
       {children}
     </ProductsContext.Provider>
   );

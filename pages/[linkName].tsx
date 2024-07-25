@@ -74,9 +74,11 @@ const LinkNamePage: React.FC = () => {
           <div className={styles.productFull__imageContainer}>
             <Image
               className={styles.productFull__image}
-              src={img2}
+              // src={img2}
+              src={currentItem.cat_id === 1 || currentItem.cat_id === 2 ? 'https://i.ibb.co/VS8jW7D/pack.png' : 'https://i.ibb.co/6vYmZTL/drip.jpg'}
+              fill
               alt="фото пачки"
-              onClick={handleTestBack}
+              // onClick={handleTestBack}
             />
             <div className={styles.productFull__titleContainer}>
               <h2 className={styles.productFull__title}>{currentItem.name}</h2>
