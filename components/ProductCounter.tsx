@@ -20,8 +20,15 @@ const Counter: React.FC<counterProps> = ({ currentProduct, isCart
     if (!isCart) {
       updateQuantity(currentProduct._id, input.id);
     } else {
-      updateQuantutyInCart(currentProduct, input.id);
+    // } else if (isCart && 'quantity' in currentProduct && 'milling' in currentProduct && 'currentSize' in currentProduct){
+      updateQuantutyInCart(currentProduct as OrderType, input.id);
+      // updateQuantutyInCart(currentProduct, input.id);
+    // } else {
+    //   console.log('debug')
     }
+
+    // if ('quantity' in currentProduct && 'milling' in currentProduct && 'currentSizets' in currentProduct) {
+      // currentProduct является OrderType
     
   }
   // const handleChangeQuantity = (input: any): void => {
