@@ -513,7 +513,10 @@ export const ProductsContextProvider = ({
   };
 
   useEffect(() => {
+    var counter = 0
     const fetchData = async () => {
+      counter = counter + 1
+      console.log(`попытка получить данные № ${counter}`)
       try {
         const data = await getItems();
         if (productsData.length < 1) {
@@ -524,9 +527,8 @@ export const ProductsContextProvider = ({
       }
     };
     if (productsData.length < 1) {
-      console.log('debug')
+      console.log('данные о товарах не пришли с сервера')
       fetchData();
-      // console.log('counter')
     } else {
       return
     }
