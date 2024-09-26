@@ -256,6 +256,7 @@
   text-wrap: wrap;
   overflow-y: visible;
   overflow-wrap: break-word;
+  -webkit-appearance: none;
 }
 
 .cart__customerData::placeholder {
