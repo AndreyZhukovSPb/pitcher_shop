@@ -22,11 +22,11 @@ interface headerProps {
 }
 
 const Header: React.FC<headerProps> = ({
-  isMayak,
-  isPark,
+  // isMayak,
+  // isPark,
   isMain,
-  isContacts,
-  isShop,
+  // isContacts,
+  // isShop,
   isFullCard,
   isCart
 }) => {
@@ -105,13 +105,19 @@ const Header: React.FC<headerProps> = ({
           src={logo}
           priority={true}
           alt="logo"
-          className={`${styles.header__logo} ${isMain ? styles.header__logo_type_main : ''}`}
+          className={`
+            ${styles.header__logo} 
+            ${isMain || isScrolled ? styles.header__logo_type_main : ''}
+            `}
         />
         <Image
           src={logoMobile}
           priority={true}
           alt="logo"
-          className={`${styles.header__logo} ${isMain ? styles.header__logo_type_main : ''} ${styles.header__logo_mobile} }`}
+          className={`
+            ${styles.header__logo} 
+            ${isMain || isScrolled ? styles.header__logo_type_main : ''} 
+            ${styles.header__logo_mobile} }`}
         />
       </Link>
       <div className={styles.header__cartContainer}>
