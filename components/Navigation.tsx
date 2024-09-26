@@ -73,7 +73,7 @@ const Navigation: React.FC<navigationProps> = ({
       } else {
         const linkName = query.linkName.toString();
         if (currentFeatures.length >= 1) {
-          console.log('или здесь?')
+          // console.log('или здесь?')
           setFullCardId(currentFeatures.find(item => item.linkName === linkName).itemId)
         } 
       }
