@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 // import arrow from '../../image/icons/arr-down.svg';
 import arrow from "../public/arr_down.svg";
 import styles from "../styles/Category.module.css";
@@ -13,49 +13,75 @@ interface categoryProps {
   // isOpen: boolean;
 }
 
-const Category: React.FC<categoryProps> = ({
-  category,
-
-}) => {
+const Category: React.FC<categoryProps> = ({ category }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
   const [isCatOpened, setIsCatOpened] = useState(false);
-  const isBigScreen = useMediaQuery({ query: '(min-width: 1024px)' });
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1024px)" });
 
-  useEffect (() => {
-    if (isCatOpened || isBigScreen) {
-      const contentEl = contentRef.current as HTMLDivElement;
-      setHeight(contentEl?.scrollHeight);
-    } else {
-      setHeight(0);
+  // useEffect(() => {
+  //   if (isCatOpened || isBigScreen) {
+  //     const contentEl = contentRef.current as HTMLDivElement;
+  //     setHeight(contentEl?.scrollHeight);
+  //     console.log(`height = ${contentEl?.scrollHeight}`)
+  //   } else {
+  //     setHeight(0);
+  //   }
+  // }, [isCatOpened, isBigScreen]);
+
+  useEffect(() => {
+    const contentEl = contentRef.current as HTMLDivElement;
+    const observer = new ResizeObserver(() => {
+      if (isCatOpened || isBigScreen) {
+        setHeight(contentEl.scrollHeight);
+        console.log(`height = ${contentEl.scrollHeight}`);
+      } else {
+        setHeight(0);
+      }
+    });
+    if (contentEl) {
+      observer.observe(contentEl);
     }
+    return () => {
+      if (contentEl) {
+        observer.unobserve(contentEl);
+      }
+    };
   }, [isCatOpened, isBigScreen]);
 
   const openCatHandler = () => {
     if (isBigScreen) {
-      return
+      return;
     } else {
-      setIsCatOpened(!isCatOpened)
+      setIsCatOpened(!isCatOpened);
     }
-  }
+  };
 
   return (
     <li className={styles.category__container}>
-        <SectionLine
-          isForCatalog={true}
-        />
-        <button className={styles.category__btn} onClick={openCatHandler}>
+      <SectionLine isForCatalog={true} />
+      <button className={styles.category__btn} onClick={openCatHandler}>
         <h2 className={styles.category__name}>{category.name}</h2>
-          <Image
-            className={`${styles.category__arrow} ${
-              isCatOpened ? styles.category__arrow_opened : ""
-            } `}
-            src={arrow}
-            alt="Стрелка"
-          />
+        <Image
+          className={`${styles.category__arrow} ${
+            isCatOpened ? styles.category__arrow_opened : ""
+          } `}
+          src={arrow}
+          alt="Стрелка"
+        />
       </button>
-      <div className={`${styles.category__wrap} ${isCatOpened ? styles.category__wrap_opened : ''}`} style={{ height }}>
-          <div ref={contentRef} className={`${styles.category__productContainer} ${isCatOpened ? styles.category__productContainer_opened : ''}`}>
+      <div
+        className={`${styles.category__wrap} ${
+          isCatOpened ? styles.category__wrap_opened : ""
+        }`}
+        style={{ height }}
+      >
+        <div
+          ref={contentRef}
+          className={`${styles.category__productContainer} ${
+            isCatOpened ? styles.category__productContainer_opened : ""
+          }`}
+        >
           {category.array.map((item, number) => {
             return <Product key={number} product={item} />;
           })}

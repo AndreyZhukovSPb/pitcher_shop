@@ -288,8 +288,8 @@
 
 .product__counterButton {
   border: none;
-  width: 14px;
-  height: 14px;
+  width: 14px !important;
+  height: 14px !important;
   background-position: center;
   background-color: transparent;
   cursor: pointer;

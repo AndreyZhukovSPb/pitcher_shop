@@ -88,7 +88,7 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
     <ul className={styles.catalog__list}>
       {categoryListTransformed.map((item, number) => {
         return (
-          <div key={number} id={`section${number + 1}`} ref={(el) => { sectionRefs.current[number] = el; }}>
+          <div className={styles.catalog__item} key={number} id={`section${number + 1}`} ref={(el) => { sectionRefs.current[number] = el; }}>
             {item.array.length > 0 && (
               <Category
                 category={item}
