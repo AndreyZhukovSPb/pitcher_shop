@@ -272,6 +272,7 @@
   font-family: var(--paragpaph-font);
   font-size: var(--titles-h-large-font-size);
   cursor: auto;
+  padding-top: 2px;
 }
 
 .product__extra_cart {
@@ -280,7 +281,7 @@
 }
 
 .product__counter_cart {
-  font-size: 20px;
+  /* font-size: 20px; */
   margin: 0 10px;
 }
 
@@ -292,12 +293,13 @@
   background-position: center;
   background-color: transparent;
   cursor: pointer;
+  box-sizing: border-box;
   /* padding: 0; */
 }
 
 .product__counterButton_cart {
-  width: 12px;
-  height: 12px;
+  /* width: 12px;
+  height: 12px; */
 }
 
 /* .product__select {
