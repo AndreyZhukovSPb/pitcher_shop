@@ -296,6 +296,7 @@
   box-sizing: border-box;
   appearance: none; /* Убирает стандартное оформление */
   -webkit-appearance: none; /* Для Safari */
+  transform: scale(1);
   /* padding: 0; */
 }
 
