@@ -50,13 +50,13 @@ const Counter: React.FC<counterProps> = ({ currentProduct, isCart
     <div className={styles.product__counterContainer}>
     <p className={`${styles.product__extra} ${isCart ? styles.product__extra_cart : ''}`}>количество</p>
     <div className={`${styles.product__counterBox} ${isCart ? styles.product__counterBox_cart : ''}`}>
-      <button
+      <span
         id="minus"
         className={`${styles.product__counterButton} ${styles.product__counterButton_type_minus} ${isCart ? styles.product__counterButton_cart : ''}`}
         onClick={(event) => {
           handleChangeQuantity(event.target);
         }}
-      ></button>
+      ></span>
       <p
         className={`${styles.product__extra} ${styles.product__counter} ${isCart ? styles.product__counter_cart : ''}`}
       >
@@ -71,13 +71,13 @@ const Counter: React.FC<counterProps> = ({ currentProduct, isCart
           )
         }
       </p>
-      <button
+      <span
         id="plus"
         className={`${styles.product__counterButton} ${styles.product__counterButton_type_plus} ${isCart ? styles.product__counterButton_cart : ''}`}
         onClick={(event) => {
           handleChangeQuantity(event.target);
         }}
-      ></button>
+      ></span>
     </div>
   </div>
     );
