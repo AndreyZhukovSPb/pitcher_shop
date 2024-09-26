@@ -297,6 +297,7 @@
   appearance: none; /* Убирает стандартное оформление */
   -webkit-appearance: none; /* Для Safari */
   transform: scale(1);
+  touch-action: manipulation;
   /* padding: 0; */
 }
 
