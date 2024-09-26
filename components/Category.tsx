@@ -34,7 +34,7 @@ const Category: React.FC<categoryProps> = ({ category }) => {
     const observer = new ResizeObserver(() => {
       if (isCatOpened || isBigScreen) {
         setHeight(contentEl.scrollHeight);
-        console.log(`height = ${contentEl.scrollHeight}`);
+        // console.log(`height = ${contentEl.scrollHeight}`);
       } else {
         setHeight(0);
       }
