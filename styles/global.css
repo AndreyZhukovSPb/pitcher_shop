@@ -75,6 +75,7 @@
   --bg-color-card: rgb(253 251 247);
   --bg-color-2: #F5F5F5;
   --btn-color: rgb(84 84 84);
+  --btn-color-focus: rgba(84 84 84 0.1);
   --span-font: 'Mont-Light';
   --span-font-size-mobile: 13px;
   --span-font-size-tablet: 12px;
