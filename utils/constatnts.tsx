@@ -2,10 +2,7 @@
 const baseURL = 'https://pitcherbartest.ru/api/'
 // const baseURL = 'http://84.201.136.165/api'
 
-
 const mainWebUrl = 'https://pitcherbar.ru'
-// const baseURL = 'https://pitcherbar.ru/api'
-// const baseURL = 'http://158.160.11.42/api/'
 
 const millingTableNew = [
   'в зернах (не молоть)',
@@ -38,9 +35,9 @@ const paymentChecking = [
   'Пожалуйста, не покидайте страницу', 
 ]
 
-
 const mapSrc = "https://yandex.ru/map-widget/v1/?scroll=false&um=constructor%3A37a493ba0d534859391bcced906d752064b18c0040fab40833b83ba8019fb9bf&amp;source=constructor" 
 
+const jokeForDasha = 'https://ya.ru/search/?text=%D1%87%D1%82%D0%BE+%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C+%D0%B5%D1%81%D0%BB%D0%B8+%D1%8F+%D1%81%D0%BB%D0%BE%D0%BC%D0%B0%D0%BB%D0%B0+%D1%81%D0%B0%D0%B9%D1%82&lr=10435&search_source=yaru_desktop_common&search_domain=yaru'
 
 // src="https://yandex.ru/map-widget/v1/?scroll=false&um=constructor%3A27a9f717a2a1ccaa0396594d6444c4aab423f2081492148a7a675b24ca5b121a&amp;source=constructor
 export {
@@ -51,5 +48,6 @@ export {
   regOrderError,
   paymentFailed,
   paymentCheckError,
-  paymentChecking
+  paymentChecking,
+  jokeForDasha
 }

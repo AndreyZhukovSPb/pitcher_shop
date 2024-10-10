@@ -5,7 +5,7 @@
 
 .main__container {
   position: relative;
-  height: 300px;
+  height: 250px;
   width: 100%;
 }
 
@@ -15,7 +15,7 @@
 
 .main__overlay {
   position: relative;
-  background: rgba(0,0,0,.25);
+  background: rgba(0,0,0,.3);
   width: 100%;
   height: 100%;
 }
@@ -44,9 +44,29 @@
   font-size: var(--titles-h-large-font-size);
 }
 
-@media (width > 1023px) {
+
+@media (width > 400px) {
   .main__container {
-    height: 550px;
+    height: 290px;
+  }
+}
+
+@media (width > 499px) {
+  .main__container {
+    height: 320px;
+  }
+}
+
+@media (width > 599px) {
+  .main__container {
+    height: 400px;
+  }
+}
+
+
+@media (width > 699px) {
+  .main__container {
+    /* height: 550px; */
   }
 }
 

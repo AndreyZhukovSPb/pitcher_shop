@@ -92,7 +92,8 @@ const Product: React.FC<productProps> = ({ product }) => {
       <div className={styles.product__container} onClick={handleProductClick}>
         <Image
           className={styles.product__image}
-          src={product.cat_id === 1 || product.cat_id === 2 ? 'https://i.ibb.co/VS8jW7D/pack.png' : 'https://i.ibb.co/6vYmZTL/drip.jpg'}
+          // src={product.cat_id === 2 || product.cat_id === 3 ? 'https://i.ibb.co/VS8jW7D/pack.png' : 'https://i.ibb.co/6vYmZTL/drip.jpg'}
+          src={product.url}
           alt="фото пачки"
           onClick={handleProductClick}
           fill
@@ -116,7 +117,7 @@ const Product: React.FC<productProps> = ({ product }) => {
         {product.balance && <Balance item={product} isShortCard={true} />}
       </div>
 
-      {(product.cat_id === 1 || product.cat_id === 2) && (
+      {(product.cat_id === 2 || product.cat_id === 3) && (
         <Milling currentProduct={product} isShotCard={true} />
       )}
       <div className={styles.product__cartContainer}>

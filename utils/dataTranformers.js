@@ -3,15 +3,15 @@ import { millingTableNew } from "./constatnts";
 export const filterCats = (array) => {
   const promoArray = array.filter(item => item.promo).sort((a, b) => a.order - b.order)
   const promoObject = {name: 'Новое в Pitcher', array: promoArray};
-  const filterArray = array.filter(item => item.cat_id === 1).sort((a, b) => a.order - b.order)
-  const filterObject = {name: 'Фильтр обжарка', array: filterArray};
+  const dripArray = array.filter(item => item.cat_id === 1).sort((a, b) => a.order - b.order)
+  const dripObject = {name: 'Дрип кофе', array: dripArray};
   const espressoArray = array.filter(item => item.cat_id === 2).sort((a, b) => a.order - b.order)
   const espressoObject = {name: 'Эспрессо обжарка', array: espressoArray};
-  const othersArray = array.filter(item => item.cat_id === 3).sort((a, b) => a.order - b.order)
+  const filterArray = array.filter(item => item.cat_id === 3).sort((a, b) => a.order - b.order)
+  const filterObject = {name: 'Фильтр обжарка', array: filterArray};
+  const othersArray = array.filter(item => item.cat_id === 4).sort((a, b) => a.order - b.order)
   const othersObject = {name: 'Мерч', array: othersArray};
-  const dripArray = array.filter(item => item.cat_id === 4).sort((a, b) => a.order - b.order)
-  const dripObject = {name: 'Дрип кофе', array: dripArray};
-  const newArray = [promoObject, filterObject, espressoObject, othersObject, dripObject]
+  const newArray = [promoObject, dripObject, espressoObject, filterObject, othersObject ]
   return newArray
 };
 
@@ -50,6 +50,21 @@ export const getWordForCart = (summ) => {
     }
   }
   return(ending);
+}
+
+export const getOrderData = (date, time) => {
+  const dateTimeString = `${date} ${time}`;
+
+  const dateTime = new Date(dateTimeString);
+
+  const day = String(dateTime.getDate()).padStart(2, '0');
+  const month = String(dateTime.getMonth() + 1).padStart(2, '0'); // Месяцы в JavaScript начинаются с 0
+  const year = String(dateTime.getFullYear()).slice(-2); // Берем последние 2 цифры года
+  const hours = String(dateTime.getHours()).padStart(2, '0');
+  const minutes = String(dateTime.getMinutes()).padStart(2, '0');
+  
+  const formattedDateTime = `${day}.${month}.${year} ${hours}:${minutes}`;
+  return formattedDateTime
 }
 
 

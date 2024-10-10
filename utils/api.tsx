@@ -93,6 +93,60 @@ export async function postOrder(client, orderData, total) {
   }
 }
 
+export async function login(data) {
+  const url = `${baseURL}login`;
+  try {
+    const res = await axios.post(url, {
+      password: data
+    },
+      {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      timeout: 40000
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function auth(data) {
+  const url = `${baseURL}auth`;
+  try {
+    const res = await axios.post(url, {},
+      {
+      headers: {
+        'Content-Type': 'application/json',
+        'customtoken': `Bearer ${data}`
+      },
+      timeout: 40000
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getOrders(token) {
+  const url = `${baseURL}orders`;
+  try {
+    const res = await axios.get(url,
+      {
+      headers: {
+        'Content-Type': 'application/json',
+        'customtoken': `Bearer ${token}`
+      },
+      timeout: 40000
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+
 export async function checkOrder(bankOrderId) {
   const url = `${baseURL}order/payment`;
   try {

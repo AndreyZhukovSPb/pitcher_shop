@@ -10,17 +10,13 @@
   box-sizing: border-box;
 }
 
-.catalog__item:first-child {
-  margin-top: 20px;
-}
-
 .catalog__nav {
-  padding: 0 5.5vw;
+  /* padding: 0 5.5vw; */
   display: none;
   justify-content: space-between;
   /* height: 150px; */
   /* background-color: bisque; */
-  padding: 10px 8.5vw;
+  padding: 15px 8.5vw;
   /* box-sizing: border-box; */
 }
 
@@ -53,6 +49,10 @@
   padding: 5px 15px;
 }
 
+.catalog__item:first-child {
+  margin-top: 20px;
+}
+
 .catalog__navLink_active {
   color: white;
   background-color: var(--btn-color);
@@ -64,6 +64,9 @@
   }
   .catalog__placeholder {
     display: block;
+  }
+  .catalog__item:first-child {
+    margin-top: 0;
   }
 }
 

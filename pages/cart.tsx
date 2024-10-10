@@ -27,10 +27,6 @@ const Cart: React.FC<cartProps> = ({  }) => {
   const orderData = Context.orderData;
   // const orderDataFromContext = Context.orderData;
   const resetCart = Context.resetCart;
-  // const addToCart = Context.addToOrder;
-
-  // const currentProductFeatures = Context.currentProductFeatures;
-
   const router = useRouter();
   const [currentAmount, setCurentAmount] = React.useState<number>(0);
   const [currentTotal, setCurentTotal] = React.useState<number>(0);
@@ -497,6 +493,3 @@ const Cart: React.FC<cartProps> = ({  }) => {
 };
 
 export default Cart;
-
-
-// закрытие по оверлею
