@@ -45,7 +45,6 @@ const Popup: React.FC<PopupProps> = ({
     if (isPayed || isPaymentError) {
       onCloseSuccess;
       router.push('/');
-      // onClose();
     } else {
       if (currentPath !== '/cart' && currentPath.startsWith('/cart')) {
         router.push('/cart')
@@ -55,8 +54,6 @@ const Popup: React.FC<PopupProps> = ({
       }
     }
   };
-
-  console.log(message)
 
   return (
     <section 
@@ -81,15 +78,11 @@ const Popup: React.FC<PopupProps> = ({
                     <span className={styles.popup__text_bold}> {orderEmail}</span>
                   </p>
                   <p className={styles.popup__text}>
-                    {isTimeInInterval ? 
+                    {!isTimeInInterval() ? 
                       'Завтра ' : 
                       'Сегодня '}
                     мы свяжемся с вами и согласуем время доставки
                   </p>
-                  {/* <p className={styles.popup__text}>
-                    {isTimeInInterval ? '' : ''}
-                    В ближайшее время мы свяжемся с вами и согласуем время доставки
-                  </p> */}
                 </>
               )}
               {!isPayed && (
@@ -117,14 +110,3 @@ const Popup: React.FC<PopupProps> = ({
 };
 
 export default Popup;
-
-// {!isPayed && (
-//   <>
-//     <p className={styles.popup__text}>
-//       При оплате заказа проиошла ошибка
-//     </p>
-//     <p className={styles.popup__text}>
-//       Пожалуйста, попробуйте еще раз
-//     </p>
-//   </>
-// )}

@@ -9,7 +9,6 @@
   z-index: 1;
   transition: left 1s;
   justify-content: flex-start;
-  /* color: #000000; */
   color: white;
 }
 
@@ -26,13 +25,13 @@
   display: flex;
   justify-content: center;
   position: relative;
-  background-image: url('https://i.ibb.co/sKpYKKn/texture-new-transformed.jpg');
   background-size: cover;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 .menu__container::before {
   content: "";
-  background: rgba(0,0,0,.4);
+  /* background: rgba(0,0,0,.4); */
   opacity: .2;
   position: absolute;
   top: 0;
@@ -55,7 +54,7 @@
   cursor: pointer;
   transition: opacity 1s ease;
   background-color: transparent;
-  /* filter: invert(100%); */
+  filter: invert(100%);
 }
 
 /* .menu__closeButton:hover {
@@ -72,7 +71,7 @@
   line-height: 1.6;
   text-decoration: none;
   /* color: #000000; */
-  color: white;
+  color: black;
 }
 
 /* .navigation__link_active {
@@ -80,7 +79,7 @@
 } */
 
 .menu__navigation_active {
-  border-bottom: 1.4px white solid;
+  border-bottom: 1.4px black solid;
 }
 
 .menu__navContainer {
@@ -114,8 +113,8 @@
   .menu__closeButton {
     filter: invert(100%);
   }
-  .menu__navigation_active {
+  /* .menu__navigation_active {
     border-bottom: 1.4px black solid;
-  }
+  } */
 }
 

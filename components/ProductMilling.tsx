@@ -56,6 +56,10 @@ const Milling: React.FC<categoryMilling> = ({ isShotCard, currentProduct, isCart
 
   useOnClickOutside(ref, () => setIsMillingListOpen(false));
 
+  const bugHandler = () => {
+    console.log(millingTableNew)
+  }
+
   return (
     <div className=
       {`${styles.product__extrasContainer} 
@@ -67,7 +71,7 @@ const Milling: React.FC<categoryMilling> = ({ isShotCard, currentProduct, isCart
       className={`${styles.product__extraOptions} ${isCart ? styles.product__extraOptions_cart : ''}`}
       // ref={ref}
     >
-      <p className={styles.product__millingTitle}>Помол:</p>
+      <p className={styles.product__millingTitle} onClick={bugHandler}>Помол:</p>
       <span
         className={`${styles.product__currentMill} ${isCart ? styles.product__currentMill_cart : ''}`}
         onClick={() => {

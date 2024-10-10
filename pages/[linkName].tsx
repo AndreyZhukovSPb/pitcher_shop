@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { millingTableNew } from "../utils/constatnts";
+// import { millingTableNew } from "../utils/constatnts";
 import { ProductsContext } from "../components/Context";
 import { getItemByLinkName } from "../utils/api";
 import { ProductType } from "../utils/sharedTypes";
@@ -42,7 +42,7 @@ const LinkNamePage: React.FC = () => {
       return;
     } else {
       const linkName = query.linkName.toString();
-      if (productsList.length > 0) {
+      if (productsList.length > 0 && productsList.find((item) => item.linkName === linkName)) {
         // console.log('забрали продукт из контекста');
         setCurrentItem(productsList.find((item) => item.linkName === linkName));
       } else {
@@ -63,9 +63,9 @@ const LinkNamePage: React.FC = () => {
   }, [currentItem]);
 
   const router = useRouter();
-  const handleTestBack = () => {
-    router.push("/");
-  };
+  // const handleTestBack = () => {
+  //   router.push("/");
+  // };
 
   return (
     <>
@@ -75,7 +75,8 @@ const LinkNamePage: React.FC = () => {
             <Image
               className={styles.productFull__image}
               // src={img2}
-              src={currentItem.cat_id === 1 || currentItem.cat_id === 2 ? 'https://i.ibb.co/VS8jW7D/pack.png' : 'https://i.ibb.co/6vYmZTL/drip.jpg'}
+              // src={currentItem.cat_id === 1 || currentItem.cat_id === 2 ? 'https://i.ibb.co/VS8jW7D/pack.png' : 'https://i.ibb.co/6vYmZTL/drip.jpg'}
+              src={currentItem.urlLarge}
               fill
               alt="фото пачки"
               // onClick={handleTestBack}
@@ -98,34 +99,40 @@ const LinkNamePage: React.FC = () => {
             {currentItem.description.flavour && (
               <div className={styles.productFull__aboutContainer}>
                 {currentItem.description.roastingType && (
-                  <div className={styles.productFull__featureContainer}>
-                    <p className={styles.productFull__aboutTitle}>
-                      Тип обжарки:{" "}
-                    </p>
-                    <p className={styles.productFull__about}>
-                      {currentItem.description.roastingType}
-                    </p>
-                  </div>
+                  // <div className={styles.productFull__featureContainer}>
+                  //   <p className={styles.productFull__aboutTitle}>
+                  //     Тип обжарки:{" "}
+                  //   </p>
+                  //   <p className={styles.productFull__about}>
+                  //     {currentItem.description.roastingType}
+                  //   </p>
+                  // </div>
+                  <p className={styles.productFull__featureContainer}>
+                    <span className={styles.productFull__aboutTitle}>Тип обжарки: </span>
+                    {currentItem.description.roastingType}
+                  </p>
                 )}
                 {currentItem.description.variaty && (
-                  <div className={styles.productFull__featureContainer}>
-                    <p className={styles.productFull__aboutTitle}>
-                      Обработка:{" "}
-                    </p>
-                    <p className={styles.productFull__about}>
-                      {currentItem.description.variaty}
-                    </p>
-                  </div>
+                  // <div className={styles.productFull__featureContainer}>
+                  //   <p className={styles.productFull__aboutTitle}>
+                  //     Обработка:{" "}
+                  //   </p>
+                  //   <p className={styles.productFull__about}>
+                  //     {currentItem.description.variaty}
+                  //   </p>
+                  // </div>
+                  <p className={styles.productFull__featureContainer}>
+                    <span className={styles.productFull__aboutTitle}>Обработка: </span>
+                    {currentItem.description.variaty}
+                  </p>
+
                 )}
                 {currentItem.description.flavour && (
-                  <div className={styles.productFull__featureContainer}>
-                    <p className={styles.productFull__aboutTitle}>
-                      Вкусовой профиль:{" "}
-                    </p>
-                    <p className={styles.productFull__about}>
-                      {currentItem.description.flavour}
-                    </p>
-                  </div>
+                  <p className={styles.productFull__featureContainer}>
+                    <span className={styles.productFull__aboutTitle}>Вкусовой профиль: </span>
+                    {currentItem.description.flavour}
+                  </p>
+                  
                 )}
               </div>
             )}
@@ -138,7 +145,7 @@ const LinkNamePage: React.FC = () => {
             )}
             {currentItem.aboutFull &&
               (!isBigScreen ||
-                (!(currentItem.cat_id === 1 || currentItem.cat_id === 2) &&
+                (!(currentItem.cat_id === 2 || currentItem.cat_id === 3) &&
                   !currentItem.balance)) && (
                 <div className={styles.productFull__descriptionContainer}>
                   <p className={styles.productFull__descriptionTitle}>
@@ -156,7 +163,7 @@ const LinkNamePage: React.FC = () => {
                   })}
                 </div>
               )}
-            {(currentItem.cat_id === 1 || currentItem.cat_id === 2) && (
+            {(currentItem.cat_id === 2 || currentItem.cat_id === 3) && (
               <Milling currentProduct={currentItem} isShotCard={false} />
             )}
             <div className={styles.productFull__cartContainer_bigScreen}>

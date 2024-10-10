@@ -16,6 +16,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.2",
     "react-input-mask": "^2.0.4",
+    "react-paginate": "^8.2.0",
     "react-responsive": "^9.0.2",
     "react-router": "^6.15.0",
     "typescript": "^5.1.6",

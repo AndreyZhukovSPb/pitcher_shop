@@ -4,6 +4,7 @@ import { getItems } from '../utils/api';
 import { millingTableNew } from '../utils/constatnts';
 
 interface ICurrentProductFeatures {
+  urlLarge: any;
   itemId: string,
   name: string,
   name_2?: string,
@@ -65,20 +66,10 @@ export const CartContextProvider = ({
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  // const [orderData, setOrderData] = useState<OrderType[]>([]);
-
-  // const [orderData, setOrderData] = useState<OrderType[]>(() => {
-  //   if (typeof window !== 'undefined') { // Проверка, чтобы избежать ошибок на сервере (например, при SSR)
-  //     const storedData = localStorage.getItem('orderData');
-  //     return storedData ? JSON.parse(storedData) : [];
-  //   }
-  //   return [];
-  // });
-
+  
   const [orderData, setOrderData] = useState<OrderType[]>([]);
   const ProductList = React.useContext(ProductsContext).productsData;
 
-  // Используем useEffect для инициализации состояния из localStorage на клиенте
   useEffect(() => {
     const checkOldGoods = (catalogIds, cart) => {
       return cart.every(cartItem => catalogIds.includes(cartItem._id));
@@ -94,7 +85,7 @@ export const CartContextProvider = ({
     if (ProductList.length < 1) {
       return
     } else {
-      if (typeof window !== 'undefined') { // Проверка, чтобы убедиться, что это выполняется только на клиенте
+      if (typeof window !== 'undefined') { 
         const storedData = localStorage.getItem('orderData');
         const storedDataArray = JSON.parse(storedData)
         const catalogIds = ProductList.map(item => item._id);
@@ -111,10 +102,6 @@ export const CartContextProvider = ({
     }
   }, [ProductList]);
 
-  // console.log(ProductList)
-
-
-  // const [currentMillingType, setCurrentMillingType] = useState<IMillingList[]>([]);
   const [currentProductFeatures, setCurrentProductFeatures] = useState<ICurrentProductFeatures[]>([]);
 
   // console.log (currentProductFeatures)
@@ -286,7 +273,7 @@ export const CartContextProvider = ({
     if (ProductList.length >= 1) {
       setCurrentProductFeatures(() => 
         ProductList.map(item => {
-          if (item.cat_id === 1 || item.cat_id === 2) {
+          if (item.cat_id === 2 || item.cat_id === 3) {
             return {
               name: item.name,
               name_2: item.name_2,
@@ -301,7 +288,8 @@ export const CartContextProvider = ({
               promo: item.promo, // DELETE?
               currentSize: 0,
               linkName: item.linkName,
-              url: item.url
+              url: item.url,
+              urlLarge: item.urlLarge,
             };
           } else {
             return {
@@ -316,7 +304,8 @@ export const CartContextProvider = ({
               promo: item.promo, // DELETE ?
               currentSize: 0,
               linkName: item.linkName,
-              url: item.url
+              url: item.url,
+              urlLarge: item.urlLarge,
             };
           }
         })
@@ -366,7 +355,7 @@ export const CartContextProvider = ({
   }, [ProductList]);
   
   useEffect(()=> {
-    // console.log(orderData)
+    console.log('debug')
     if (orderData.length === 0) {
       // localStorage.removeItem('orderData');
       // console.log('корзина пуста')
@@ -397,6 +386,7 @@ export const CartContextProvider = ({
       name_2: itemForAdd.name_2 ? itemForAdd.name_2 : undefined,
       price: itemForAdd.price[itemForAdd.currentSize],
       url: itemForAdd.url,
+      urlLarge: itemForAdd.urlLarge,
       linkName: itemForAdd.linkName,
       quantity: itemForAdd.quantity,
       _id: itemForAdd.itemId,

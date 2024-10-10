@@ -87,7 +87,7 @@
     grid-template-columns: repeat(3, 1fr); 
     padding: 1.5px 1.5px;
     gap: 50px;
-    gap: 70px;
+    /* gap: 70px; */
   }
   .category__btn {
     width: 90%;

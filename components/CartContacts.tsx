@@ -51,9 +51,7 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
   //   // 
   // }, [isValid])
 
-  // async function test() {
   const test = async () => {
-    console.log(errors)
     const errorsArray = [
       errors.name && errors.name.message,
       errors.phone && errors.phone.message,
@@ -128,7 +126,6 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
       // onSubmit={handleSubmit(onSubmit)}
     >
       <h2 className={styles.cart__title}
-        onClick={test}
       >Данные получателя</h2>
       {/* <label className="profile__inputTitle"> */}
         {/* Имя */}
@@ -205,20 +202,3 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
 };
 
 export default CartContacts;
-
-
-{/* <InputMask
-        // maskChar='2'
-        minLength={16}
-        alwaysShowMask={false}
-        name="phone"
-        // onBlur={formik.handleBlur}
-        // onChange={formik.handleChange}
-        className={styles.cart__customerData}
-        mask={"+7(999)999-99-99"}
-        placeholder="Телефон"
-        // placeholderChar='Телефон'
-        // showMask={true}
-        // maskPlaceholder={null} value="телефон"
-        // maskPlaceholder={'телефон'}
-      /> */}

@@ -19,8 +19,9 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const offset = 500; 
-      const fixedPosition = 480;
+      const offset = 350; 
+      const fixedPosition = 330;
+      // 500 и 480 330
       if (scrollY > fixedPosition) {
         setIsMenuFixed(true);
       } else {
@@ -72,18 +73,18 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
       <a href="#section2" 
         // className={styles.catalog__navLink} 
         className={`${styles.catalog__navLink} ${activeSection === `section2` ? styles.catalog__navLink_active : ''}`}
-        onClick={scrollToSection}>Фильтр</a>
+        onClick={scrollToSection}>Дрип кофе</a>
       <a href="#section3" 
         // className={styles.catalog__navLink} 
         className={`${styles.catalog__navLink} ${activeSection === `section3` ? styles.catalog__navLink_active : ''}`}
         onClick={scrollToSection}>Эспрессо</a>
       <a href="#section4" 
         className={`${styles.catalog__navLink} ${activeSection === `section4` ? styles.catalog__navLink_active : ''}`}
-        onClick={scrollToSection}>Наш мерч</a>
+        onClick={scrollToSection}>Фильтр</a>
       <a href="#section5" 
         // className={styles.catalog__navLink} 
         className={`${styles.catalog__navLink} ${activeSection === `section5` ? styles.catalog__navLink_active : ''}`}
-        onClick={scrollToSection}>Дрип кофе</a>
+        onClick={scrollToSection}>Наш мерч</a>
     </div>
     <ul className={styles.catalog__list}>
       {categoryListTransformed.map((item, number) => {

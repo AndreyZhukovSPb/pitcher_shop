@@ -39,18 +39,19 @@ const CartItem: React.FC<cartItemProps> = ({ item }) => {
       <div className={styles.cart__about}>
         <Image
           className={styles.cart__image}
-          src={img1}
+          src={item.url}
           alt="фото пачки"
           onClick={handleImageClick}
+          fill
         />
         <div className={styles.cart__featureContainer}>
           <h2 className={styles.cart__itemName}>{item.name}</h2>
-          {item.name_2 && (
+          {/* {item.name_2 && (
             <h2 className={styles.cart__itemName}>{item.name_2}</h2>
           )}
           {item.subtitle && (
         <p className={styles.cart__subTitle}>{item.subtitle}</p>
-      )}
+      )} */}
 
           <div className={styles.cart__itemSize}>
             <p className={styles.cart__itemSizeTitle}>
@@ -60,8 +61,8 @@ const CartItem: React.FC<cartItemProps> = ({ item }) => {
               {item.price.priceItem} &#8381;
             </p>
           </div>
-          {(item.cat_id === 1 ||
-            item.cat_id === 2) && (<Milling currentProduct={item} isShotCard={false} isCart={true}/>)}
+          {(item.cat_id === 2 ||
+            item.cat_id === 3) && (<Milling currentProduct={item} isShotCard={false} isCart={true}/>)}
         </div>
         <button 
           className={styles.cart__del} 

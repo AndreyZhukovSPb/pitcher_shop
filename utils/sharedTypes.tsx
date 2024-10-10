@@ -10,6 +10,7 @@ export interface ProductType {
     }
   ];
   url: string;
+  urlLarge: string;
   promo?: boolean;
   description: {
     // type?: string;
@@ -41,6 +42,7 @@ export interface OrderType {
     quantity: number
     };
   url: string;
+  urlLarge: string;
   linkName: string;
   quantity: number;
   milling: string;
@@ -48,3 +50,38 @@ export interface OrderType {
   currentSize: number;
   subtitle?: string;
 }
+
+interface AdminOrderType {
+  name: string;
+  name_2?: string;
+  price: 
+    {title: string,
+    priceItem: number,
+    quantity: number
+    };
+  milling?: string;
+  _id: string;
+}
+
+interface AdminClientType {
+  comment?: string;
+  deliveryPoint?: string;
+  address?: string;
+  deliveryType: string;
+  email: string;
+  name: string
+  phone: string
+}
+
+export interface AdminDataType {
+  order: AdminOrderType[];
+  client: AdminClientType;
+  isPayed: boolean;
+  date: string;
+  time: string;
+  number: number;
+  total: number;
+  _id: string
+}
+
+
