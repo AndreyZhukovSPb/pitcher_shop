@@ -58,7 +58,7 @@ const Popup: React.FC<PopupProps> = ({
 
   return (
     <section 
-      className={`${styles.popup} ${isOpen ? styles.popup_opened : ''}`}
+      className={`${styles.popup} ${debugPopup ? styles.popup_opened : ''}`}
       onClick={handleCheckIsOverlay}
       ref={overlayRef}  
     >
