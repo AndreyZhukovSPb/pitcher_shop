@@ -80,15 +80,13 @@
     width: 350px;
     height: 230px;
   }
-  .popup__btn:hover {
-    cursor: pointer;
+  .popup__btn {
     top: 15px;
     right: 15px;
     width: 16px;
     height: 16px;
-  }  
-  .popup__container {
-    width: 320px;
-    height: 200px;
   }
+  .popup__btn:hover {
+    cursor: pointer;
+  }  
 }
