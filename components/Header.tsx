@@ -100,6 +100,7 @@ const Header: React.FC<headerProps> = ({
         isCart={isCart}
         // isShop={isShop}
       />
+      {/* ${isMain || isScrolled ? styles.header__logo_type_main : ''} убрал проверку isScrolled*/} 
       <Link href={'/'} className={styles.header__logoContainer}>
         <Image
           src={logo}
@@ -107,16 +108,17 @@ const Header: React.FC<headerProps> = ({
           alt="logo"
           className={`
             ${styles.header__logo} 
-            ${isMain || isScrolled ? styles.header__logo_type_main : ''}
+            ${isMain ? styles.header__logo_type_main : ''} 
             `}
         />
+        {/* ${isMain || isScrolled ? styles.header__logo_type_main : ''} тоже убрал проверку isScrolled */}
         <Image
           src={logoMobile}
           priority={true}
           alt="logo"
           className={`
             ${styles.header__logo} 
-            ${isMain || isScrolled ? styles.header__logo_type_main : ''} 
+            ${isMain ? styles.header__logo_type_main : ''} 
             ${styles.header__logo_mobile} }`}
         />
       </Link>
