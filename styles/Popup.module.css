@@ -63,14 +63,15 @@
 
 .popup__btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 15px !important;
-  height: 15px !important;
+  top: 15px;
+  right: 15px;
+  width: 16px !important;
+  height: 16px !important;
   background-image: url(/_next/static/media/closeIcon.99923edc.svg);
   /* background-size: cover; */
   background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
   border: none;
   background-color: transparent;
   filter: invert(100%);
@@ -82,12 +83,12 @@
     width: 350px;
     height: 230px;
   }
-  .popup__btn {
+  /* .popup__btn {
     top: 15px;
     right: 15px;
     width: 16px !important;
     height: 16px !important;
-  }
+  } */
   .popup__btn:hover {
     cursor: pointer;
   }  
