@@ -11,7 +11,7 @@ import { getWordForCart } from "../utils/dataTranformers";
 import { useRouter } from "next/router";
 import { postOrder, checkOrder } from "../utils/api";
 import { useMediaQuery } from "react-responsive";
-import { regOrderError, paymentFailed, paymentCheckError, paymentChecking } from "../utils/constatnts";
+import { regOrderError, paymentFailed, paymentCheckError, paymentChecking, freeDeliveryAmount } from "../utils/constatnts";
 
 // import useCheckStorage from '../utils/checkStorage'
 
@@ -122,12 +122,11 @@ const Cart: React.FC<cartProps> = ({  }) => {
     setCurentTotal(orderData.reduce((acc, item) => {
       return acc + item.price.priceItem * item.price.quantity;
     }, 0));
-    // setDeliveryPrice(currentTotal >= 1800 ? 0 : 400)
   }, [orderData])
 
   useEffect(() => {
     if (deliveryType === 'Курьер') {
-      setDeliveryPrice(currentTotal >= 1800 ? 0 : 400)
+      setDeliveryPrice(currentTotal >= freeDeliveryAmount ? 0 : 400)
     } else {
       setDeliveryPrice(0)  
     }
@@ -361,7 +360,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
                 <p className={styles.cart__deliveryName}>
                   Доставка по Санкт-Петербургу
                   <span className={styles.cart__deliveryComment}>
-                    {currentTotal < 1800 ? ' (400₽ или бесплатно при заказе от 1800₽)' : ' (бесплатно)'}
+                    {currentTotal < freeDeliveryAmount ? ` (400₽ или бесплатно при заказе от ${freeDeliveryAmount}₽)` : ' (бесплатно)'}
                   </span>  
                 </p>
               </label>
