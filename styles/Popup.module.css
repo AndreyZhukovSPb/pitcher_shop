@@ -63,12 +63,12 @@
 
 .popup__btn {
   position: absolute;
-  top: 13px;
-  right: 13px;
-  width: 14px;
-  height: 14px;
+  top: 14px;
+  right: 14px;
+  width: 15px !important;
+  height: 15px !important;
   background-image: url(/_next/static/media/closeIcon.99923edc.svg);
-  background-size: 14px 14px;
+  background-size: cover;
   border: none;
   background-color: transparent;
   filter: invert(100%);
@@ -83,9 +83,8 @@
   .popup__btn {
     top: 15px;
     right: 15px;
-    width: 16px;
-    height: 16px;
-    background-size: cover;
+    width: 16px !important;
+    height: 16px !important;
   }
   .popup__btn:hover {
     cursor: pointer;
