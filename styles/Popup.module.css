@@ -68,7 +68,7 @@
   width: 14px;
   height: 14px;
   background-image: url(/_next/static/media/closeIcon.99923edc.svg);
-  background-size: cover;
+  background-size: 14px 14px;
   border: none;
   background-color: transparent;
   filter: invert(100%);
@@ -85,6 +85,7 @@
     right: 15px;
     width: 16px;
     height: 16px;
+    background-size: cover;
   }
   .popup__btn:hover {
     cursor: pointer;
