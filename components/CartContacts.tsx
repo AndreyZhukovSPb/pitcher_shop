@@ -154,14 +154,12 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
             message: "Введите корректный номер телефона",
           },
         })}
-        // onChange={handlePhoneChange}
-        // minLength={10}
         alwaysShowMask={false}
         name="phone"
         className={styles.cart__customerData}
         mask="+7(999)999-99-99"
         placeholder="Телефон *"
-        
+        inputMode="numeric"
       />
         <input
           {...register("email", {
