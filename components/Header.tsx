@@ -109,6 +109,7 @@ const Header: React.FC<headerProps> = ({
           className={`
             ${styles.header__logo} 
             ${isMain ? styles.header__logo_type_main : ''} 
+            ${isMain && isScrolled ? styles.header__logo_type_default : ''} 
             `}
         />
         {/* ${isMain || isScrolled ? styles.header__logo_type_main : ''} тоже убрал проверку isScrolled */}
@@ -119,6 +120,7 @@ const Header: React.FC<headerProps> = ({
           className={`
             ${styles.header__logo} 
             ${isMain ? styles.header__logo_type_main : ''} 
+            ${isMain && isScrolled ? styles.header__logo_type_default : ''} 
             ${styles.header__logo_mobile} }`}
         />
       </Link>
@@ -126,7 +128,11 @@ const Header: React.FC<headerProps> = ({
         <Image
           src={"/cart.svg"}
           alt="main cart"
-          className={`${styles.header__cart} ${isMain ? styles.header__cart_type_main : ''}`}
+          className={`
+            ${styles.header__cart} 
+            ${isMain ? styles.header__cart_type_main : ''}
+            ${isMain && isScrolled ? styles.header__cart_type_default : ''} 
+            `}
           fill
           onClick={hanldeOnCartClick}
         />
