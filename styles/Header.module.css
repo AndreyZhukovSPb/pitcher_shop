@@ -71,12 +71,20 @@
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
   background-color:  white;
   z-index: 11;
-  .header__logo_type_main {
+  /* .header__logo_type_main {
     filter: invert(0%);
   }
   .header__cart {
     filter: invert(100%);
-  }
+  } */
+}
+
+.header__cart_type_default {
+  filter: invert(100%);
+}
+
+.header__logo_type_default {
+  filter: invert(0%);
 }
 
 .header__logoContainer {
