@@ -30,6 +30,7 @@ const Popup: React.FC<PopupProps> = ({
   const overlayRef = React.useRef<HTMLDivElement>(null);
   const router = useRouter();
   const currentPath = router.asPath;
+  const debugPopup = true;
 
   const handleCheckIsOverlay = (e: any) => {
     if (isPaymentPending) {
