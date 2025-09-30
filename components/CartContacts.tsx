@@ -46,11 +46,6 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
     // reset(currentUser);
   // };
 
-  // useEffect(() => {
-  //   console.log(isValid);
-  //   // 
-  // }, [isValid])
-
   const test = async () => {
     const errorsArray = [
       errors.name && errors.name.message,
@@ -75,7 +70,6 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
   }, [isPaymentReceived])
 
   useEffect(()=> {
-    // console.log('а здесь были')
     if (!isValid) {
       return
     } else if (isSubmiyClicked) {

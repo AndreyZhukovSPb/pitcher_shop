@@ -58,9 +58,11 @@ const Index = ({ data }) => {
 export default Index;
 
 export async function getServerSideProps() {
-  try {
+  
+  try {    
     const res = await fetch(baseURL);
     const data = await res.json();
+    // console.log(data)
     return {
       props: {
         data,
