@@ -29,6 +29,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  padding-top: 35px;
+  box-sizing: border-box;
 }
 
 .main__text {
@@ -36,12 +38,14 @@
   width: 70%;
   font-family: var(--titles-h-font);
   font-size: var(--titles-h-font-size);
+  /* font-size: 32px; */
   text-align: center;
 }
 
 .main__text:first-child {
   margin-bottom: 10px;
   font-size: var(--titles-h-large-font-size);
+  /* font-size: 48px; */
 }
 
 
@@ -66,7 +70,19 @@
 
 @media (width > 699px) {
   .main__container {
-    /* height: 550px; */
+    height: 300px;
+  }
+  .main__text {
+  font-size: 32px;
+  }
+  .main__text:first-child {
+    font-size: 48px;
+  }
+}
+
+@media (height < 700px) {
+  .main__container {
+    height: 220px;
   }
 }
 

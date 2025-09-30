@@ -129,7 +129,7 @@ const Orders: React.FC = () => {
       {!isLoggedIn && (
         <section className={styles.orders__login}>
           <h2 className={styles.orders__greeting}>
-            Даша, привет! Как настроение?
+            Аня, привет! Как настроение?
           </h2>
           <h3 className={styles.orders__hay}>
             Давай проверим, что это ты
@@ -171,7 +171,8 @@ const Orders: React.FC = () => {
           </nav>
           <div className={styles.orders__ordersList}>
             <ul className={styles.orders__currentPage}>
-              {currentOrders.slice().reverse().map((item) => (
+              {/* {currentOrders.slice().reverse().map((item) => ( */}
+              {currentOrders.slice().map((item) => (
                 <Order
                   order={item}
                   key={item._id}
@@ -216,24 +217,3 @@ const Orders: React.FC = () => {
 };
 
 export default Orders;
-
-
-/*
-client: 
-{name: 'Андрей', email: 'pitcherbar@gmail.com', phone: '+7(222)222-22-22', deliveryType: 'Самовывоз', comment: '', …}
-date: "Tue Jul 23 2024"
-isPayed: false
-number: 212 (43)
-order: 
-{name: 'Набор из 6 дрип пакетов ', cat_id: 4, price: {…}, _id: '65f05cb5a605a2f7675b9f03'}
-{name: 'Коста Рика НОВАЯ', cat_id: 1, 
-price: 
-  {
-  priceItem: 620
-  quantity: 1
-  title: "200г"  
-}, 
-milling: 'для аэропресса'}
-time: "7:13:09 PM"
-total: 1010
-*/
