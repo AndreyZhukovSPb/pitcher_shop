@@ -19,8 +19,8 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const offset = 350; 
-      const fixedPosition = 330;
+      const offset = 250; // 350 было при высоте банера 400
+      const fixedPosition = 230; // 330 было при высоте банера 400
       // 500 и 480 330
       if (scrollY > fixedPosition) {
         setIsMenuFixed(true);
