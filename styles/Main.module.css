@@ -80,7 +80,7 @@
   }
 }
 
-@media (height < 700px) {
+@media (height < 650px) {
   .main__container {
     height: 220px;
   }
