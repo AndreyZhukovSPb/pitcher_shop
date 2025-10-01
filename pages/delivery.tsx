@@ -24,8 +24,8 @@ export default function delivery () {
           </p>
           <ul className={`${styles.delivery__text} ${styles.delivery__text_type_listTitle}`}>
             Доставка по Санкт-Петербургу в пределах зеленой зоны на карте:
-            <li className={styles.delivery__text_type_listItem}>- бесплатно при заказе на сумму от 1800р.</li>
-            <li className={styles.delivery__text_type_listItem}>- 400р при заказе менее 1800р.</li>
+            <li className={styles.delivery__text_type_listItem}>- бесплатно при заказе на сумму от 2400р.</li>
+            <li className={styles.delivery__text_type_listItem}>- 400р при заказе менее 2400р.</li>
           </ul>
           <p className={styles.delivery__text}>
             Доставка в другие города РФ и доставка по Санкт-Петербургу за пределами зеленой зоны осуществляется компанией СДЭК. В этом случае доставка оплачивается отдельно при получении. Мы отвозим на склад СДЭК в Санкт-Петербурге бесплатно, а вы оплачиваете услуги транспортной компании при получении кофе.

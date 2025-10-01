@@ -2,7 +2,7 @@
 const baseURL = 'https://pitcherbartest.ru/api/'
 const mainWebUrl = 'https://pitcherbar.ru'
 
-const freeDeliveryAmount = 1900
+const freeDeliveryAmount = 2400
 
 const millingTableNew = [
   'в зернах (не молоть)',
