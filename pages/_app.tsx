@@ -8,13 +8,13 @@ import React from "react";
 import { CartContextProvider, ProductsContextProvider } from "../components/Context";
 
 export default function MyApp({ Component, pageProps }) {  
+  
   return (
     <>
       <Head>
         <title>Specialty coffee</title>
         <link rel="icon" href="/favicon.ico/" sizes="any" lang="RU"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
       </Head>
       <ScrollToTop />
       <div className='page'>
@@ -37,7 +37,10 @@ export default function MyApp({ Component, pageProps }) {
 TODO
 консоль почистить
 интеграция с эвотор
-боевой эквайиринг
+боевой эквайринг
+наполнить товары
+фото ребят и новости
+проверить 404 на телефоне
 
 ТЕСТИРОВАНИЕ
 проверить что монго не падает, а если падает то встает
@@ -48,6 +51,7 @@ TODO
 удалить старые заказы
 
 ??
+добавить проверку отправлен ли уже заказ покупателю и нам
 бесплатная доставка по России и тогда поменять описание условий доставки?
 на ховере менять фото для большой пачки
 кнопки добавить в корзину голубые как на главной?

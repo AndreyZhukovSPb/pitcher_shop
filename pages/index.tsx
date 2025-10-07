@@ -12,15 +12,20 @@ const Index = ({ data }) => {
   const ProductList = ContextProduct.productsData;
   const ContextCart = React.useContext(CartContext);
   const currentProductFeatures = ContextCart.currentProductFeatures;
-  const setCartFromStorage = ContextCart.setOrderFromStorage;
+  // const setCartFromStorage = ContextCart.setOrderFromStorage;
   // const addToCart = ContextCart.addToOrder;
-  const [isCartSet, setIsCartSet] = React.useState(false)
+  // const [isCartSet, setIsCartSet] = React.useState(false)
+
+  // useEffect(()=> {
+  //   console.log(currentProductFeatures)
+  // },[currentProductFeatures])
 
   useEffect(()=> {
     if (ProductList.length < 1 ) {
+      console.log('иницииурем продакт лист')
       passInitialProducts(data);
     } else {
-      // console.log('не сетим данные')
+      console.log('НЕ иницииурем продакт лист')
     }
   }, [data])
 
