@@ -29,10 +29,20 @@ const LinkNamePage: React.FC = () => {
   const [productToAdd, setProductToAdd] = useState({}); // DELETE?
 
   const fetchCurrentItem = async (linkName: string) => {
-    // console.log('получили продукт с сервера');
+
+    // if (productsList.length > 0) {
+    //   console.log('не пойдем обновлять продакт лист с сайта')
+    //   return
+    // }
+
     const item = await getItemByLinkName(linkName);
-    // setCurrentItem(item);
+    console.log('тут?');
+      if (!item) {
+        router.replace("/404"); // редирект на страницу 404
+        return;
+  }
     passToProductList([item]);
+    // setCurrentItem(productsList.find((item) => item.linkName === linkName));
   };
 
   useEffect(() => {
@@ -43,13 +53,15 @@ const LinkNamePage: React.FC = () => {
     } else {
       const linkName = query.linkName.toString();
       if (productsList.length > 0 && productsList.find((item) => item.linkName === linkName)) {
-        // console.log('забрали продукт из контекста');
+        console.log('забрали продукт из контекста');
         setCurrentItem(productsList.find((item) => item.linkName === linkName));
       } else {
+        console.log('пошли за продуктом на сервер');
         fetchCurrentItem(linkName);
       }
     }
   }, [productsList, query.linkName]);
+  // }, [query.linkName]);
 
   useEffect(() => {
     if (currentItem) {

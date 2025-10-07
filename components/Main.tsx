@@ -3,7 +3,7 @@ import styles from "../styles/Main.module.css";
 import Image from "next/image";
 import Catalog from "./Catalog";
 import SectionLine from "./SectionLine";
-import { useMediaQuery } from "react-responsive";
+// import { useMediaQuery } from "react-responsive";
 import mainbanner from '../public/mainbanner.png'
 import mainbanmob from '../public/mainbannermob.png'
 
@@ -15,8 +15,7 @@ interface MainProps {
 
 const Main: React.FC<MainProps> = ({ data }) => {
 
-  const isBigScreen = useMediaQuery({ query: "(min-width: 399px)" });
-  console.log(isBigScreen)
+  // const isBigScreen = useMediaQuery({ query: "(min-width: 399px)" });
 
   return (
     <>

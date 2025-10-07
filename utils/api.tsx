@@ -5,11 +5,16 @@ export async function getItemByLinkName(linkName: string) {
   const url = `${baseURL}link/${linkName}`;
   try {
     const res = await fetch(url);
+      if (res.status === 404 || res.status === 500) {
+      // console.log(res)
+      return null; // возвращаем null, если нет товара
+    }
     const data = await res.json();
     return data 
   } catch (error) {
-    console.log(error);
-    throw error;
+    // console.log(error);
+    return null;
+    // throw error;
   }
 }
 

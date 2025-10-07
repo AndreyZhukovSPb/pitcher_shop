@@ -269,7 +269,7 @@ export const CartContextProvider = ({
   }
 
   const setInitialProductList = () => {
-    // console.log(ProductList);
+    console.log(ProductList)
     if (ProductList.length >= 1) {
       setCurrentProductFeatures(() => 
         ProductList.map(item => {
@@ -489,7 +489,11 @@ export const ProductsContextProvider = ({
 
   const addToProducts = (products: ProductType[]) => {
     // console.log('добавили продукт в контекст')
-    setProductsData(products);
+    if (productsData.length >= 0) {
+      console.log ('не стали сетить продакт лист так как он уже был')
+      return
+    }
+    else {setProductsData(products)};
   };
 
   const getInitialProducts = (products: ProductType[]) => {

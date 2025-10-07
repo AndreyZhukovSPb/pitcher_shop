@@ -38,6 +38,7 @@
   /* width: 33% !important; */
   /* height: auto !important; */
   object-fit: contain;
+  object-fit: cover;
   height: 130px !important;
   margin-top: 25px;
   max-width: 107px;
