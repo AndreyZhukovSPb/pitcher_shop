@@ -84,7 +84,7 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
       <a href="#section5" 
         // className={styles.catalog__navLink} 
         className={`${styles.catalog__navLink} ${activeSection === `section5` ? styles.catalog__navLink_active : ''}`}
-        onClick={scrollToSection}>Наш мерч</a>
+        onClick={scrollToSection}>Мерч и подарки</a>
     </div>
     <ul className={styles.catalog__list}>
       {categoryListTransformed.map((item, number) => {
