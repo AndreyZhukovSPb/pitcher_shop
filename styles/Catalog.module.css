@@ -68,6 +68,9 @@
   .catalog__item:first-child {
     margin-top: 0;
   }
+  .catalog__navLink {
+    cursor: pointer;
+  }
 }
 
 
