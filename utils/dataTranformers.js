@@ -10,7 +10,7 @@ export const filterCats = (array) => {
   const filterArray = array.filter(item => item.cat_id === 3).sort((a, b) => a.order - b.order)
   const filterObject = {name: 'Фильтр обжарка', array: filterArray};
   const othersArray = array.filter(item => item.cat_id === 4).sort((a, b) => a.order - b.order)
-  const othersObject = {name: 'Мерч', array: othersArray};
+  const othersObject = {name: 'Мерч и подарки', array: othersArray};
   const newArray = [promoObject, dripObject, espressoObject, filterObject, othersObject ]
   return newArray
 };
