@@ -44,7 +44,8 @@ const Popup: React.FC<PopupProps> = ({
 
   const handleClose = (): void => {
     if (isPayed || isPaymentError) {
-      onCloseSuccess;
+      console.log('here')
+      onCloseSuccess();
       router.push('/');
     } else {
       if (currentPath !== '/cart' && currentPath.startsWith('/cart')) {
@@ -87,6 +88,7 @@ const Popup: React.FC<PopupProps> = ({
                 </>
               )}
               {!isPayed && (
+              
                 <>
                   {Array.isArray(message) && message.map((item, index) => (
                     <p key={index} className={styles.popup__text}>

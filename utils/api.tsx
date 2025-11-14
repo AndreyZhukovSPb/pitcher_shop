@@ -81,6 +81,7 @@ export async function getItems() {
 
 export async function postOrder(client, orderData, total) {
   const url = `${baseURL}orders`;
+  // console.log(orderData)
   try {
     const res = await axios.post(url, {
       client,
@@ -161,11 +162,16 @@ export async function checkOrder(bankOrderId) {
       headers: {
         'Content-Type': 'application/json',
       },
-      timeout: 40000
+      timeout: 120000
       // timeout: 3
     });
     console.log(res.data.message) // оставить для того чтобы дебажить боевой
-    return { success: true, status: true, data: res.data }
+    if (res.data.error) {
+      console.log('debug')
+      return { success: true, status: true, dataBaseError: true }
+    } else {
+      return { success: true, status: true, data: res.data }
+    }
   } catch (error) {
     if (error.response) {
       if (error.response.status === 400) {

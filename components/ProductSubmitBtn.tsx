@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/Product.module.css";
 import { CartContext } from "./Context";
 import { ProductType } from "../utils/sharedTypes";
+import { cartIdHandler } from "../utils/cartIdHandler";
 
 interface SubmitBtnProps {
   currentProduct: ProductType;
@@ -14,47 +15,84 @@ const SubmitBtn: React.FC<SubmitBtnProps> = ({ currentProduct, isFullCard
   const currentFeatures = Context.currentProductFeatures;
   const currentCart = Context.orderData;
   const addToCart = Context.addToOrder;
-  const updateCart = Context.updateProductQuantity;
+  const updateCart = Context.updateProductQuantityInCart;
   // const [isSpanVisible, setIsSpanVisible] = useState(false);
   const resetMilling = Context.resetMilling;
   const resetPriceType = Context.resetPriceType;
   const resetQuantity = Context.resetQuantity;
   const [itemsInCart, setItemsInCart] = useState<number>(0);
+  const [existInCart, setExistInCart] = useState<boolean>(false);
 
-  useEffect(()=>{
-    if (!currentCart.some(item => item._id === currentProduct._id)) {
-      return
+  // useEffect(()=>{
+  //   if (!currentCart.some(item => item._id === currentProduct._id)) {
+  //     return
+  //   } else {
+  //     setItemsInCart(currentCart
+  //       .filter(item => item._id === currentProduct._id)
+  //         .reduce((total, item) => total + item.quantity, 0))
+  //   }
+  // }, [currentCart])
+
+  useEffect(() => {
+  if (currentFeatures.length === 0 || currentCart.length === 0) {
+    setExistInCart(false);
+    return;
+  } else if ((!currentCart.some(item => item._id === currentProduct._id))) {
+    setExistInCart(false);
+    return;
+  } else {
+    const productWithSize = currentFeatures.find(item => item.itemId === currentProduct._id)
+    const productBaseId = `${productWithSize.itemId}_${productWithSize.currentSize}`; 
+    const filteredItems = currentCart.filter(item => {
+      const [id, size] = item.cartId.split('_');
+      const itemBaseId = `${id}_${size}`;
+      return itemBaseId === productBaseId; // сравниваем без milling
+  });
+    if (filteredItems.length === 0) {
+      setExistInCart(false);
     } else {
-      setItemsInCart(currentCart
-        .filter(item => item._id === currentProduct._id)
-          .reduce((total, item) => total + item.price.quantity, 0))
+      setExistInCart(true)  
     }
-  }, [currentCart])
+    const totalQuantity = filteredItems.reduce((total, item) => total + item.quantity, 0);
+    setItemsInCart(totalQuantity);
+  }
+  
+}, [currentCart, currentFeatures]);
 
   const handleSubmit = () => {
-    // const delta = (currentFeatures.find(item => item.itemId === currentProduct._id).quantity)
-    currentCart.some(item => item._id === currentProduct._id) 
-    && 
-    // currentCart.find(item => item.id === currentProduct._id).currentSize === 
-    // currentFeatures.find(item => item.itemId === currentProduct._id).currentSize
-    currentCart.filter(item => item._id === currentProduct._id)
-      .find(item => item.currentSize === currentFeatures.find(item => item.itemId === currentProduct._id).currentSize) 
-    ? 
-      (updateCart(currentProduct._id),
-        resetProductFeatures())
-      : 
+    const productWithFeatures = currentFeatures.find(item => item.itemId === currentProduct._id)
+    const idForCart = cartIdHandler(productWithFeatures.itemId, productWithFeatures.currentSize, productWithFeatures.millingType)
+    if (currentCart.some(item => item.cartId === idForCart)) {
+      updateCart(currentProduct._id, idForCart);
+      resetProductFeatures();
+    } else {
       addToCartHandler();
+    }
+    // currentCart.some(item => item.cartId === idForCart) && currentCart.filter(item => item._id === currentProduct._id)
+    //   .find(item => 
+    //     item.currentSize === currentFeatures.find(item => item.itemId === currentProduct._id).currentSize 
+    //     &&
+    //     item.milling &&
+    //     item.milling === currentFeatures.find(item => item.itemId === currentProduct._id).millingType
+    //     )
+    //     ? 
+    //       (updateCart(currentProduct._id),
+    //       resetProductFeatures())
+    //     : 
+    //       addToCartHandler();
   };
 
   const resetProductFeatures = () => {
-    resetMilling(currentProduct._id);
-    resetPriceType(currentProduct._id);
+    // что оставляем? пока оставляем только размер
+    resetMilling(currentProduct._id); 
+    // resetPriceType(currentProduct._id);
     resetQuantity(currentProduct._id, true);
   }
 
   const addToCartHandler =  () => {
     // setIsSpanVisible(!isSpanVisible);
     addToCart(currentProduct);
+    // console.log(currentProduct)
     resetProductFeatures();
   }
 
@@ -74,7 +112,8 @@ const SubmitBtn: React.FC<SubmitBtnProps> = ({ currentProduct, isFullCard
             styles.product__added_visible
           } `}
         >
-          {currentCart.some(item => item._id === currentProduct._id) && (
+          {/* {currentCart.some(item => item._id === currentProduct._id) && ( */}
+          {existInCart && (
             // `В корзине ${currentCart.some(item => item.id === currentProduct._id) && (currentCart.find(item => item.id === currentProduct._id).quantity)} шт `
             `В корзине ${itemsInCart} шт `
             

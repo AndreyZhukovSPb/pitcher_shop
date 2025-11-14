@@ -22,7 +22,7 @@
 
 .conditions__subTitle {
   margin: 0;
-  font-family: var(--titles-font);
+  font-family: var(--titles-h-font);
   font-size: var(--subtitles-font-size);
   font-weight: normal;
 }

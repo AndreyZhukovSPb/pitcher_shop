@@ -22,11 +22,7 @@ interface headerProps {
 }
 
 const Header: React.FC<headerProps> = ({
-  // isMayak,
-  // isPark,
   isMain,
-  // isContacts,
-  // isShop,
   isFullCard,
   isCart
 }) => {
@@ -34,24 +30,12 @@ const Header: React.FC<headerProps> = ({
   const Context = React.useContext(CartContext);
   const currentOrder = Context.orderData;
   const [itemsInCart, setItemsInCart] = useState(0);
-  // const resetMilling = Context.resetMilling;
-  // const resetPriceType = Context.resetPriceType;
   const resetProductFeatures = Context.setInitialProductList;
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const scrollPosition = window.scrollY;
-  //     if (scrollPosition > 0) {
-  //       setIsScrolled(true);
-  //     } else {
-  //       setIsScrolled(false);
-  //     }
-  //   };
-  // })
-
   useEffect(()=> {
-    setItemsInCart(currentOrder.reduce((total, item) => total + item.price.quantity, 0));
+    // console.log('корзина обновлена')
+    setItemsInCart(currentOrder.reduce((total, item) => total + item.quantity, 0));
   }, [currentOrder])
 
   useEffect(() => {
@@ -73,11 +57,7 @@ const Header: React.FC<headerProps> = ({
     resetProductFeatures();
   }
 
-  // console.log(isCart)
-  // ${isCart? styles.header__type_cart : ''} 
-
   return (
-    // ${isMain? styles.header__type_main : ''} 
     <header className=
       {`${styles.header} 
       ${isMain? styles.header__type_main : ''} 

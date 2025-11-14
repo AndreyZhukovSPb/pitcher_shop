@@ -25,12 +25,12 @@ const CartItem: React.FC<cartItemProps> = ({ item }) => {
 
   const handleImageClick = () => {
     router.push(`/${item.linkName}`);
-    console.log("пойдем в карточку");
+    // console.log("пойдем в карточку");
   };
 
 
   const handleDelItemClick = () => {
-    console.log("удаляем заказ");
+    // console.log("удаляем заказ");
     removeFromCart(item);
   };
 
@@ -39,7 +39,7 @@ const CartItem: React.FC<cartItemProps> = ({ item }) => {
       <div className={styles.cart__about}>
         <Image
           className={styles.cart__image}
-          src={item.url}
+          src={item.currentUrl}
           alt="фото пачки"
           onClick={handleImageClick}
           fill
@@ -76,7 +76,8 @@ const CartItem: React.FC<cartItemProps> = ({ item }) => {
         />
         <div className={styles.cart__numbersContainer}>
           <p className={styles.cart__subTotalTitle}>сумма</p>
-          <p className={styles.cart__subTotal}>{item.price.quantity * item.price.priceItem} &#8381;</p>
+          {/* <p className={styles.cart__subTotal}>{item.price.quantity * item.price.priceItem} &#8381;</p> */}
+          <p className={styles.cart__subTotal}>{item.quantity * item.price.priceItem} &#8381;</p>
         </div>
       </div>
       <SectionLine

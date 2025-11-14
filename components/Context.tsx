@@ -1,31 +1,32 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { OrderType, ProductType } from "../utils/sharedTypes";
-import { getItems } from '../utils/api';
-import { millingTableNew } from '../utils/constatnts';
+import { getItems } from "../utils/api";
+import { millingTableNew } from "../utils/constatnts";
+import { cartIdHandler } from "../utils/cartIdHandler";
 
 interface ICurrentProductFeatures {
-  urlLarge: any;
-  itemId: string,
-  name: string,
-  name_2?: string,
-  millingType?: string,
-  price: 
-    {title: string,
-    priceItem: number,
-    quantity: number
-    }[],
-  quantity: number, // DEL?
-  promo: boolean,
-  currentSize: number,
-  linkName: string,
-  url: string
+  url: string;
+  urlLarge: string;
+  currentUrl: string;
+  currentUrlLarge: string;
+  urlGrandeS?: string;
+  urlGrandeL?: string;
+  itemId: string;
+  name: string;
+  name_2?: string;
+  millingType?: string;
+  price: { title: string; priceItem: number; quantity: number }[];
+  quantity: number;
+  promo: boolean;
+  currentSize: number;
+  linkName: string;
 }
 
 interface cartProps {
   orderData: OrderType[] | undefined; // Определяем тип данных для orderData
   addToOrder: (product: ProductType) => void; // Корректируем тип для функций
   removeFromOrder: (product: OrderType) => void;
-  updateProductQuantity: (productId: string, delta?: number) => void;
+  updateProductQuantityInCart: (productId: string, cartId: string) => void;
   updateMillingType: (id: string, value: string) => void;
   updatePriceType: (id: string, value: number) => void;
   updateQuantity: (id: string, value: string) => void;
@@ -43,22 +44,22 @@ interface cartProps {
 
 export const CartContext = createContext<cartProps>({
   orderData: undefined,
-  addToOrder: () => {}, 
+  addToOrder: () => {},
   setOrderFromStorage: () => {},
-  removeFromOrder: () => {}, 
-  updateProductQuantity: () => {},
-  updateMillingType:() => {},
-  updatePriceType:() => {},
-  updateQuantity:() => {},
+  removeFromOrder: () => {},
+  updateProductQuantityInCart: () => {},
+  updateMillingType: () => {},
+  updatePriceType: () => {},
+  updateQuantity: () => {},
   currentProductFeatures: undefined,
-  resetQuantity:() => {},
+  resetQuantity: () => {},
   resetPriceType: () => {},
   resetMilling: () => {},
   setInitialProductList: () => {},
   updateMillingCart: () => {},
   updateQuantutyInCart: () => {},
   removeFromCart: () => {},
-  resetCart: () => {}
+  resetCart: () => {},
 });
 
 export const CartContextProvider = ({
@@ -66,35 +67,36 @@ export const CartContextProvider = ({
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  
   const [orderData, setOrderData] = useState<OrderType[]>([]);
   const ProductList = React.useContext(ProductsContext).productsData;
 
   useEffect(() => {
     const checkOldGoods = (catalogIds, cart) => {
-      return cart.every(cartItem => catalogIds.includes(cartItem._id));
-    }
+      return cart.every((cartItem) => catalogIds.includes(cartItem._id));
+    };
 
     const removeOldGoods = (catalogIds, cart) => {
-        const updatedCart = cart.filter(cartItem => 
-        catalogIds.some(catalogId => catalogId === cartItem._id)
+      const updatedCart = cart.filter((cartItem) =>
+        catalogIds.some((catalogId) => catalogId === cartItem._id)
       );
-      return updatedCart
-    }
+      localStorage.setItem("orderData", updatedCart);
+      // console.log(updatedCart);
+      return updatedCart;
+    };
 
     if (ProductList.length < 1) {
-      return
+      return;
     } else {
-      if (typeof window !== 'undefined') { 
-        const storedData = localStorage.getItem('orderData');
-        const storedDataArray = JSON.parse(storedData)
-        const catalogIds = ProductList.map(item => item._id);
+      if (typeof window !== "undefined") {
+        const storedData = localStorage.getItem("orderData");
+        const storedDataArray = JSON.parse(storedData);
+        const catalogIds = ProductList.map((item) => item._id);
         if (storedData) {
           if (checkOldGoods(catalogIds, storedDataArray)) {
-            console.log('в корзине нет старых товаров')
+            // console.log("в корзине нет старых товаров");
             setOrderData(storedDataArray);
           } else {
-            console.log('в корзине были старые товары')
+            // console.log("в корзине были старые товары");
             setOrderData(removeOldGoods(catalogIds, storedDataArray));
           }
         }
@@ -102,187 +104,281 @@ export const CartContextProvider = ({
     }
   }, [ProductList]);
 
-  const [currentProductFeatures, setCurrentProductFeatures] = useState<ICurrentProductFeatures[]>([]);
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "orderData") {
+        try {
+          const storedData = JSON.parse(event.newValue) || [];
+          if (storedData === orderData) {
+            console.log("за каким то хером вызвался слушатель стораджа");
+            return;
+          } else {
+            console.log("Корзина обновлена из другой вкладки");
+            setOrderData(storedData);
+          }
+
+          // const updatedOrder = JSON.parse(event.newValue) || [];
+          // setItemsInCart(updatedOrder.reduce((total, item) => total + item.price.quantity, 0));
+        } catch (err) {
+          console.error("Ошибка парсинга currentOrder из localStorage", err);
+        }
+      }
+    };
+
+    // Подписываемся на событие
+    window.addEventListener("storage", handleStorageChange);
+
+    // Чистим за собой
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  const [currentProductFeatures, setCurrentProductFeatures] = useState<
+    ICurrentProductFeatures[]
+  >([]);
 
   // console.log (currentProductFeatures)
 
   const setOrderFromStorage = (products: OrderType[]) => {
-    console.log(products)
+    console.log(products);
     // добавить проверку на старые продукты, если товара уже нет, то удалить его из LS и не добавлять в корзину
     setOrderData(products);
-  }
+  };
 
   const updateMillingType = (newId: string, value: string) => {
-    setCurrentProductFeatures(prevState => 
-      prevState.map(item => 
+    // console.log(value);
+    setCurrentProductFeatures((prevState) =>
+      prevState.map((item) =>
         item.itemId === newId ? { ...item, millingType: value } : item
       )
     );
   };
 
-  const updateMillingCart = (product: OrderType, value: string) => {
-    setOrderData(prevState => 
-      prevState.map(item => 
-        (item._id === product._id && item.currentSize === product.currentSize) ? 
-          { ...item, milling: value } : item
-      )
-    );
-  }
+  const updateMillingCart = (product: OrderType, newMilling: string) => {
+    const newId = cartIdHandler(product._id, product.currentSize, newMilling);
+
+    setOrderData((prevState) => {
+      const existingIndexNew = prevState.some((item) => item.cartId === newId);
+
+      if (existingIndexNew) {
+        // Если есть, объединяем количества
+        return prevState
+          .map((item) =>
+            item.cartId === newId
+              ? {
+                  ...item,
+                  quantity: item.quantity + product.quantity,
+                  milling: newMilling,
+                }
+              : // Убираем старый вариант товара с предыдущим milling
+              item.cartId === product.cartId
+              ? null
+              : item
+          )
+          .filter(Boolean); // убираем старый товар
+      } else {
+        // Если нет, просто обновляем milling и _id
+        return prevState.map((item) =>
+          item.cartId === product.cartId
+            ? { ...item, milling: newMilling, cartId: newId }
+            : item
+        );
+      }
+    });
+  };
 
   const updateQuantutyInCart = (product: OrderType, value: string) => {
-    if (value === 'minus') {
-      if (orderData.filter(item => item._id === product._id)
-        .find(item => item.currentSize === product.currentSize).price.quantity  === 1) {
-          return
-      } else {
-        setOrderData(prevState => 
-          prevState.map(item => 
-            (item._id === product._id && item.currentSize === product.currentSize) ?
-              {...item, price: {...item.price, quantity: item.price.quantity - 1}}  
-              : item
-          )  
-        )
+    if (value === "minus") {
+      if (product.quantity === 1) {
+        removeFromCart(product);
+        return;
+      }
+      // if (orderData.filter(item => item.cartId === product.cartId)
+      //   .find(item => item.currentSize === product.currentSize).price.quantity  === 1) {
+      //     return
+      // }
+      else {
+        setOrderData((prevState) =>
+          prevState.map(
+            (item) =>
+              item.cartId === product.cartId
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            // (item._id === product._id && item.currentSize === product.currentSize) ?
+            // {...item, price: {...item.price, quantity: item.price.quantity - 1}}
+            // : item
+          )
+        );
       }
     } else if (value === "plus") {
-      setOrderData(prevState => 
-        prevState.map(item => 
-          (item._id === product._id && item.currentSize === product.currentSize) ?
-            {...item, price: {...item.price, quantity: item.price.quantity + 1}}  
-            : item
-        )  
-      )
+      setOrderData((prevState) =>
+        prevState.map(
+          (item) =>
+            item.cartId === product.cartId
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          // (item._id === product._id && item.currentSize === product.currentSize) ?
+          // {...item, price: {...item.price, quantity: item.price.quantity + 1}}
+          // : item
+        )
+      );
     }
-  }
+  };
 
   const removeFromCart = (product: OrderType) => {
     if (orderData.length === 1) {
-      console.log('это был последний заказа в корзине')
-      localStorage.removeItem('orderData');
-      setOrderData(prevState => 
-        prevState.filter(item => !(item._id === product._id && item.currentSize === product.currentSize))
-      );
-    } else {
-      console.log('это НЕ последний заказа в корзине')
-      setOrderData(prevState => 
-        prevState.filter(item => !(item._id === product._id && item.currentSize === product.currentSize))
-      );
+      // console.log('это был последний заказа в корзине')
+      localStorage.removeItem("orderData");
     }
-  }
+    setOrderData((prevState) =>
+      prevState.filter((item) => !(item.cartId === product.cartId))
+    );
+  };
 
   const resetPriceType = (newId: string) => {
-    setCurrentProductFeatures(prevState => 
-      prevState.map(item => 
-        item.itemId === newId ? { ...item, currentSize: 0 } : item
+    setCurrentProductFeatures((prevState) =>
+      prevState.map((item) =>
+        item.itemId === newId
+          ? {
+              ...item,
+              currentSize: 0,
+              currentUrl: item.url,
+              currentUrlLarge: item.urlLarge,
+            }
+          : item
       )
     );
-  }
+  };
 
   const resetMilling = (newId: string) => {
-    setCurrentProductFeatures(prevState => 
-      prevState.map(item => 
-        item.itemId === newId ? { ...item, millingType: millingTableNew[0] } : item
+    setCurrentProductFeatures((prevState) =>
+      prevState.map((item) =>
+        item.itemId === newId
+          ? { ...item, millingType: millingTableNew[0] }
+          : item
       )
     );
-  }
+  };
 
   const resetQuantity = (newId: string, full?: boolean, index?: number) => {
     if (full) {
-      setCurrentProductFeatures(prevState => 
-        prevState.map(item => item.itemId === newId 
-          ? { 
-            ...item, 
-            price: item.price.map((priceItem) => 
-                ({ ...priceItem, quantity: 1 } )
-            ) 
-          } 
-        : item
-        ))
+      setCurrentProductFeatures((prevState) =>
+        prevState.map((item) =>
+          item.itemId === newId
+            ? {
+                ...item,
+                price: item.price.map((priceItem) => ({
+                  ...priceItem,
+                  quantity: 1,
+                })),
+              }
+            : item
+        )
+      );
     } else {
-      setCurrentProductFeatures(prevState => 
-        prevState.map(item => item.itemId === newId 
-          ? { 
-            ...item, 
-            price: item.price.map((priceItem, indx) => 
-                indx === index ? ({ ...priceItem, quantity: 1 } ) : priceItem
-            ) 
-          } 
-        : item
-        ))
+      setCurrentProductFeatures((prevState) =>
+        prevState.map((item) =>
+          item.itemId === newId
+            ? {
+                ...item,
+                price: item.price.map((priceItem, indx) =>
+                  indx === index ? { ...priceItem, quantity: 1 } : priceItem
+                ),
+              }
+            : item
+        )
+      );
     }
-  }
+  };
 
   const resetCart = () => {
     setOrderData([]);
-    localStorage.removeItem('orderData');
-  }
+    localStorage.removeItem("orderData");
+  };
 
-  const updateQuantity = (newId: string, value: string ) => {
+  const updateQuantity = (newId: string, value: string) => {
     if (value === "minus") {
       // if (currentProductFeatures.find(item => item.itemId === newId).quantity === 1) {
-      if (currentProductFeatures.find(item => item.itemId === newId)
-        .price[currentProductFeatures.find(item => item.itemId === newId).currentSize].quantity 
-          === 1) {
-        return
+      if (
+        currentProductFeatures.find((item) => item.itemId === newId).price[
+          currentProductFeatures.find((item) => item.itemId === newId)
+            .currentSize
+        ].quantity === 1
+      ) {
+        return;
       } else {
-        setCurrentProductFeatures(prevState => 
-          prevState.map(item => 
+        setCurrentProductFeatures((prevState) =>
+          prevState.map((item) =>
             // item.itemId === newId ? { ...item, quantity: item.quantity + 1 } : item
-            item.itemId === newId 
-            ? { 
-              ...item, 
-              price: item.price.map((priceItem, index) => 
-                index === item.currentSize 
-                  ? { ...priceItem, quantity: priceItem.quantity - 1 } 
-                  : priceItem
-              ) 
-            } 
-          : item
-          ))
-          // prevState.map(item => 
-          //   item.itemId === newId ? { ...item, quantity: item.quantity - 1 } : item
-          // ))
+            item.itemId === newId
+              ? {
+                  ...item,
+                  price: item.price.map((priceItem, index) =>
+                    index === item.currentSize
+                      ? { ...priceItem, quantity: priceItem.quantity - 1 }
+                      : priceItem
+                  ),
+                }
+              : item
+          )
+        );
+        // prevState.map(item =>
+        //   item.itemId === newId ? { ...item, quantity: item.quantity - 1 } : item
+        // ))
       }
     } else if (value === "plus") {
-      setCurrentProductFeatures(prevState => 
-        prevState.map(item => 
+      setCurrentProductFeatures((prevState) =>
+        prevState.map((item) =>
           // item.itemId === newId ? { ...item, quantity: item.quantity + 1 } : item
-          item.itemId === newId 
-          ? { 
-            ...item, 
-            price: item.price.map((priceItem, index) => 
-              index === item.currentSize 
-                ? { ...priceItem, quantity: priceItem.quantity + 1 } 
-                : priceItem
-            ) 
-          } 
-        : item
-        ))
-      }
-  }
+          item.itemId === newId
+            ? {
+                ...item,
+                price: item.price.map((priceItem, index) =>
+                  index === item.currentSize
+                    ? { ...priceItem, quantity: priceItem.quantity + 1 }
+                    : priceItem
+                ),
+              }
+            : item
+        )
+      );
+    }
+  };
 
-  const updatePriceType = (newId: string, value: number ) => {
-    setCurrentProductFeatures(prevState => 
-      prevState.map(item => 
-        item.itemId === newId ? { ...item, currentSize: value } : item
+  const updatePriceType = (newId: string, value: number) => {
+    const isBigBag = value === 0 ? false : true;
+    // console.log(isBigBag);
+    setCurrentProductFeatures((prevState) =>
+      prevState.map((item) =>
+        // item.itemId === newId ? { ...item, currentSize: value } : item
+        item.itemId === newId
+          ? {
+              ...item,
+              currentSize: value,
+              currentUrl: isBigBag ? item.urlGrandeS : item.url,
+              currentUrlLarge: isBigBag ? item.urlGrandeL : item.urlLarge,
+            }
+          : item
       )
     );
-  }
+  };
 
   const setInitialProductList = () => {
-    console.log(ProductList)
+    // console.log(ProductList)
     if (ProductList.length >= 1) {
-      setCurrentProductFeatures(() => 
-        ProductList.map(item => {
+      setCurrentProductFeatures(() =>
+        ProductList.map((item) => {
           if (item.cat_id === 2 || item.cat_id === 3) {
             return {
               name: item.name,
               name_2: item.name_2,
               itemId: item._id,
               millingType: millingTableNew[0],
-              price: item.price.map(priceItem => ({
+              price: item.price.map((priceItem) => ({
                 title: priceItem.title,
                 priceItem: priceItem.priceItem,
-                quantity: 1
+                quantity: 1,
               })),
               quantity: 1,
               promo: item.promo, // DELETE?
@@ -290,15 +386,19 @@ export const CartContextProvider = ({
               linkName: item.linkName,
               url: item.url,
               urlLarge: item.urlLarge,
+              urlGrandeS: item.urlGrandeS,
+              urlGrandeL: item.urlGrandeL,
+              currentUrl: item.url,
+              currentUrlLarge: item.urlLarge,
             };
           } else {
             return {
               name: item.name,
               itemId: item._id,
-              price: item.price.map(priceItem => ({
+              price: item.price.map((priceItem) => ({
                 title: priceItem.title,
                 priceItem: priceItem.priceItem,
-                quantity: 1
+                quantity: 1,
               })),
               quantity: 1,
               promo: item.promo, // DELETE ?
@@ -306,16 +406,18 @@ export const CartContextProvider = ({
               linkName: item.linkName,
               url: item.url,
               urlLarge: item.urlLarge,
+              currentUrl: item.url,
+              currentUrlLarge: item.urlLarge,
             };
           }
         })
       );
     }
-  } 
+  };
 
   useEffect(() => {
     setInitialProductList();
-    // setCurrentProductFeatures(() => 
+    // setCurrentProductFeatures(() =>
     //   ProductList.map(item => {
     //     if (item.cat_id === 1 || item.cat_id === 2) {
     //       return {
@@ -353,116 +455,106 @@ export const CartContextProvider = ({
     //   })
     // );
   }, [ProductList]);
-  
-  useEffect(()=> {
-    console.log('debug')
+
+  useEffect(() => {
+    // console.log(orderData)
     if (orderData.length === 0) {
       // localStorage.removeItem('orderData');
-      // console.log('корзина пуста')
-      return
+      // console.log("удалили последний заказ из LS");
+      return;
     } else {
-      const storedData = localStorage.getItem('orderData');
+      const storedData = localStorage.getItem("orderData");
       const orderDataForStorage = JSON.stringify(orderData);
       if (!storedData) {
-        localStorage.setItem('orderData', orderDataForStorage);
+        localStorage.setItem("orderData", orderDataForStorage);
       } else {
         if (storedData === JSON.stringify(orderData)) {
-          console.log('данные в корзине и LS совадают, не обновляем LS')
-          return
+          // console.log("данные в корзине и LS совадают, не обновляем LS");
+          return;
         } else {
-          console.log('данные в корзине и LS  НЕ совадают, обновляем LS')
-          localStorage.setItem('orderData', orderDataForStorage);
+          // console.log("данные в корзине и LS  НЕ совадают, обновляем LS");
+          localStorage.setItem("orderData", orderDataForStorage);
         }
       }
     }
-  }, [orderData])
+  }, [orderData]);
 
   const addToOrder = (product: ProductType) => {
-    console.log('here?')
-    const itemForAdd = currentProductFeatures.find(item => item.itemId === product._id)
+    const itemForAdd = currentProductFeatures.find(
+      (item) => item.itemId === product._id);
     // console.log(itemForAdd);
     const addedItem = {
       name: itemForAdd.name,
       name_2: itemForAdd.name_2 ? itemForAdd.name_2 : undefined,
       price: itemForAdd.price[itemForAdd.currentSize],
-      url: itemForAdd.url,
-      urlLarge: itemForAdd.urlLarge,
+      url: itemForAdd.currentUrl,
+      urlLarge: itemForAdd.currentUrlLarge,
       linkName: itemForAdd.linkName,
-      quantity: itemForAdd.quantity,
+      quantity: itemForAdd.price[itemForAdd.currentSize].quantity,
       _id: itemForAdd.itemId,
+      cartId: cartIdHandler(
+        itemForAdd.itemId,
+        itemForAdd.currentSize,
+        itemForAdd.millingType
+      ),
       milling: itemForAdd.millingType ? itemForAdd.millingType : undefined,
       currentSize: itemForAdd.currentSize,
       cat_id: product.cat_id,
-      subtitle: product.subtitle
-    }
-    setOrderData(prevOrderData => [...prevOrderData, { ...addedItem}]);
+      subtitle: product.subtitle,
+      currentUrl: itemForAdd.currentUrl,
+    };
+    setOrderData((prevOrderData) => [...prevOrderData, { ...addedItem }]);
   };
 
   const removeFromOrder = (product: OrderType) => {
-    console.log('or here')
-    // if (orderData.length === 1) {
-    //   console.log('debu')
-    //   localStorage.removeItem('orderData');
-    //   setOrderData(prevOrderData =>
-    //     prevOrderData.filter(item => item._id !== product._id)
-    //   );
-    // } else {
-      setOrderData(prevOrderData =>
-        prevOrderData.filter(item => item._id !== product._id)
-      );
-    // }
+    // console.log("or here");
+    setOrderData((prevOrderData) =>
+      prevOrderData.filter((item) => item.cartId !== product.cartId)
+    );
   };
 
-  // const updateProductQuantity = (productId: string, delta: number) => {
-  //   console.log('or here')
-  //   setOrderData(prevOrderData =>
-  //     prevOrderData.map(item =>
-  //       item.id === productId
-  //         ? { ...item, quantity: Math.max(0, item.quantity + delta) }
-  //         : item
-  //     )
-  //   );
-  // }; // DEL?
-
-  const updateProductQuantity = (productId: string, delta?: number) => {
-    const itemForAdd = currentProductFeatures.find(item => item.itemId === productId);
-    setOrderData(prevOrderData =>
-      prevOrderData.map(item =>
-        item._id === productId && item.currentSize === itemForAdd.currentSize
-          ? { 
-              ...item, 
-              price: { 
-                ...item.price, 
-                quantity: Math.max(0, item.price.quantity + itemForAdd.price[itemForAdd.currentSize].quantity) 
-              } 
+  const updateProductQuantityInCart = (productId: string, cartId: string) => {
+    const itemForAdd = currentProductFeatures.find(
+      (item) => item.itemId === productId
+    );
+    setOrderData((prevOrderData) =>
+      prevOrderData.map((item) =>
+        item.cartId === cartId
+          ? {
+              ...item,
+              quantity: Math.max(
+                0,
+                item.quantity +
+                  itemForAdd.price[itemForAdd.currentSize].quantity
+              ),
             }
           : item
       )
     );
-      }
+  };
+
   return (
-    <CartContext.Provider 
-      value=
-        {{ 
-          orderData, 
-          addToOrder, 
-          removeFromOrder, 
-          updateProductQuantity, // DEL?
-          updateMillingType, 
-          currentProductFeatures,
-          updatePriceType,
-          updateQuantity,
-          resetQuantity,
-          resetMilling,
-          resetPriceType,
-          setInitialProductList,
-          updateMillingCart,
-          updateQuantutyInCart,
-          removeFromCart,
-          resetCart,
-          setOrderFromStorage
-        }}
-      >
+    <CartContext.Provider
+      value={{
+        orderData,
+        addToOrder,
+        removeFromOrder,
+        updateProductQuantityInCart, // DEL?
+        updateMillingType,
+        currentProductFeatures,
+        updatePriceType,
+        updateQuantity,
+        resetQuantity,
+        resetMilling,
+        resetPriceType,
+        setInitialProductList,
+        updateMillingCart,
+        updateQuantutyInCart,
+        removeFromCart,
+        resetCart,
+        setOrderFromStorage,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
@@ -490,27 +582,28 @@ export const ProductsContextProvider = ({
   const addToProducts = (products: ProductType[]) => {
     // console.log('добавили продукт в контекст')
     if (productsData.length >= 0) {
-      console.log ('не стали сетить продакт лист так как он уже был')
-      return
+      // console.log("не стали сетить продакт лист так как он уже был");
+      return;
+    } else {
+      setProductsData(products);
     }
-    else {setProductsData(products)};
   };
 
   const getInitialProducts = (products: ProductType[]) => {
     if (productsData.length < 1) {
       // console.log('сетим каталог из индкеса')
-      setProductsData(products); }
-    else {
+      setProductsData(products);
+    } else {
       // console.log('НЕ сетим каталог из индкеса')
-      return
+      return;
     }
   };
 
   useEffect(() => {
-    var counter = 0
+    var counter = 0;
     const fetchData = async () => {
-      counter = counter + 1
-      console.log(`попытка получить данные № ${counter}`)
+      counter = counter + 1;
+      // console.log(`попытка получить данные № ${counter}`);
       try {
         const data = await getItems();
         if (productsData.length < 1) {
@@ -521,23 +614,20 @@ export const ProductsContextProvider = ({
       }
     };
     if (productsData.length < 1) {
-      console.log('данные о товарах не пришли с сервера')
+      // console.log("данные о товарах не пришли с сервера");
       fetchData();
     } else {
-      return
+      return;
     }
   }, [productsData]);
 
-  // console.log('установили продакт лист')
-  // console.log(productsData);
 
   return (
-    <ProductsContext.Provider value={{ productsData, getInitialProducts, addToProducts }}>
+    <ProductsContext.Provider
+      value={{ productsData, getInitialProducts, addToProducts }}
+    >
       {children}
     </ProductsContext.Provider>
   );
 };
-
-// addToProducts убрал
-
 

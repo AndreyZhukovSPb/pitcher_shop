@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 // import { millingTableNew } from "../utils/constatnts";
-import { ProductsContext } from "../components/Context";
+import { CartContext, ProductsContext } from "../components/Context";
 import { getItemByLinkName } from "../utils/api";
 import { ProductType } from "../utils/sharedTypes";
 import styles from "../styles/ProductFull.module.css";
@@ -17,32 +17,23 @@ import { useMediaQuery } from "react-responsive";
 
 const LinkNamePage: React.FC = () => {
   const Context = useContext(ProductsContext);
+  const FeaturesContext = useContext(CartContext)
   const productsList = Context.productsData;
   const passToProductList = Context.addToProducts;
   const { query } = useRouter();
   const [currentItem, setCurrentItem] = useState<ProductType>();
+  const [currentItemUrl, setCurrentItemUrl] = useState<string>();
   const isBigScreen = useMediaQuery({ query: "(min-width: 1024px)" });
-  // const [millingType, setMillingType] = useState(millingTableNew[0]);
-
-  // useCheckStorage();
-
-  const [productToAdd, setProductToAdd] = useState({}); // DELETE?
+  const currentFeatures = FeaturesContext.currentProductFeatures;
 
   const fetchCurrentItem = async (linkName: string) => {
 
-    // if (productsList.length > 0) {
-    //   console.log('не пойдем обновлять продакт лист с сайта')
-    //   return
-    // }
-
     const item = await getItemByLinkName(linkName);
-    console.log('тут?');
       if (!item) {
         router.replace("/404"); // редирект на страницу 404
         return;
   }
     passToProductList([item]);
-    // setCurrentItem(productsList.find((item) => item.linkName === linkName));
   };
 
   useEffect(() => {
@@ -53,45 +44,33 @@ const LinkNamePage: React.FC = () => {
     } else {
       const linkName = query.linkName.toString();
       if (productsList.length > 0 && productsList.find((item) => item.linkName === linkName)) {
-        console.log('забрали продукт из контекста');
+        // console.log('забрали продукт из контекста');
         setCurrentItem(productsList.find((item) => item.linkName === linkName));
       } else {
-        console.log('пошли за продуктом на сервер');
+        // console.log('пошли за продуктом на сервер');
         fetchCurrentItem(linkName);
       }
     }
   }, [productsList, query.linkName]);
-  // }, [query.linkName]);
-
-  useEffect(() => {
+  
+  useEffect(()=>{
     if (currentItem) {
-      setProductToAdd({
-        size: currentItem.price[0].title,
-        price: currentItem.price[0].priceItem,
-      });
-    } else {
-      return;
+      setCurrentItemUrl(currentFeatures.find((item)=>item.itemId === currentItem._id).currentUrlLarge)
     }
-  }, [currentItem]);
+  },[currentFeatures, currentItem])
 
   const router = useRouter();
-  // const handleTestBack = () => {
-  //   router.push("/");
-  // };
 
   return (
     <>
-      {currentItem && (
+      {currentItem && currentItemUrl &&(
         <section className={styles.productFull}>
           <div className={styles.productFull__imageContainer}>
             <Image
               className={styles.productFull__image}
-              // src={img2}
-              // src={currentItem.cat_id === 1 || currentItem.cat_id === 2 ? 'https://i.ibb.co/VS8jW7D/pack.png' : 'https://i.ibb.co/6vYmZTL/drip.jpg'}
-              src={currentItem.urlLarge}
+              src={currentItemUrl}
               fill
               alt="фото пачки"
-              // onClick={handleTestBack}
             />
             <div className={styles.productFull__titleContainer}>
               <h2 className={styles.productFull__title}>{currentItem.name}</h2>
@@ -111,28 +90,12 @@ const LinkNamePage: React.FC = () => {
             {currentItem.description.flavour && (
               <div className={styles.productFull__aboutContainer}>
                 {currentItem.description.roastingType && (
-                  // <div className={styles.productFull__featureContainer}>
-                  //   <p className={styles.productFull__aboutTitle}>
-                  //     Тип обжарки:{" "}
-                  //   </p>
-                  //   <p className={styles.productFull__about}>
-                  //     {currentItem.description.roastingType}
-                  //   </p>
-                  // </div>
                   <p className={styles.productFull__featureContainer}>
                     <span className={styles.productFull__aboutTitle}>Тип обжарки: </span>
                     {currentItem.description.roastingType}
                   </p>
                 )}
                 {currentItem.description.variaty && (
-                  // <div className={styles.productFull__featureContainer}>
-                  //   <p className={styles.productFull__aboutTitle}>
-                  //     Обработка:{" "}
-                  //   </p>
-                  //   <p className={styles.productFull__about}>
-                  //     {currentItem.description.variaty}
-                  //   </p>
-                  // </div>
                   <p className={styles.productFull__featureContainer}>
                     <span className={styles.productFull__aboutTitle}>Обработка: </span>
                     {currentItem.description.variaty}
@@ -182,8 +145,6 @@ const LinkNamePage: React.FC = () => {
               <div className={styles.productFull__cartContainer}>
                 <Size
                   product={currentItem}
-                  // weightToAdd={weightToAdd}
-                  // onSizeClick={handleSizeChoise}
                 />
                 <Counter currentProduct={currentItem} />
               </div>

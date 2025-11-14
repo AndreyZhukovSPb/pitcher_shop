@@ -1,7 +1,7 @@
 .popup {
   display: flex;
   opacity: 0;
-  transition: visibility 1s, opacity 1s ease;
+  /* transition: visibility 1s, opacity 1s ease; */
   visibility: hidden;
   color: #000000;
   width: 100%;
@@ -27,7 +27,7 @@
   width: 300px;
   height: 240px;
   border-radius: 5px; 
-  transition: opacity 0.3s ease;
+  /* transition: opacity 0.3s ease; */
   display: flex;
   background-color: var(--bg-color-2);
   justify-content: center;
