@@ -503,6 +503,7 @@
     }
   .product__image_large {
     max-width: 150px;
+    object-fit: contain;
   }
   .product {
     /* height: 570px; */
