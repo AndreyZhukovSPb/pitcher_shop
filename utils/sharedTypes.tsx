@@ -11,6 +11,8 @@ export interface ProductType {
   ];
   url: string;
   urlLarge: string;
+  urlGrandeS?: string,
+  urlGrandeL?: string,
   promo?: boolean;
   description: {
     // type?: string;
@@ -30,6 +32,7 @@ export interface ProductType {
   linkName: string;
   _id: string;
   aboutFull?: string[];
+  quantity?: number;
 }
 
 export interface OrderType {
@@ -49,6 +52,8 @@ export interface OrderType {
   _id: string;
   currentSize: number;
   subtitle?: string;
+  cartId: string;
+  currentUrl: string;
 }
 
 interface AdminOrderType {

@@ -89,27 +89,16 @@ const Cart: React.FC<cartProps> = ({  }) => {
       }
     };
 
-// идем забирать id из url
       const currentUrl = window.location.href;
-      console.log('debug')
       const urlType = determineUrlType(currentUrl);
       if (urlType) {
         setIsPaymentPending(true);
         setIsPopupOpened(true);
         setPopupMessage(paymentChecking);
-      // if (urlType === 'order') {
-        console.log(`URL содержит orderId = ${urlType}`);
+        // console.log(`URL содержит orderId = ${urlType}`);
         checkPayment(urlType);
-        // const checkPaymentSuccess = checkPayment();
-        // if (checkPaymentSuccess) {
-        //   setIsPreloaderOpened(false);
-        //   resetOrder();
-        //   setOrderNumber(data.orderData.number)
-        //   setOrderEmail(data.orderData.client.email)
-        //   setIsOrderPayed(true) 
-        // }
       } else {
-        console.log('URL не содержит orderId, выполняем действия для корзины');
+        // console.log('URL не содержит orderId, выполняем действия для корзины');
         return
       }
   }, []); 
@@ -120,7 +109,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
       return acc + item.price.quantity;
     }, 0));
     setCurentTotal(orderData.reduce((acc, item) => {
-      return acc + item.price.priceItem * item.price.quantity;
+      return acc + item.price.priceItem * item.quantity;
     }, 0));
   }, [orderData])
 
@@ -220,7 +209,16 @@ const Cart: React.FC<cartProps> = ({  }) => {
 
   const checkPayment = async (orderId) => {
     const orderPayed = await checkOrder(orderId);
-    if (orderPayed.success && orderPayed.status) {
+    // if (orderPayed.success && orderPayed.status && orderPayed.dataBaseError) {
+    //   console.log('here?')
+    //   setIsPaymentPending(false);
+    //   setIsPopupOpened(true);
+    //   setIsOrderPayed(true);
+    //   setIsPaymentError(true);
+    //   setPopupMessage(dataBaseError);
+    //   resetOrder();
+    // } else 
+      if (orderPayed.success && orderPayed.status) {
       // console.log(`проверили зака, вернулся ${orderPayed.data.message}`)
       console.log(orderPayed.data.order.number)
       console.log(orderPayed.data.order.client.email)
@@ -231,7 +229,6 @@ const Cart: React.FC<cartProps> = ({  }) => {
       setIsOrderPayed(true);
       resetOrder();
       return;  
-        // setIsPopupOpened(true)
     } else if (orderPayed.success && !orderPayed.status) {
       console.log('заказ не оплачен, попробуйте еще раз')
       setIsPopupOpened(true);
@@ -267,16 +264,20 @@ const Cart: React.FC<cartProps> = ({  }) => {
   }
 
   const handleClosePopup = () => {
+    
     setIsPopupOpened(false);
     setPopupMessage([]);
+    // setIsOrderPayed(false); // НАДО?
   }
 
   const handleCloseSuccessPopup = () => {
+    console.log('here2')
     setIsPopupOpened(false);
     setOrderNumber('');
     setOrderEmail('');
     setPopupMessage([]);
     setIsPaymentError(false);
+    // setIsOrderPayed(false); // НАДО?
   }
 
   const handleDeliveryClick = () => {
@@ -284,13 +285,14 @@ const Cart: React.FC<cartProps> = ({  }) => {
     console.log("пойдем в условия доставки");
   };
 
-  if (orderData.length === 0) {
+  if (orderData && orderData.length === 0) {
     // Пока данные загружаются, отображайте индикатор загрузки или placeholder
     return (
       <>
         <section className={styles.cart}>
           <h2 className={styles.cart__title} >Корзина</h2>
           <p className={styles.cart__subTitle}>Ваша корзина пуста</p>
+          <a rel="stylesheet" href="/" className={styles.cart__backLink}>Вернуться в каталог</a>
         </section>
         <Popup
           onClose={handleClosePopup}
@@ -305,15 +307,13 @@ const Cart: React.FC<cartProps> = ({  }) => {
         />
       </>
     )
-    
-    
   }
 
   return (
     <>
       <section className={styles.cart}>
       {/* <SectionLine/> */}
-        <h2 className={styles.cart__title} >Корзина</h2>
+        <h2 className={styles.cart__title}>Корзина</h2>
         {/* {orderData.length === 0 && (
           <p className={styles.cart__subTitle}>Ваша корзина пуста</p>
         )} */}

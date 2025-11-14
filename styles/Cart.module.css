@@ -81,11 +81,20 @@
 }
 
 .cart__subTitle {
-  margin: 5px 0 0;
+  margin: 5px 0 20px;
   font-family: var(--span-font);
   font-family: var(--paragpaph-font);
   font-size: var(--paragpaph-font-size);
   color: var(--font-color-gray);
+}
+
+.cart__backLink {
+  font-family: var(--paragpaph-font);
+  font-size: var(--paragpaph-font-size);
+  color: var(--font-color-gray);
+  text-decoration: none;
+  border-bottom: 0.8px solid var(--font-color-gray);
+  margin-right: auto;
 }
 
 .cart__itemSize {
@@ -140,7 +149,7 @@
   /* font-size: 20px; */
   font-size: var(--titles-h-font-size);
   font-family: var(--paragpaph-font);
-  width: 70px;
+  width: 80px;
   text-align: center;
 }
 
@@ -148,7 +157,7 @@
   font-family: var(--span-font);
   letter-spacing: 0;
   font-size: var(--span-font-size);
-  width: 70px;
+  width: 80px;
   text-align: center;
   color: var(--font-color-gray);
   margin: 0 0 5px;

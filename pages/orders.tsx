@@ -40,7 +40,7 @@ const Orders: React.FC = () => {
       ])
     } else {
       setPopupMessage([
-        'Даша, пароль неверный', 
+        'Аня, пароль неверный', 
         `осталось ${counter} попытки и сайт самоуничтожится`
       ])
     }
@@ -59,7 +59,7 @@ const Orders: React.FC = () => {
     } else {
       getOrders(localStorage.getItem('token'))
         .then(res => {
-          console.log(res)
+          // console.log(res)
           setOrders(res.reverse())
         })
     }

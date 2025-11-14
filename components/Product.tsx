@@ -21,6 +21,7 @@ const Product: React.FC<productProps> = ({ product }) => {
   const resetMilling = Context.resetMilling;
   const resetPriceType = Context.resetPriceType;
   const resetQuantity = Context.resetQuantity;
+  const currentFeatures = Context.currentProductFeatures;
 
   // const addToCart = Context.addToOrder;
   // const currentCart = Context.orderData;
@@ -84,48 +85,66 @@ const Product: React.FC<productProps> = ({ product }) => {
     resetMilling(product._id);
     resetPriceType(product._id);
     resetQuantity(product._id, true);
-    console.log("click?");
+    // console.log("click?");
   };
 
-  return (
-    <div className={styles.product}>
-      <div className={styles.product__container} onClick={handleProductClick}>
-        <Image
-          className={styles.product__image}
-          // src={product.cat_id === 2 || product.cat_id === 3 ? 'https://i.ibb.co/VS8jW7D/pack.png' : 'https://i.ibb.co/6vYmZTL/drip.jpg'}
-          src={product.url}
-          alt="фото пачки"
-          onClick={handleProductClick}
-          fill
-        />
-        <div className={styles.product__titleContainer}>
-          <h2 className={styles.product__title}>{product.name}</h2>
-          {product.name_2 && (
-            <h2 className={styles.product__title}>{product.name_2}</h2>
-          )}
-        </div>
-        {product.description.variaty && (
-          <p className={styles.product__scaleTitle}>
-            {product.description.variaty}
-          </p>
-        )}
-        {product.subtitle && (
-          <p className={styles.product__scaleTitle}>{product.subtitle}</p>
-        )}
-        <p className={styles.product__about}>{product.description.flavour}</p>
-        <p className={styles.product__about}>{product.description.about}</p>
-        {product.balance && <Balance item={product} isShortCard={true} />}
-      </div>
+  const currentImageUrl = currentFeatures.find(
+    (item) => item.itemId === product._id
+  )?.currentUrl;
 
-      {(product.cat_id === 2 || product.cat_id === 3) && (
-        <Milling currentProduct={product} isShotCard={true} />
+  // const [loaded, setLoaded] = useState(false);
+
+  return (
+    <>
+      {currentImageUrl && (
+        <div className={styles.product}>
+          <div
+            className={styles.product__container}
+            onClick={handleProductClick}
+          >
+            <Image
+              className={`${styles.product__image} ${product.name=== 'DRIP BAG 25 дрипов' ? styles.product__image_large : ''}  `}
+              // src={product.cat_id === 2 || product.cat_id === 3 ? 'https://i.ibb.co/VS8jW7D/pack.png' : 'https://i.ibb.co/6vYmZTL/drip.jpg'}
+              // src={product.url}
+              src={currentImageUrl}
+              alt="фото пачки"
+              onClick={handleProductClick}
+              fill
+              // onLoadingComplete={() => setLoaded(true)}
+              // style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
+            />
+            <div className={styles.product__titleContainer}>
+              <h2 className={styles.product__title}>{product.name}</h2>
+              {product.name_2 && (
+                <h2 className={styles.product__title}>{product.name_2}</h2>
+              )}
+            </div>
+            {product.description.variaty && (
+              <p className={styles.product__scaleTitle}>
+                {product.description.variaty}
+              </p>
+            )}
+            {product.subtitle && (
+              <p className={styles.product__scaleTitle}>{product.subtitle}</p>
+            )}
+            <p className={styles.product__about}>
+              {product.description.flavour}
+            </p>
+            <p className={styles.product__about}>{product.description.about}</p>
+            {product.balance && <Balance item={product} isShortCard={true} />}
+          </div>
+
+          {(product.cat_id === 2 || product.cat_id === 3) && (
+            <Milling currentProduct={product} isShotCard={true} />
+          )}
+          <div className={styles.product__cartContainer}>
+            <Size product={product} />
+            <Counter currentProduct={product} />
+          </div>
+          <SubmitBtn currentProduct={product} />
+        </div>
       )}
-      <div className={styles.product__cartContainer}>
-        <Size product={product} />
-        <Counter currentProduct={product} />
-      </div>
-      <SubmitBtn currentProduct={product} />
-    </div>
+    </>
   );
 };
 

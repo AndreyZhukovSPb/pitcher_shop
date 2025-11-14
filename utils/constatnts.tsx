@@ -26,9 +26,14 @@ const paymentFailed = [
 ]
 
 const paymentCheckError = [
-  'При проверке оплаты произошла ошибка', 
-  'Пожалуйста, свяжитесь с нами по телефону +7-981-039-79-12 или по электронной почте dasha@pitcherbar.ru',
+  'При обработке заказа произошла ошибка', 
+  'Пожалуйста, свяжитесь с нами по телефону +7-981-039-79-12 или по электронной почте anna@pitcherbar.ru',
 ]
+
+// const dataBaseError = [
+//   'Заказ успешно оплачен.', 
+//   'Мы скоро свяжемся с вами.'
+// ]
 
 const paymentChecking = [
   'Проверяем ваш платеж', 
@@ -50,5 +55,6 @@ export {
   paymentCheckError,
   paymentChecking,
   jokeForDasha,
-  freeDeliveryAmount
+  freeDeliveryAmount,
+  // dataBaseError
 }

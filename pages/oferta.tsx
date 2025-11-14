@@ -11,7 +11,7 @@ export default function conditions () {
           <h2 className={styles.conditions__title}>Условия и правила продажи</h2>
         </div>
         <div className={styles.conditions__chapter}>
-          <h3 className={styles.conditions__subTitle}>Опредления</h3>
+          <h3 className={styles.conditions__subTitle}>Определения</h3>
           <p className={styles.conditions__text}>
             Продавец – Индивидуальный предприниматель Жуков Андрей Владимирович, зарегистрированный по адресу: Пермский край, город Чайковский, ул. Мира 27-24, ИНН 592007476876 ОГРН 315595800068101.
           </p>

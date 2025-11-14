@@ -44,21 +44,27 @@ const Milling: React.FC<categoryMilling> = ({ isShotCard, currentProduct, isCart
 
   const handleChoseMilling = (value: string): void => {
     if (isCart) {
-      console.log('сейчас установим в корзине новый помол' + value);
-      updateMillingInCart(currentProduct, value);
-      setIsMillingListOpen(!isMillingListOpen);
+      if ('milling' in currentProduct && currentProduct.milling  === value) {
+        // console.log('помол не поменялся, ничего не делаем')
+        setIsMillingListOpen(!isMillingListOpen);
+        return
+      } else {
+        // console.log('сейчас установим в корзине новый помол ' + value);
+        updateMillingInCart(currentProduct, value);
+        setIsMillingListOpen(!isMillingListOpen);
+      }
     } else {
       updateMillingType(currentProduct._id, value);
-      console.log('сейчас установим' + value)
+      // console.log('сейчас установим ' + value)
       setIsMillingListOpen(!isMillingListOpen);
     }
   };
 
   useOnClickOutside(ref, () => setIsMillingListOpen(false));
 
-  const bugHandler = () => {
-    console.log(millingTableNew)
-  }
+  // const bugHandler = () => {
+  //   console.log(millingTableNew)
+  // }
 
   return (
     <div className=
@@ -71,7 +77,7 @@ const Milling: React.FC<categoryMilling> = ({ isShotCard, currentProduct, isCart
       className={`${styles.product__extraOptions} ${isCart ? styles.product__extraOptions_cart : ''}`}
       // ref={ref}
     >
-      <p className={styles.product__millingTitle} onClick={bugHandler}>Помол:</p>
+      <p className={styles.product__millingTitle} >Помол:</p>
       <span
         className={`${styles.product__currentMill} ${isCart ? styles.product__currentMill_cart : ''}`}
         onClick={() => {
@@ -79,14 +85,17 @@ const Milling: React.FC<categoryMilling> = ({ isShotCard, currentProduct, isCart
         }}
       >
         {isCart && (
-          orderData.some(item => item._id === currentProduct._id) 
-            && (orderData.filter(item => item._id === currentProduct._id 
-              && 'currentSize' in currentProduct 
-                && item.currentSize === currentProduct.currentSize)[0].milling)  
+          'milling' in currentProduct &&
+          currentProduct.milling
+          // orderData.some(item => item._id === currentProduct._id) 
+          //   && (orderData.filter(item => item._id === currentProduct._id 
+          //     && 'currentSize' in currentProduct 
+          //       && item.currentSize === currentProduct.currentSize)[0].milling)  
         )}
-        {!isCart && (currentFeatures.some(item => item.itemId === currentProduct._id) && (currentFeatures.find(item => item.itemId === currentProduct._id).millingType))}
-        {/* {currentFeatures.some(item => item.itemId === currentProduct._id) && (currentFeatures.find(item => item.itemId === currentProduct._id).millingType)} */}
-        {/* {getMillingType.some(item => item.id === currentProduct._id) && (getMillingType.find(item => item.id === currentProduct._id).millingType)} */}
+        {/* {!isCart && 'millingType' in currentProduct && String(currentProduct.millingType)} */}
+        {!isCart && (
+          currentFeatures.some(item => item.itemId === currentProduct._id) && (currentFeatures.find(item => item.itemId === currentProduct._id).millingType)
+        )}
       </span>
       <ul
         ref={ref}

@@ -16,6 +16,8 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
   const sectionRefs = useRef([]);
   const [isMenuFixed, setIsMenuFixed] = useState(false);
 
+  
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -58,6 +60,13 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
     }
   };
 
+  // const [loaded, setLoaded] = useState(false);
+
+  // useEffect(() => {
+  // const timeout = setTimeout(() => setLoaded(true), 50);
+  // return () => clearTimeout(timeout);
+  // }, []);
+
   return (
     <>
     {isMenuFixed ? (<div className={styles.catalog__placeholder}></div>) : ''}
@@ -86,7 +95,12 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
         className={`${styles.catalog__navLink} ${activeSection === `section5` ? styles.catalog__navLink_active : ''}`}
         onClick={scrollToSection}>Мерч и подарки</a>
     </div>
-    <ul className={styles.catalog__list}>
+    <div className={styles.catalog__list}
+      // style={{
+      // opacity: loaded ? 1 : 0,
+      // transition: 'opacity 1s ease'
+      // }}
+    >
       {categoryListTransformed.map((item, number) => {
         return (
           <div className={styles.catalog__item} key={number} id={`section${number + 1}`} ref={(el) => { sectionRefs.current[number] = el; }}>
@@ -98,7 +112,7 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
           </div>
         );
       })}
-    </ul>
+    </div>
   </>
   );
 };

@@ -64,10 +64,12 @@ const Counter: React.FC<counterProps> = ({ currentProduct, isCart
           (currentFeatures.find(item => item.itemId === currentProduct._id)
             .price[currentFeatures.find(item => item.itemId === currentProduct._id).currentSize].quantity))
         }
-        {isCart && (orderData.some(item => item._id === currentProduct._id) && 
-          (orderData.filter(item => item._id === currentProduct._id 
-            && 'currentSize' in currentProduct 
-              && item.currentSize === currentProduct.currentSize)[0].price.quantity)  
+        {isCart && (
+          currentProduct.quantity
+          // orderData.some(item => item._id === currentProduct._id) && 
+          // (orderData.filter(item => item._id === currentProduct._id 
+          //   && 'currentSize' in currentProduct 
+          //     && item.currentSize === currentProduct.currentSize)[0].price.quantity)  
           )
         }
       </p>
