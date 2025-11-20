@@ -32,21 +32,11 @@ const Category: React.FC<categoryProps> = ({ category }) => {
     return () => observer.unobserve(contentEl);
   }, []);
 
-  // Сворачиваем маленькие экраны после гидратации
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // Вычисляем высоту для контейнера
-  // const displayedHeight = !mounted
-  //   ? "auto" // сервер: всегда открыто
-  //   : isBigScreen
-  //     ? "auto" // клиент: большой экран → открыто
-  //     : isCatOpened
-  //       ? `${contentHeight}px` // клиент: маленький экран, открыто по клику
-  //       : "0px";               // клиент: маленький экран, закрыто по умолчанию
-
   const displayedHeight = !mounted 
-    ? "0px" // сервер: всегда открыто
+    ? "0px" // сервер: всегда закрыто тк есть скелетон
     : isBigScreen
       ? "auto" // клиент: большой экран → открыто
       : isCatOpened
