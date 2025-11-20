@@ -18,6 +18,15 @@
   line-height: 40px;
 } */
 
+/* .category__skeletonContainer {
+  display: none;
+}
+
+.category__skeletonItem {
+  
+  display: none;
+} */
+
 .category__btn {
   width: 75%;
   margin: 8px auto 8px;
@@ -83,6 +92,18 @@
 }
 
 @media (width > 1023px) {
+  .category__skeletonContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    padding: 1.5px 1.5px;
+    gap: 50px;
+  }
+  .category__skeletonItem {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--bg-color-card);
+    height: 520px;
+  }
   .category__productContainer {
     grid-template-columns: repeat(3, 1fr); 
     padding: 1.5px 1.5px;

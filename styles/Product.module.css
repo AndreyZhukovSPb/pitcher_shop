@@ -2,12 +2,7 @@
   width: 100%;
   color: var(--font-color);
   box-sizing: border-box;
-  /* background-color: #fafafa; */
-  background-color: rgb(249 246 240);
-  background-color: rgb(253 251 247);
   background-color: var(--bg-color-card);
-  /* background-color: rgb(260 251 247); */
-  /* background-color: #f3f1f2; */
   display: flex;
   justify-content: center;
   align-items: center;
