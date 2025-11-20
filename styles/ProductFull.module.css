@@ -134,7 +134,7 @@
     grid-template-columns: 1.2fr 1fr;
     padding: 50px 100px 50px 50px;
     column-gap: 40px;
-    max-height: calc(100vh - 70px);
+    /* max-height: calc(100vh - 70px); */
   }
   .productFull__imageContainer {
     padding: 0 100px;
@@ -155,6 +155,7 @@
   }
   .productFull__image {
     max-width: 250px;
+    object-fit: contain;
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
   }
   .productFull__cartContainer {

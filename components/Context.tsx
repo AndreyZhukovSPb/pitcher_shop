@@ -3,6 +3,7 @@ import { OrderType, ProductType } from "../utils/sharedTypes";
 import { getItems } from "../utils/api";
 import { millingTableNew } from "../utils/constatnts";
 import { cartIdHandler } from "../utils/cartIdHandler";
+import { filterCats } from "../utils/dataTranformers";
 
 interface ICurrentProductFeatures {
   url: string;
@@ -564,20 +565,28 @@ interface ProductsProps {
   productsData: ProductType[] | undefined;
   addToProducts: (products: ProductType[]) => void;
   getInitialProducts: (products: ProductType[]) => void;
+  categoriesData: any
 }
 
 export const ProductsContext = createContext<ProductsProps>({
   productsData: undefined,
   addToProducts: () => {},
   getInitialProducts: () => {},
+  categoriesData: undefined
 });
 
 export const ProductsContextProvider = ({
   children,
+  initialProducts = [],
+  initialCategories = []
 }: {
   children: ReactNode;
+  initialProducts?: ProductType[];
+  initialCategories?: any
 }): JSX.Element => {
-  const [productsData, setProductsData] = useState<ProductType[]>([]);
+  // const [productsData, setProductsData] = useState<ProductType[]>([]);
+  const [productsData, setProductsData] = useState<ProductType[]>(initialProducts);
+  const [categoriesData, setCategoriesData] = useState(initialCategories);
 
   const addToProducts = (products: ProductType[]) => {
     // console.log('добавили продукт в контекст')
@@ -591,7 +600,7 @@ export const ProductsContextProvider = ({
 
   const getInitialProducts = (products: ProductType[]) => {
     if (productsData.length < 1) {
-      // console.log('сетим каталог из индкеса')
+      console.log('сетим каталог из индкеса')
       setProductsData(products);
     } else {
       // console.log('НЕ сетим каталог из индкеса')
@@ -600,10 +609,12 @@ export const ProductsContextProvider = ({
   };
 
   useEffect(() => {
+    // console.log('измененме productsData')
+    // console.log(productsData)
     var counter = 0;
     const fetchData = async () => {
       counter = counter + 1;
-      // console.log(`попытка получить данные № ${counter}`);
+      console.log(`попытка получить данные № ${counter}`);
       try {
         const data = await getItems();
         if (productsData.length < 1) {
@@ -624,7 +635,8 @@ export const ProductsContextProvider = ({
 
   return (
     <ProductsContext.Provider
-      value={{ productsData, getInitialProducts, addToProducts }}
+      value={{ productsData, getInitialProducts, addToProducts, categoriesData }}
+      // value={{ productsData, getInitialProducts, addToProducts }}
     >
       {children}
     </ProductsContext.Provider>
