@@ -37,13 +37,22 @@ const Category: React.FC<categoryProps> = ({ category }) => {
   useEffect(() => setMounted(true), []);
 
   // Вычисляем высоту для контейнера
-  const displayedHeight = !mounted
-    ? "auto" // сервер: всегда открыто
+  // const displayedHeight = !mounted
+  //   ? "auto" // сервер: всегда открыто
+  //   : isBigScreen
+  //     ? "auto" // клиент: большой экран → открыто
+  //     : isCatOpened
+  //       ? `${contentHeight}px` // клиент: маленький экран, открыто по клику
+  //       : "0px";               // клиент: маленький экран, закрыто по умолчанию
+
+  const displayedHeight = !mounted 
+    ? "0px" // сервер: всегда открыто
     : isBigScreen
       ? "auto" // клиент: большой экран → открыто
       : isCatOpened
         ? `${contentHeight}px` // клиент: маленький экран, открыто по клику
         : "0px";               // клиент: маленький экран, закрыто по умолчанию
+
 
   const openCatHandler = () => {
     if (!isBigScreen) setIsCatOpened(!isCatOpened);
@@ -62,6 +71,14 @@ const Category: React.FC<categoryProps> = ({ category }) => {
           alt="Стрелка"
         />
       </button>
+      {!mounted && (<>
+            <div className={styles.category__skeletonContainer}>
+              <div className={styles.category__skeletonItem}></div>
+              <div className={styles.category__skeletonItem}></div>
+              <div className={styles.category__skeletonItem}></div>
+            </div>
+          </>)}
+      
       <div
         className={`${styles.category__wrap} ${
           isCatOpened ? styles.category__wrap_opened : ""
@@ -74,6 +91,7 @@ const Category: React.FC<categoryProps> = ({ category }) => {
             isCatOpened ? styles.category__productContainer_opened : ""
           }`}
         >
+          
           {category.array.map((item, number) => (
             <Product key={number} product={item} />
           ))}
