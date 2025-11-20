@@ -90,9 +90,9 @@ export const CartContextProvider = ({
     } else {
       if (typeof window !== "undefined") {
         const storedData = localStorage.getItem("orderData");
-        const storedDataArray = JSON.parse(storedData);
         const catalogIds = ProductList.map((item) => item._id);
         if (storedData) {
+          const storedDataArray = JSON.parse(storedData);
           if (checkOldGoods(catalogIds, storedDataArray)) {
             // console.log("в корзине нет старых товаров");
             setOrderData(storedDataArray);
@@ -619,6 +619,7 @@ export const ProductsContextProvider = ({
         const data = await getItems();
         if (productsData.length < 1) {
           setProductsData(data);
+          setCategoriesData(filterCats(data))
         }
       } catch (error) {
         console.error(error);
