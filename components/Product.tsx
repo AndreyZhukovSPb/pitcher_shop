@@ -22,6 +22,7 @@ const Product: React.FC<productProps> = ({ product }) => {
   const resetPriceType = Context.resetPriceType;
   const resetQuantity = Context.resetQuantity;
   const currentFeatures = Context.currentProductFeatures;
+  // const currentImage = React.useState('')
 
   // const addToCart = Context.addToOrder;
   // const currentCart = Context.orderData;
@@ -92,11 +93,13 @@ const Product: React.FC<productProps> = ({ product }) => {
     (item) => item.itemId === product._id
   )?.currentUrl;
 
+  useEffect
+
   // const [loaded, setLoaded] = useState(false);
 
   return (
     <>
-      {currentImageUrl && (
+      {/* {currentImageUrl && ( */}
         <div className={styles.product}>
           <div
             className={styles.product__container}
@@ -104,9 +107,9 @@ const Product: React.FC<productProps> = ({ product }) => {
           >
             <Image
               className={`${styles.product__image} ${product.name=== 'DRIP BAG 25 дрипов' ? styles.product__image_large : ''}  `}
-              // src={product.cat_id === 2 || product.cat_id === 3 ? 'https://i.ibb.co/VS8jW7D/pack.png' : 'https://i.ibb.co/6vYmZTL/drip.jpg'}
-              // src={product.url}
-              src={currentImageUrl}
+              // src={currentImageUrl}
+              src={!currentImageUrl ? product.url : currentImageUrl}
+
               alt="фото пачки"
               onClick={handleProductClick}
               fill
@@ -143,7 +146,7 @@ const Product: React.FC<productProps> = ({ product }) => {
           </div>
           <SubmitBtn currentProduct={product} />
         </div>
-      )}
+      {/* )} */}
     </>
   );
 };

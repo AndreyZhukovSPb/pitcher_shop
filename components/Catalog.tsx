@@ -3,6 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import Category from "./Category";
 import { filterCats } from "../utils/dataTranformers";
 import { type ProductType } from '../utils/sharedTypes';
+import { ProductsContext } from "./Context";
 
 import React, { useEffect, useRef, useState } from "react";
 
@@ -11,12 +12,13 @@ interface catalogProps {
 }
 
 const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
-  const categoryListTransformed = filterCats(categoryList);
+  const ContextProduct = React.useContext(ProductsContext);
+  const newWay = ContextProduct.categoriesData;
+
+  // const categoryListTransformed = filterCats(categoryList);
   const [activeSection, setActiveSection] = useState(null);
   const sectionRefs = useRef([]);
   const [isMenuFixed, setIsMenuFixed] = useState(false);
-
-  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,27 +73,19 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
     <>
     {isMenuFixed ? (<div className={styles.catalog__placeholder}></div>) : ''}
     <div className={`${styles.catalog__nav} ${isMenuFixed ? styles.catalog__nav_fixed : ''}`}>
-      {/* <a href="#section1" 
-        // className={styles.catalog__navLink} 
-        className={`${styles.catalog__navLink} ${activeSection === `section1` ? styles.catalog__navLink_active : ''}`}
-        onClick={scrollToSection}>Все товары</a> */}
       <a href="#section1" 
-        // className={styles.catalog__navLink} 
         className={`${styles.catalog__navLink} ${activeSection === `section1` ? styles.catalog__navLink_active : ''}`}
         onClick={scrollToSection}>Новое в Pitcher</a>
       <a href="#section2" 
-        // className={styles.catalog__navLink} 
         className={`${styles.catalog__navLink} ${activeSection === `section2` ? styles.catalog__navLink_active : ''}`}
         onClick={scrollToSection}>Дрип кофе</a>
       <a href="#section3" 
-        // className={styles.catalog__navLink} 
         className={`${styles.catalog__navLink} ${activeSection === `section3` ? styles.catalog__navLink_active : ''}`}
         onClick={scrollToSection}>Эспрессо</a>
       <a href="#section4" 
         className={`${styles.catalog__navLink} ${activeSection === `section4` ? styles.catalog__navLink_active : ''}`}
         onClick={scrollToSection}>Фильтр</a>
       <a href="#section5" 
-        // className={styles.catalog__navLink} 
         className={`${styles.catalog__navLink} ${activeSection === `section5` ? styles.catalog__navLink_active : ''}`}
         onClick={scrollToSection}>Мерч и подарки</a>
     </div>
@@ -101,14 +95,15 @@ const Catalog: React.FC<catalogProps> = ({ categoryList }) => {
       // transition: 'opacity 1s ease'
       // }}
     >
-      {categoryListTransformed.map((item, number) => {
+      {/* {categoryListTransformed.map((item, number) => { */}
+      {newWay.map((item, number) => {
         return (
           <div className={styles.catalog__item} key={number} id={`section${number + 1}`} ref={(el) => { sectionRefs.current[number] = el; }}>
-            {item.array.length > 0 && (
+            {/* {item.array.length > 0 && ( */}
               <Category
                 category={item}
               />
-            )}
+            {/* )} */}
           </div>
         );
       })}
