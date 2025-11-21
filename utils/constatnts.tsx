@@ -1,5 +1,6 @@
 // const baseURL = 'http://localhost:4003/api/'
-const baseURL = 'https://pitcherbartest.ru/api/'
+// const baseURL = 'https://pitcherbartest.ru/api/'
+const baseURL = 'http://84.201.136.165/api'
 const mainWebUrl = 'https://pitcherbar.ru'
 
 const freeDeliveryAmount = 2400
