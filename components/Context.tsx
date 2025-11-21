@@ -80,8 +80,11 @@ export const CartContextProvider = ({
       const updatedCart = cart.filter((cartItem) =>
         catalogIds.some((catalogId) => catalogId === cartItem._id)
       );
-      localStorage.setItem("orderData", updatedCart);
-      // console.log(updatedCart);
+      if (updatedCart.length === 0) {
+        localStorage.removeItem("orderData");
+      } else {
+        localStorage.setItem("orderData", updatedCart);
+      }
       return updatedCart;
     };
 
