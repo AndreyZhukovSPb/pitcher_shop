@@ -1,13 +1,13 @@
 // const baseURL = 'http://localhost:4003/api/'
 // const baseURL = 'https://pitcherbartest.ru/api/'
 // const baseURL = 'https://158.160.84.205/api/'
-// const baseURL = 'https://www.shop.pitcherbar.ru/api/'
+const baseURL = 'https://www.shop.pitcherbar.ru/api/'
 const mainWebUrl = 'https://pitcherbar.ru'
 
-const baseURL =
-  typeof window === "undefined"
-    ? "http://localhost:4003/api/"   // SSR на сервере → напрямую к бэку
-    : "https://www.shop.pitcherbar.ru/api/"; // браузер → публичный домен
+// const baseURL =
+//   typeof window === "undefined"
+//     ? "http://localhost:4003/api/"   // SSR на сервере → напрямую к бэку
+//     : "https://www.shop.pitcherbar.ru/api/"; // браузер → публичный домен
 
 const freeDeliveryAmount = 2400
 
