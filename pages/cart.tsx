@@ -180,7 +180,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
     postOrder(fullDeliveryData, order, total)
       .then((data) => {
         if (data.orderData && data.urlForPayment) {
-          console.log(data)
+          // console.log(data)
           // resetOrder();
           // setOrderNumber(data.orderData.number)
           // setOrderEmail(data.orderData.client.email)
@@ -220,8 +220,8 @@ const Cart: React.FC<cartProps> = ({  }) => {
     // } else 
       if (orderPayed.success && orderPayed.status) {
       // console.log(`проверили зака, вернулся ${orderPayed.data.message}`)
-      console.log(orderPayed.data.order.number)
-      console.log(orderPayed.data.order.client.email)
+      // console.log(orderPayed.data.order.number)
+      // console.log(orderPayed.data.order.client.email)
       setOrderNumber(orderPayed.data.order.number)
       setOrderEmail(orderPayed.data.order.client.email)
       setIsPaymentPending(false);
