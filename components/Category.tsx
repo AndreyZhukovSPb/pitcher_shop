@@ -6,6 +6,7 @@ import Image from "next/image";
 import Product from "./Product";
 import { type ProductType } from "../utils/sharedTypes";
 import SectionLine from "./SectionLine";
+import { showTime } from "../utils/constatnts";
 
 interface categoryProps {
   category: { name: string; array: ProductType[] };
@@ -63,9 +64,9 @@ const Category: React.FC<categoryProps> = ({ category }) => {
       </button>
       {!mounted && (<>
             <div className={styles.category__skeletonContainer}>
-              <div className={styles.category__skeletonItem}></div>
-              <div className={styles.category__skeletonItem}></div>
-              <div className={styles.category__skeletonItem}></div>
+              <div className={`${styles.category__skeletonItem} ${showTime ? styles.category__skeletonItem_showTime : ''}`}></div>
+              <div className={`${styles.category__skeletonItem} ${showTime ? styles.category__skeletonItem_showTime : ''}`}></div>
+              <div className={`${styles.category__skeletonItem} ${showTime ? styles.category__skeletonItem_showTime : ''}`}></div>
             </div>
           </>)}
       

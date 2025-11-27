@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/Product.module.css";
 import { type ProductType, type OrderType } from "../utils/sharedTypes";
 import { CartContext } from "./Context";
+import { showTime } from "../utils/constatnts";
 
 interface sizeProps {
   product: ProductType;
+  // discountPercent: number
   // weightToAdd: number;
   // onSizeClick: ((input: number)=> void); // ПЕРЕПИСАТЬ
 }
@@ -43,6 +45,18 @@ const Size: React.FC<sizeProps> = ({ product }) => {
   // const updateSize = Context.updateMillingType;
   // console.log(weightToAdd)
 
+  // const oldPrice = (product.cat_id === 2 || product.cat_id === 2)
+
+  const space = showTime ? '' : ' ' 
+
+  const oldPrice = (newPrice, size) => {
+    const cat10 = product.cat_id === 1 || product.cat_id === 4
+    const isBig = size === 0 ? false : true
+    const value = cat10 ? (newPrice / 0.9) : isBig ? (newPrice / 0.9) : (newPrice / 0.8)
+  
+    return Math.trunc(value);
+}
+
   return (
     <form className={styles.product__priceContainer}>
           {product.price.map((item, number) => {
@@ -72,21 +86,31 @@ const Size: React.FC<sizeProps> = ({ product }) => {
                 <div className={styles.product__priceOptions}>
                   <p
                     className={`${styles.product__weight} ${
-                      product.price.length === 1
-                        ? styles.product__weight_choosed
-                        : ""
-                    }`}
+                      product.price.length === 1 ? styles.product__weight_choosed : ""}`}
                   >
                     {item.title}
                   </p>
+                  {showTime && (
+                    
+                    <p
+                      className={`${styles.product__price} 
+                        ${product.price.length === 1 ? styles.product__price_choosed : ""}
+                        ${styles.product__price_old} 
+                        `}
+                    >
+                    {oldPrice(item.priceItem,number)}{space}&#8381;
+                    {/* {item.priceItem / (1-discountPercent)}{space}&#8381; */}
+                    </p>
+
+                  )}
                   <p
-                    className={`${styles.product__price} ${
-                      product.price.length === 1
-                        ? styles.product__price_choosed
-                        : ""
-                    }`}
+                    className={`${styles.product__price} 
+                    ${product.price.length === 1 ? styles.product__price_choosed : ""}
+                    ${showTime ? styles.product__price_showTime : ''}
+                    ${showTime && product.price.length === 1 ? styles.product__price_showTimeTrue : ''}
+                    `}
                   >
-                    {item.priceItem} &#8381;
+                    {item.priceItem}{space}&#8381;
                   </p>
                   {/* {formatSumm(item.priceItem)} */}
                 </div>

@@ -104,6 +104,11 @@
     background-color: var(--bg-color-card);
     height: 520px;
   }
+
+  .category__skeletonItem_showTime {
+    /* height: 540px; */
+  }
+
   .category__productContainer {
     grid-template-columns: repeat(3, 1fr); 
     padding: 1.5px 1.5px;

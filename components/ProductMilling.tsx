@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../styles/Product.module.css";
-import { millingTableNew } from "../utils/constatnts";
+import { millingTableNew, showTime } from "../utils/constatnts";
 import useOnClickOutside from "use-onclickoutside";
 import { CartContext } from "./Context";
 import  { type ProductType, type OrderType } from "../utils/sharedTypes";
@@ -70,8 +70,9 @@ const Milling: React.FC<categoryMilling> = ({ isShotCard, currentProduct, isCart
     <div className=
       {`${styles.product__extrasContainer} 
         ${isShotCard ? '' : styles.product__extrasContainer_fullCard}
-        ${isCart ? styles.product__extrasContainer_cart : ''}`
-      }
+        ${isCart ? styles.product__extrasContainer_cart : ''}
+        ${showTime ? styles.product__extrasContainer_showTime : ''}
+      `}
     >
     <div 
       className={`${styles.product__extraOptions} ${isCart ? styles.product__extraOptions_cart : ''}`}

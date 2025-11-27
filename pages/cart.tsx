@@ -11,7 +11,7 @@ import { getWordForCart } from "../utils/dataTranformers";
 import { useRouter } from "next/router";
 import { postOrder, checkOrder } from "../utils/api";
 import { useMediaQuery } from "react-responsive";
-import { regOrderError, paymentFailed, paymentCheckError, paymentChecking, freeDeliveryAmount } from "../utils/constatnts";
+import { regOrderError, paymentFailed, paymentCheckError, paymentChecking, freeDeliveryAmount, showTime } from "../utils/constatnts";
 
 // import useCheckStorage from '../utils/checkStorage'
 
@@ -314,6 +314,11 @@ const Cart: React.FC<cartProps> = ({  }) => {
       <section className={styles.cart}>
       {/* <SectionLine/> */}
         <h2 className={styles.cart__title}>Корзина</h2>
+        {showTime && (
+          <p className={`${styles.cart__showTimeText} ${styles.cart__subTitle}`}>
+            Цены на товары указаны уже за вычетом скидок
+          </p>  
+        )}
         {/* {orderData.length === 0 && (
           <p className={styles.cart__subTitle}>Ваша корзина пуста</p>
         )} */}
