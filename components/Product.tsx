@@ -11,6 +11,7 @@ import Balance from "./ProductBalance";
 import Size from "./ProductSize";
 import SubmitBtn from "./ProductSubmitBtn";
 import { useRouter } from "next/router";
+import { showTime } from "../utils/constatnts";
 
 interface productProps {
   product: ProductType;
@@ -93,20 +94,39 @@ const Product: React.FC<productProps> = ({ product }) => {
     (item) => item.itemId === product._id
   )?.currentUrl;
 
-  useEffect
+  const currentSize = currentFeatures.find(
+    (item) => item.itemId === product._id
+  )?.currentSize;
 
-  // const [loaded, setLoaded] = useState(false);
+  const isBigBag = currentSize === 0 ? false : true
+
+  // const catSrc = (product.cat_id === 2 || product.cat_id === 3) && currentSize === 0 
+  const catSrc = (product.cat_id === 2 || product.cat_id === 3) && !isBigBag
+    ? 'https://storage.yandexcloud.net/pitcher-photos/for%20shop/final/cat20s.png'
+    : 'https://storage.yandexcloud.net/pitcher-photos/for%20shop/final/cat10s.png'
+
 
   return (
     <>
       {/* {currentImageUrl && ( */}
-        <div className={styles.product}>
+        <div className={`${styles.product} ${showTime ? styles.product__showTime : ''}`}>
           <div
             className={styles.product__container}
             onClick={handleProductClick}
           >
+            {showTime && (
+              <Image 
+                className={`${styles.product__cat}`}
+                src= {catSrc}
+                fill
+                alt="cat discount"
+            />
+            )}
             <Image
-              className={`${styles.product__image} ${product.name=== 'DRIP BAG 25 дрипов' ? styles.product__image_large : ''}  `}
+              className={`
+                ${styles.product__image} ${product.name=== 'DRIP BAG 25 дрипов' ? styles.product__image_large : ''}  
+                ${showTime ? styles.product__image_showTime : ''}
+                `}
               // src={currentImageUrl}
               src={!currentImageUrl ? product.url : currentImageUrl}
 
@@ -140,8 +160,17 @@ const Product: React.FC<productProps> = ({ product }) => {
           {(product.cat_id === 2 || product.cat_id === 3) && (
             <Milling currentProduct={product} isShotCard={true} />
           )}
-          <div className={styles.product__cartContainer}>
-            <Size product={product} />
+          {showTime && (
+            <div className={styles.product__discount}></div>
+          )}  
+          <div 
+            className={`${styles.product__cartContainer} ${showTime ? styles.product__cartContainer_showTime : ''}`}
+          >
+            <Size 
+              product={product} 
+              // discountPercent={discountPercent}
+              />
+          
             <Counter currentProduct={product} />
           </div>
           <SubmitBtn currentProduct={product} />

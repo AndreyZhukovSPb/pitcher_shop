@@ -13,6 +13,7 @@ import Counter from "../components/ProductCounter";
 import Size from "../components/ProductSize";
 import SubmitBtn from "../components/ProductSubmitBtn";
 import { useMediaQuery } from "react-responsive";
+import { showTime } from "../utils/constatnts";
 // import useCheckStorage from '../utils/checkStorage'
 
 const LinkNamePage: React.FC = () => {
@@ -25,6 +26,7 @@ const LinkNamePage: React.FC = () => {
   const [currentItemUrl, setCurrentItemUrl] = useState<string>();
   const isBigScreen = useMediaQuery({ query: "(min-width: 1024px)" });
   const currentFeatures = FeaturesContext.currentProductFeatures;
+  const [currentCatUrl, setCurrentCatUrl] = useState<string>();
 
   const fetchCurrentItem = async (linkName: string) => {
 
@@ -53,11 +55,24 @@ const LinkNamePage: React.FC = () => {
     }
   }, [productsList, query.linkName]);
   
-  useEffect(()=>{
+  useEffect(()=> {
     if (currentItem) {
       setCurrentItemUrl(currentFeatures.find((item)=>item.itemId === currentItem._id).currentUrlLarge)
     }
-  },[currentFeatures, currentItem])
+      
+    if (showTime && currentItem && productsList.length > 0) { // ПОСЛЕ АКЦИИ ЗАКОМЕНТИРОВАТЬ
+      const currentSize = currentFeatures.find((item)=>item.itemId === currentItem._id).currentSize
+      const currentCatId = productsList.find((item)=>item._id === currentItem._id).cat_id
+      if (currentCatId === 1 || currentCatId === 4 || currentSize === 1) {
+        setCurrentCatUrl('https://storage.yandexcloud.net/pitcher-photos/for%20shop/final/cat10s.png')
+      } else {
+        setCurrentCatUrl('https://storage.yandexcloud.net/pitcher-photos/for%20shop/final/cat20s.png')
+      }
+    }
+    
+  },[currentFeatures, currentItem, productsList])
+
+  console.log(currentCatUrl)
 
   const router = useRouter();
 
@@ -66,6 +81,14 @@ const LinkNamePage: React.FC = () => {
       {currentItem && currentItemUrl &&(
         <section className={styles.productFull}>
           <div className={styles.productFull__imageContainer}>
+            {showTime && currentCatUrl && (<>
+              <Image 
+                className={`${styles.productFull__cat}`}
+                src= {currentCatUrl}
+                fill
+                alt="cat discount"
+            />
+            </>)}
             <Image
               className={styles.productFull__image}
               src={currentItemUrl}

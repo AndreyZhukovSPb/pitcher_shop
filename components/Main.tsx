@@ -34,8 +34,10 @@ const Main: React.FC<MainProps> = ({ data }) => {
         </picture>
         <div className={styles.main__overlay}>
           <div className={styles.main__textContainer}>
-            <p className={styles.main__text}>Свежий кофе </p>
-            <p className={styles.main__text}>с доставкой в день заказа</p>
+            {/* <p className={styles.main__text}>Свежий кофе </p> */}
+            <p className={styles.main__text}>ЧЕРНАЯ ПЯТНИЦА</p>
+            <p className={styles.main__text}>27, 28, 29, 30 НОЯБРЯ</p>
+            {/* <p className={styles.main__text}>с доставкой в день заказа</p> */}
             <a href="/delivery" className={styles.main__link }>
               подробнее о доставке и оплате
             </a>
