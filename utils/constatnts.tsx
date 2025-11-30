@@ -3,7 +3,7 @@
 // const baseURL = 'http://158.160.84.205/api/'
 const baseURL = 'https://www.shop.pitcherbar.ru/api/'
 const mainWebUrl = 'https://pitcherbar.ru'
-const showTime = true
+const showTime = false
 
 // const baseURL =
 //   typeof window === "undefined"
