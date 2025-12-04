@@ -54,6 +54,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
   const [isCodeValid, setIsCodeValid] = React.useState<boolean>(false);
   const [promoresError, setPromoresError] = React.useState<string>('');
   const [discountValue, setDiscountValue] = React.useState<number>(0);
+  const [totalForDelivery, setTotalForDelivery] = React.useState<number>(0);
   // const [currentDiscount, setCurrentDiscount] = React.useState<number>(0);
 
   // const [orderData, setOrderData] = React.useState<OrderType[]>([])
@@ -63,6 +64,14 @@ const Cart: React.FC<cartProps> = ({  }) => {
   // },[orderDataFromContext])
 
   // useCheckStorage();
+  useEffect(()=> {
+    if (isCodeValid) {
+      setTotalForDelivery(currentTotal * (1-discountValue))
+    } else {
+      setTotalForDelivery(currentTotal)
+    }
+
+  }, [orderData, deliveryType, isCodeValid])
 
   useEffect(() => {
     if (deliveryType !== 'Самовывоз') {
@@ -122,11 +131,16 @@ const Cart: React.FC<cartProps> = ({  }) => {
 
   useEffect(() => {
     if (deliveryType === 'Курьер') {
-      setDeliveryPrice(currentTotal >= freeDeliveryAmount ? 0 : 400)
+      if (!isCodeValid) {
+        setDeliveryPrice(currentTotal >= freeDeliveryAmount ? 0 : 400)
+      } else {
+        console.log(currentTotal * (1 - discountValue))
+        setDeliveryPrice(currentTotal * (1 - discountValue) >= freeDeliveryAmount ? 0 : 400)
+      }
     } else {
       setDeliveryPrice(0)  
     }
-  }, [currentTotal, deliveryType])
+  }, [currentTotal, deliveryType, isCodeValid])
 
   const handleContactsErrors = (isValid: boolean, errors: string[]) => {
     setIsContactsValid(isValid);
@@ -310,16 +324,16 @@ const checkPromoCode = async (value: string) => {
       setIsCodeValid(true);
     } else {
       setPromoresError('Промокод недействителен')
+      setDiscountValue(0)
       setIsCodeValid(false);
     }
   } catch (error) {
     setPromoresError('Ошибка при проверке промокода')
     setIsCodeValid(false); // при ошибке сбрасываем
+    setDiscountValue(0)
   }
 };
 
-  
-    
     // const result = checkPromo(value);
     // if (!isPromoChecked) {
     //   setIsPromoChecked(true)
@@ -410,7 +424,7 @@ const checkPromoCode = async (value: string) => {
                 <p className={styles.cart__deliveryName}>
                   Доставка по Санкт-Петербургу
                   <span className={styles.cart__deliveryComment}>
-                    {currentTotal < freeDeliveryAmount ? ` (400₽ или бесплатно при заказе от ${freeDeliveryAmount}₽)` : ' (бесплатно)'}
+                    {totalForDelivery < freeDeliveryAmount ? ` (400₽ или бесплатно при заказе от ${freeDeliveryAmount}₽)` : ' (бесплатно)'}
                   </span>  
                 </p>
               </label>
@@ -425,7 +439,7 @@ const checkPromoCode = async (value: string) => {
                 <p className={styles.cart__deliveryName}>
                   Доставка в другое место
                   <span className={styles.cart__deliveryComment}> 
-                    {currentTotal < freeDeliveryAmount ? ` (по тарифам транспортной компании или бесплатно при заказе от ${freeDeliveryAmount}₽)` : ' (бесплатно)'}
+                    {totalForDelivery < freeDeliveryAmount ? ` (по тарифам транспортной компании или бесплатно при заказе от ${freeDeliveryAmount}₽)` : ' (бесплатно)'}
                     {/* (по тарифам транспортной компании СДЭК) */}
                   </span>  
                 </p>
@@ -518,9 +532,9 @@ const checkPromoCode = async (value: string) => {
                     <p className={styles.cart__goodsSummMoney}>
                       {
                       
-                      deliveryType === 'Самовывоз' ? '0 ₽' : 
+                        deliveryType === 'Самовывоз' ? '0 ₽' : 
                         deliveryType === 'Курьер' ? `${deliveryPrice} ₽` : 
-                        deliveryType === 'Доставка по РФ' && currentTotal >= freeDeliveryAmount ? '0 ₽' :
+                        deliveryType === 'Доставка по РФ' && (currentTotal * (1 - discountValue)) >= freeDeliveryAmount ? '0 ₽' :
                         'при получении'}
                     </p>
                   </div>
