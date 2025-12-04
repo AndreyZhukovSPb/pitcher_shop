@@ -71,7 +71,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
       setTotalForDelivery(currentTotal)
     }
 
-  }, [orderData, deliveryType, isCodeValid])
+  }, [orderData, deliveryType, isCodeValid, currentTotal])
 
   useEffect(() => {
     if (deliveryType !== 'Самовывоз') {
