@@ -7,7 +7,7 @@ interface cartPromoProps {
   applyPromocode: (value: string) => void;
 }
 
-const CartContacts: React.FC<cartPromoProps> = ({ applyPromocode }) => {
+const CartPromo: React.FC<cartPromoProps> = ({ applyPromocode }) => {
   
   const {
     register,
@@ -60,71 +60,5 @@ const CartContacts: React.FC<cartPromoProps> = ({ applyPromocode }) => {
   );
 };
 
-export default CartContacts;
-
-
-//   const compare = watch((data) => {
-  //     if (data.profileName === data.name && data.profileEmail === data.email) {
-  //       setIsDataNew(false)
-  //     } else {
-  //       setIsDataNew(true)
-  //     }
-  //   })
-  // },[watch])
-
-  // const onSubmit = (data) => {
-    // onProfile(data.profileName, data.profileEmail);
-    // reset(currentUser);
-  // };
-
-  // const test = async () => {
-  //   const check = await trigger(); // Возвращает true, если форма валидна
-  //   if (!check) {
-  //     console.log(errors); // Выводит объект ошибок в консоль
-  //   }
-  // }
-
-
-  // useEffect(()=> {
-  //   if (!isValid) {
-  //     return
-  //   } else if (isSubmiyClicked) {
-  //     const data = getValues()
-  //     passContacts(data);
-  //     // reset();
-  //   } else {
-  //     return;
-  //   }
-  // }, [isSubmiyClicked])
-
-  // useEffect(() => {
-  //   if (!isValid) {
-  //     // console.log('вызываем при невалидности')
-  //     const errorsArray = [
-  //       errors.name && errors.name.message,
-  //       errors.phone && errors.phone.message,
-  //       errors.email && errors.email.message,
-  //       isDelivery ? errors.adress && errors.adress.message : {}
-  //     ].filter(Boolean);
-  //     passErrors(isValid, errorsArray.map(error => typeof error === 'string' ? error : ''));
-  //   } else {
-  //     // console.log('вызываем при валидности')
-  //     // const contacts = getValues()
-  //     passErrors(isValid, []);
-  //     // passContacts(getValues())
-  //   }
-  // }, [isValid, errors.name?.message, errors.phone?.message, errors.email?.message, errors.adress?.message, isDelivery])
-
-  // useEffect(() => {
-  //   trigger();
-  // }, [])
-
-  // useEffect(() => {
-  //   console.log(errors);
-  // }, [errors])
-
-
-  // useEffect(() => {
-  //   console.log(`'принудительяная проверка' ${errors}`)
-  // }, [errors])
+export default CartPromo;
 
