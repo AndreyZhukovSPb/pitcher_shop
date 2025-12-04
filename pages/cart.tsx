@@ -178,7 +178,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
     }
 
     const total = isCodeValid ? 
-      deliveryPrice + currentTotal * (1 - discountValue) : 
+      deliveryPrice + Math.round(currentTotal * (1 - discountValue)) : 
       deliveryPrice + currentTotal;
 
     // сохраняю данные заказа на клиенте - перенес в контекст
@@ -317,6 +317,8 @@ const checkPromoCode = async (value: string) => {
     setIsCodeValid(false); // при ошибке сбрасываем
   }
 };
+
+  
     
     // const result = checkPromo(value);
     // if (!isPromoChecked) {
@@ -508,7 +510,7 @@ const checkPromoCode = async (value: string) => {
                       <p className={styles.cart__goodsSummTitle}>
                         Скидка
                       </p>
-                    <p className={`${styles.cart__goodsSummMoney} ${styles.cart__goodsSummMoney_discount}`}>- {currentTotal * discountValue} &#8381;</p>
+                    <p className={`${styles.cart__goodsSummMoney} ${styles.cart__goodsSummMoney_discount}`}>- {Math.round(currentTotal * discountValue)} &#8381;</p>
                   </div>
                   )}
                   <div className={styles.cart__goodsSummContainer}>
@@ -527,7 +529,7 @@ const checkPromoCode = async (value: string) => {
                       Итого
                     </p>
                     <p className={`${styles.cart__goodsSummMoney} ${styles.cart__goodsSummMoney_total}`}>
-                      {!isCodeValid ? deliveryPrice + currentTotal : deliveryPrice + currentTotal * (1 - discountValue)} ₽
+                      {!isCodeValid ? deliveryPrice + currentTotal : deliveryPrice + Math.round(currentTotal * (1 - discountValue))} ₽
                     </p>
                   </div>
                   <div className={styles.cart__errorsContainer}>
