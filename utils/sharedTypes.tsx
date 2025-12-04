@@ -49,6 +49,7 @@ export interface OrderType {
   linkName: string;
   quantity: number;
   milling: string;
+  roastingType?: string;
   _id: string;
   currentSize: number;
   subtitle?: string;

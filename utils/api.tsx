@@ -151,8 +151,6 @@ export async function getOrders(token) {
   }
 }
 
-
-
 export async function checkOrder(bankOrderId) {
   const url = `${baseURL}order/payment`;
   try {
@@ -201,6 +199,43 @@ export async function checkOrder(bankOrderId) {
         status: undefined,
       }
     }
+  }
+}
+
+export async function checkPromo(promocode: string) {
+  const url = `${baseURL}promocodes`;
+  try {
+    const res = await axios.post(url, {
+      promocode,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      timeout: 40000
+    });
+    if (!res.data.valid) {
+      return {
+        success: true,
+        valid: false,
+      };
+    } else {
+      return {
+        success: true,
+        valid: true,
+        value: res.data.discount
+      };
+    }
+    
+  } catch (error) {
+    // if (error.response.status === 404 || error.response.status === 500) {
+    //   return {
+    //     success: false,
+    //     valid: undefined,
+    //   }
+    // } else {
+    //   throw error;
+    // } 
+    throw error;
   }
 }
 
