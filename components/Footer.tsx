@@ -117,7 +117,7 @@ const Footer: React.FC = () => {
           <Link className={styles.footer__conditions} href="/about">Реквизиты компании</Link>
         </div>
       </div>
-      <p className={styles.footer__copyright}>2014 - 2025 Picther loves you</p>
+      <p className={styles.footer__copyright}>2014 - 2025 Pitcher loves you</p>
     </footer>
   );
 };

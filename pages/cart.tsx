@@ -8,16 +8,18 @@ import CartItem from "../components/CartItem";
 import CartContacts from "../components/CartContacts";
 import Preloader from "../components/Preloader";
 import { getWordForCart } from "../utils/dataTranformers";
+import { discountedOrder } from "../utils/discountedOrder";
 import { useRouter } from "next/router";
-import { postOrder, checkOrder } from "../utils/api";
+import { postOrder, checkOrder, checkPromo } from "../utils/api";
 import { useMediaQuery } from "react-responsive";
-import { regOrderError, paymentFailed, paymentCheckError, paymentChecking, freeDeliveryAmount, showTime } from "../utils/constatnts";
+import { regOrderError, paymentFailed, paymentCheckError, paymentChecking, freeDeliveryAmount, showTime, promoTime } from "../utils/constatnts";
 
 // import useCheckStorage from '../utils/checkStorage'
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Popup from "../components/Popup";
+import CartPromo from "../components/CartPromo";
 
 interface cartProps {
 } // DEL?
@@ -48,6 +50,11 @@ const Cart: React.FC<cartProps> = ({  }) => {
   const isBigScreen = useMediaQuery({ query: "(min-width: 1024px)" });
   const [isPaymentError, setIsPaymentError] = React.useState<boolean>(false);
   const [isPaymentPending, setIsPaymentPending] = React.useState<boolean>(false);
+  const [isPromoChecked, setIsPromoChecked] = React.useState<boolean>(false);
+  const [isCodeValid, setIsCodeValid] = React.useState<boolean>(false);
+  const [promoresError, setPromoresError] = React.useState<string>('');
+  const [discountValue, setDiscountValue] = React.useState<number>(0);
+  // const [currentDiscount, setCurrentDiscount] = React.useState<number>(0);
 
   // const [orderData, setOrderData] = React.useState<OrderType[]>([])
 
@@ -103,7 +110,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
       }
   }, []); 
 
-  useEffect((    
+  useEffect((
   ) => {
     setCurentAmount(orderData.reduce((acc, item) => {
       return acc + item.price.quantity;
@@ -169,7 +176,10 @@ const Cart: React.FC<cartProps> = ({  }) => {
         deliveryType: deliveryType,
         };
     }
-    const total = deliveryPrice + currentTotal;
+
+    const total = isCodeValid ? 
+      deliveryPrice + currentTotal * (1 - discountValue) : 
+      deliveryPrice + currentTotal;
 
     // сохраняю данные заказа на клиенте - перенес в контекст
     // const orderDataForStorage = JSON.stringify(order);
@@ -249,7 +259,12 @@ const Cart: React.FC<cartProps> = ({  }) => {
   
   const handleCustomerData = (contacts: { [key: string]: string }) => {
     setIsPreloaderOpened(true)
-    sendOrder(orderData, contacts, deliveryPoint, deliveryPrice, currentTotal, isDelivery, deliveryType)
+    if (!isCodeValid) {
+      sendOrder(orderData, contacts, deliveryPoint, deliveryPrice, currentTotal, isDelivery, deliveryType)
+    } else {
+      const discountedOrderForApi = discountedOrder(orderData, discountValue);
+      sendOrder(discountedOrderForApi, contacts, deliveryPoint, deliveryPrice, currentTotal, isDelivery, deliveryType)
+    }
   }
 
   const handleSubmit = () => {
@@ -282,8 +297,36 @@ const Cart: React.FC<cartProps> = ({  }) => {
 
   const handleDeliveryClick = () => {
     router.push(`/delivery`);
-    console.log("пойдем в условия доставки");
+    // console.log("пойдем в условия доставки");
   };
+
+
+const checkPromoCode = async (value: string) => {
+  if (!isPromoChecked) {setIsPromoChecked(true);}
+  try {
+    const result = await checkPromo(value); // результат запроса от сервера
+    if (result.success && result?.valid) { 
+      setDiscountValue(result.value)
+      setIsCodeValid(true);
+    } else {
+      setPromoresError('Промокод недействителен')
+      setIsCodeValid(false);
+    }
+  } catch (error) {
+    setPromoresError('Ошибка при проверке промокода')
+    setIsCodeValid(false); // при ошибке сбрасываем
+  }
+};
+    
+    // const result = checkPromo(value);
+    // if (!isPromoChecked) {
+    //   setIsPromoChecked(true)
+    // }
+    // if (value === '123') {
+    //   setIsCodeValid(true);
+    // } else {
+    //   setIsCodeValid(false);
+    // }
 
   if (orderData && orderData.length === 0) {
     // Пока данные загружаются, отображайте индикатор загрузки или placeholder
@@ -379,24 +422,26 @@ const Cart: React.FC<cartProps> = ({  }) => {
                 <span className={styles.cart__deliveryType_type_visible}></span>
                 <p className={styles.cart__deliveryName}>
                   Доставка в другое место
-                  <span className={styles.cart__deliveryComment}> (по тарифам транспортной компании СДЭК)
+                  <span className={styles.cart__deliveryComment}> 
+                    {currentTotal < freeDeliveryAmount ? ` (по тарифам транспортной компании или бесплатно при заказе от ${freeDeliveryAmount}₽)` : ' (бесплатно)'}
+                    {/* (по тарифам транспортной компании СДЭК) */}
                   </span>  
                 </p>
                 
               </label>
             </form>
-            {deliveryType === 'Доставка по РФ' && (
+            {deliveryType === 'Доставка по РФ' && currentTotal < freeDeliveryAmount && (
               <span className={`${styles.cart__deliveryName}`}>Доставка осуществляется компанией СДЭК. Оплачивается отдельно при получении.</span>
             )}
             <div onClick={handleDeliveryClick} className={`${styles.cart__deliveryExtra}`}>
-              <span className={styles.cart__deliveryName_extra}>Подробнее о доставке и оплате.</span>  
+              <span className={styles.cart__deliveryName_extra}>Подробнее о доставке и оплате</span>  
             </div>
             </>
             )}
             
             {deliveryType === 'Самовывоз' && orderData.length >= 1 && (
               <form className={styles.cart__deliveryContainer}>
-                <h2 className={`${styles.cart__title} ${styles.cart__title_extra}`}>Выбрите кофейню</h2>
+                <h2 className={`${styles.cart__title} ${styles.cart__title_extra}`}>Выберите кофейню</h2>
                 <label className={styles.cart__label}>
                   <input
                     type="radio"
@@ -431,6 +476,25 @@ const Cart: React.FC<cartProps> = ({  }) => {
                   isSubmiyClicked={isReadyToPay}
                   isPaymentReceived={isOrderPayed}
                 />
+                {promoTime && (
+                  <>
+                    <h2 className={`${styles.cart__title} ${styles.cart__title_promo}`}>Промокод</h2>
+                    <CartPromo
+                      applyPromocode={checkPromoCode}
+                    />
+                    <div className={styles.cart__promoresContainer}>
+                      <span className={`${styles.cart__promores} ${isCodeValid ? styles.cart__promores_visible : ''}`}>
+                        Применен промокод на {discountValue*100}% скидку
+                      </span>
+                      <span className={`${styles.cart__promores} ${styles.cart__promores_false} ${!isCodeValid && isPromoChecked ? styles.cart__promores_visible : ''}`}>
+                        {/* Промокод недействителен */}
+                        {promoresError}
+                      </span>
+                    </div>
+                    
+                  </>
+                  
+                )}
                 <div className={styles.cart__totalContainer}>
                   <h2 className={styles.cart__title}>Ваш заказ</h2>
                   <div className={styles.cart__goodsSummContainer}>
@@ -439,10 +503,23 @@ const Cart: React.FC<cartProps> = ({  }) => {
                     </p>
                     <p className={styles.cart__goodsSummMoney}>{currentTotal} &#8381;</p>
                   </div>
+                  {isCodeValid && (
+                    <div className={styles.cart__goodsSummContainer}>
+                      <p className={styles.cart__goodsSummTitle}>
+                        Скидка
+                      </p>
+                    <p className={`${styles.cart__goodsSummMoney} ${styles.cart__goodsSummMoney_discount}`}>- {currentTotal * discountValue} &#8381;</p>
+                  </div>
+                  )}
                   <div className={styles.cart__goodsSummContainer}>
                     <p className={styles.cart__goodsSummTitle}>Доставка</p>
                     <p className={styles.cart__goodsSummMoney}>
-                      {deliveryType === 'Самовывоз' ? 'бесплатно' : deliveryType === 'Курьер' ? `${deliveryPrice} ₽` : 'при получении'}
+                      {
+                      
+                      deliveryType === 'Самовывоз' ? '0 ₽' : 
+                        deliveryType === 'Курьер' ? `${deliveryPrice} ₽` : 
+                        deliveryType === 'Доставка по РФ' && currentTotal >= freeDeliveryAmount ? '0 ₽' :
+                        'при получении'}
                     </p>
                   </div>
                   <div className={styles.cart__goodsSummContainer}>
@@ -450,7 +527,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
                       Итого
                     </p>
                     <p className={`${styles.cart__goodsSummMoney} ${styles.cart__goodsSummMoney_total}`}>
-                      {deliveryPrice + currentTotal} ₽
+                      {!isCodeValid ? deliveryPrice + currentTotal : deliveryPrice + currentTotal * (1 - discountValue)} ₽
                     </p>
                   </div>
                   <div className={styles.cart__errorsContainer}>

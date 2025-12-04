@@ -225,6 +225,92 @@
   margin: 10px 0 20px;
 }
 
+/* .cart__promobox {
+  margin: 20px 0 0;
+} */
+
+.cart__promorDataForm {
+  width: 100%;
+  border-bottom: 1px solid rgb(104 100 100 / 0.4);
+  display: flex;
+  flex-direction: row;
+  /* padding: 0 30px 40px; */
+}
+
+.cart__promoSbmt {
+  width: 20%;
+  box-sizing: border-box;
+  font-family: var(--paragpaph-font);
+  font-size: var(--paragpaph-font-size);
+  font-size: 16px;
+  text-align: right;
+  align-self: flex-end;
+  background-color: white;
+  color: var(--font-color-gray);
+  border: none;
+  padding: 0 0 10px;
+  display: none;
+  cursor: pointer;
+}
+
+.cart__promoSbmt_active {
+  display: block;
+}
+
+.cart__promoresContainer {
+  height: 10px;
+}
+
+
+.cart__promores {
+  font-family: var(--span-font);
+  /* font-size: 13px; */
+  font-size: var(--paragpaph-font-size);
+  margin: 5px 0 0;
+  color: #04b304;
+  display: none;
+}
+
+.cart__promores_false {
+  color: red;
+}
+
+.cart__promores_visible {
+  display: block;
+}
+
+.cart__promoData{
+  width: 80%;
+  box-sizing: border-box;
+  font-family: var(--paragpaph-font);
+  font-size: var(--paragpaph-font-size);
+  font-size: 16px;
+  /* background-color: var(--btn-color); */
+  border: none;
+  outline: none;
+  color: black;
+  /* margin-top: 20px; */
+  /* padding-top: 20px; */
+  padding: 0 0 10px;
+  /* padding-bottom: 10px; */
+  /* border-bottom: 1px solid white; */
+  resize: vertical;
+  height: auto;
+  display: flex;
+  text-wrap: wrap;
+  overflow-y: visible;
+  overflow-wrap: break-word;
+  border-radius: 0;
+}
+
+.cart__title_promo {
+  margin-bottom: 15px;
+}
+
+.cart__goodsSummMoney_discount {
+  color: #04b304;
+}
+
 .cart__deliveryName_extra {
   /* margin: 5px 0; */
   line-height: 1.4;

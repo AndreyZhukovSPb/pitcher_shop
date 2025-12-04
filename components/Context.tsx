@@ -16,6 +16,7 @@ interface ICurrentProductFeatures {
   name: string;
   name_2?: string;
   millingType?: string;
+  roastingType?: string;
   price: { title: string; priceItem: number; quantity: number }[];
   quantity: number;
   promo: boolean;
@@ -394,6 +395,7 @@ export const CartContextProvider = ({
               urlGrandeL: item.urlGrandeL,
               currentUrl: item.url,
               currentUrlLarge: item.urlLarge,
+              roastingType: item.description.roastingType
             };
           } else {
             return {
@@ -502,9 +504,10 @@ export const CartContextProvider = ({
         itemForAdd.millingType
       ),
       milling: itemForAdd.millingType ? itemForAdd.millingType : undefined,
+      roasting: itemForAdd.roastingType ? itemForAdd.roastingType : undefined,
       currentSize: itemForAdd.currentSize,
       cat_id: product.cat_id,
-      subtitle: product.subtitle,
+      // subtitle: product.subtitle,
       currentUrl: itemForAdd.currentUrl,
     };
     setOrderData((prevOrderData) => [...prevOrderData, { ...addedItem }]);
