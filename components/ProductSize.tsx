@@ -38,7 +38,9 @@ const Size: React.FC<sizeProps> = ({ product }) => {
   const handleChoseSize = (value: number): void => {
     updatePrice(product._id, value);
     resetQuantity(product._id, false, value);
-    resetMilling (product._id);
+    if (product.cat_id === 2 || product.cat_id === 3) {
+      resetMilling (product._id);
+    }
   };
 
   // console.log(currentSize)

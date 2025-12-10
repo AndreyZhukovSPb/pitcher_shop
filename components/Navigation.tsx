@@ -48,6 +48,7 @@ const Navigation: React.FC<navigationProps> = ({
   const { query }  = useRouter();
 
   const [fullCardId, setFullCardId] = useState<string>('')
+  const [fullCardCatId, setFullCardCatId] = useState<number>(0)
   const router = useRouter();
 
   useEffect(() => {
@@ -76,6 +77,7 @@ const Navigation: React.FC<navigationProps> = ({
           // console.log(`проверяем query ${query.linkName}`)
           // setFullCardId(currentFeatures.find(item => item.linkName === linkName).itemId)
           setFullCardId(currentFeatures.find(item => item.linkName === linkName).itemId)
+          setFullCardCatId(currentFeatures.find(item => item.linkName === linkName).cat_id)
         } 
       }
     }
@@ -93,10 +95,12 @@ const Navigation: React.FC<navigationProps> = ({
   }
 
   function handleBackClick() {
-    resetMilling(fullCardId);
     resetPriceType(fullCardId);
     resetQuantity(fullCardId, true);
     // router.push(`/`);
+    if (fullCardCatId === 2 || fullCardCatId === 3) {
+      resetMilling(fullCardId);
+    }
     router.back()
   }
 
