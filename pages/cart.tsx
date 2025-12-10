@@ -446,8 +446,13 @@ const checkPromoCode = async (value: string) => {
                 
               </label>
             </form>
-            {deliveryType === 'Доставка по РФ' && currentTotal < freeDeliveryAmount && (
-              <span className={`${styles.cart__deliveryName}`}>Доставка осуществляется компанией СДЭК. Оплачивается отдельно при получении.</span>
+            {deliveryType === 'Доставка по РФ' && (
+              <span className={`${styles.cart__deliveryName}`}>
+                {currentTotal < freeDeliveryAmount ? 
+                  'Доставка осуществляется компанией СДЭК. Оплачивается отдельно при получении.' :
+                  'Бесплатная доставка до пункта выдачи СДЭК на территории России по вашему выбору.'
+                }
+                </span>
             )}
             <div onClick={handleDeliveryClick} className={`${styles.cart__deliveryExtra}`}>
               <span className={styles.cart__deliveryName_extra}>Подробнее о доставке и оплате</span>  

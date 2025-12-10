@@ -22,6 +22,7 @@ interface ICurrentProductFeatures {
   promo: boolean;
   currentSize: number;
   linkName: string;
+  cat_id?: number;
 }
 
 interface cartProps {
@@ -395,7 +396,8 @@ export const CartContextProvider = ({
               urlGrandeL: item.urlGrandeL,
               currentUrl: item.url,
               currentUrlLarge: item.urlLarge,
-              roastingType: item.description.roastingType
+              roastingType: item.description.roastingType,
+              cat_id: item.cat_id
             };
           } else {
             return {
@@ -414,6 +416,7 @@ export const CartContextProvider = ({
               urlLarge: item.urlLarge,
               currentUrl: item.url,
               currentUrlLarge: item.urlLarge,
+              cat_id: item.cat_id
             };
           }
         })

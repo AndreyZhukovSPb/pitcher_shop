@@ -84,9 +84,11 @@ const Product: React.FC<productProps> = ({ product }) => {
 
   const handleProductClick = () => {
     router.push(`/${product.linkName}`);
-    resetMilling(product._id);
     resetPriceType(product._id);
     resetQuantity(product._id, true);
+    if (product.cat_id === 2 || product.cat_id === 3) {
+      resetMilling (product._id);
+    }
     // console.log("click?");
   };
 

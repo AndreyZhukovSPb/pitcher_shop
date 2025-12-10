@@ -83,10 +83,12 @@ const SubmitBtn: React.FC<SubmitBtnProps> = ({ currentProduct, isFullCard
   };
 
   const resetProductFeatures = () => {
-    // что оставляем? пока оставляем только размер
-    resetMilling(currentProduct._id); 
-    // resetPriceType(currentProduct._id);
     resetQuantity(currentProduct._id, true);
+    if (currentProduct.cat_id === 2 || currentProduct.cat_id === 3) {
+      resetMilling(currentProduct._id); 
+    }
+    // что оставляем? пока оставляем только размер
+    // resetPriceType(currentProduct._id);
   }
 
   const addToCartHandler =  () => {
