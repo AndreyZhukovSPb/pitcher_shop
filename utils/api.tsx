@@ -79,14 +79,15 @@ export async function getItems() {
 //   }
 // }
 
-export async function postOrder(client, orderData, total) {
+export async function postOrder(client, orderData, total, isCodeValid) {
   const url = `${baseURL}orders`;
   // console.log(orderData)
   try {
     const res = await axios.post(url, {
       client,
       orderData,
-      total
+      total,
+      isCodeValid
     }, {
       headers: {
         'Content-Type': 'application/json',
