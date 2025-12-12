@@ -81,6 +81,10 @@ const Cart: React.FC<cartProps> = ({  }) => {
     }
   }, [deliveryType])
 
+  useEffect(() => {
+  setIsPreloaderOpened(false);
+}, []);
+
   const handleChooseDelivery = (value: string) => {
     setDeliveryType(value);
     setIsDeliveryChosen(true);
@@ -201,7 +205,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
     // const deliveryDataForStorage = JSON.stringify(fullDeliveryData);
     // localStorage.setItem('deliveryData', deliveryDataForStorage);
 
-    postOrder(fullDeliveryData, order, total)
+    postOrder(fullDeliveryData, order, total, isCodeValid)
       .then((data) => {
         if (data.orderData && data.urlForPayment) {
           // console.log(data)
