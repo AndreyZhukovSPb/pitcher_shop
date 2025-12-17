@@ -129,7 +129,12 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
               value: true,
               message: "Заполните поле Имя",
             },
+            maxLength: {
+              value: 30,
+              message: "Имя не должно превышать 30 символов",
+          }
           })}
+          maxLength={30}
           type="text"
           placeholder="Имя и фамилия *"
           className={styles.cart__customerData}
@@ -158,11 +163,16 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
         <input
           {...register("email", {
             required: "Заполните поле Email",
+            maxLength: {
+              value: 30,
+              message: "Email не должен превышать 30 символов",
+            },
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
               message: "Некорректный адрес электронной почты",
             },
           })}
+          maxLength={30}
           type="email"
           placeholder="email *"
           className={styles.cart__customerData}
@@ -174,18 +184,26 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
               value: true,
               message: "Заполните поле Адрес",
             },
+            maxLength: {
+              value: 200,
+              message: "Адрес не должен превышать 200 символов",
+            }
           })}
           // type="text"
+          maxLength={200}
           placeholder="Адрес доставки *"
           className={styles.cart__customerData}
         />
       )}
-      
         <textarea
           {...register("comment", {
-            required: false
+            required: false,
+            maxLength: {
+              value: 200,
+              message: "Адрес не должен превышать 200 символов",
+            }
           })}
-          // type="text"
+          maxLength={200}
           placeholder="Комментарий к заказу"
           className={styles.cart__customerData}
         />
