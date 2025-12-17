@@ -7,6 +7,8 @@ import { ProductsContext } from "../components/Context";
 // import { useMediaQuery } from "react-responsive";
 import mainbanner from '../public/mainbanner.png'
 import mainbanmob from '../public/mainbannermob.png'
+import mainbannerny from '../public/bannerNYL.jpeg'
+import mainbannernymob from '../public/bannerNYS.jpeg'
 import React from "react";
 
 // import img1 from "../public/Mobile_1_2.png";
@@ -24,9 +26,11 @@ const Main: React.FC<MainProps> = ({ data }) => {
     <section className={styles.main}>
       <div className={styles.main__container}>
         <picture>
-          <source srcSet={mainbanmob.src} media="(max-width: 399px)" />
+          {/* <source srcSet={mainbanmob.src} media="(max-width: 399px)" /> */}
+          <source srcSet={mainbannernymob.src} media="(max-width: 399px)" />
           <Image
-            src={mainbanner}
+            // src={mainbanner}
+            src={mainbannerny}
             alt="main banner"
             className={styles.main__banner}
             fill
