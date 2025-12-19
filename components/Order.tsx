@@ -65,7 +65,8 @@ const Order: React.FC<orderProps> = ({ order }) => {
             )}
             <p className={styles.orders__itemTaleOrder}>
               <span className={styles.orders__itemTaleOrder_gray}>Количество: </span>
-              {item.price.quantity}
+              {/* {item.price.quantity} */}
+              {item.quantity}
             </p>
             <p className={styles.orders__itemTaleOrder}>
               <span className={styles.orders__itemTaleOrder_gray}>Цена: </span>
