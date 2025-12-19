@@ -5,7 +5,7 @@ export const discountedOrder = (orders: OrderType[], value: number) => {
     ...order,
     price: {
       ...order.price,
-      priceItem: Math.round(order.price.priceItem * (1 - value)),
+      priceItem: order.price.priceItem*(100-value)/100,
     },
   }));
 };
