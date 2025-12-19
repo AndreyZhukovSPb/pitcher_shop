@@ -67,6 +67,7 @@ interface AdminOrderType {
     };
   milling?: string;
   _id: string;
+  quantity: number
 }
 
 interface AdminClientType {

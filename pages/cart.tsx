@@ -54,6 +54,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
   const [isCodeValid, setIsCodeValid] = React.useState<boolean>(false);
   const [promoresError, setPromoresError] = React.useState<string>('');
   const [discountValue, setDiscountValue] = React.useState<number>(0);
+  const [discountValueForPrices, setDiscountValueForPrices] = React.useState<number>(0);
   const [totalForDelivery, setTotalForDelivery] = React.useState<number>(0);
   // const [currentDiscount, setCurrentDiscount] = React.useState<number>(0);
 
@@ -66,7 +67,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
   // useCheckStorage();
   useEffect(()=> {
     if (isCodeValid) {
-      setTotalForDelivery(currentTotal * (1-discountValue))
+      setTotalForDelivery(currentTotal * (100-discountValueForPrices)/100)
     } else {
       setTotalForDelivery(currentTotal)
     }
@@ -125,21 +126,25 @@ const Cart: React.FC<cartProps> = ({  }) => {
 
   useEffect((
   ) => {
+    console.log('debug')
     setCurentAmount(orderData.reduce((acc, item) => {
-      return acc + item.price.quantity;
+      // return acc + item.price.quantity;
+      return acc + item.quantity;
     }, 0));
     setCurentTotal(orderData.reduce((acc, item) => {
       return acc + item.price.priceItem * item.quantity;
     }, 0));
   }, [orderData])
 
+  console.log(currentAmount)
+
   useEffect(() => {
     if (deliveryType === 'Курьер') {
       if (!isCodeValid) {
         setDeliveryPrice(currentTotal >= freeDeliveryAmount ? 0 : 400)
       } else {
-        console.log(currentTotal * (1 - discountValue))
-        setDeliveryPrice(currentTotal * (1 - discountValue) >= freeDeliveryAmount ? 0 : 400)
+        console.log(currentTotal * (100-discountValueForPrices)/100)
+        setDeliveryPrice(currentTotal * (100-discountValueForPrices)/100 >= freeDeliveryAmount ? 0 : 400)
       }
     } else {
       setDeliveryPrice(0)  
@@ -196,7 +201,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
     }
 
     const total = isCodeValid ? 
-      deliveryPrice + Math.round(currentTotal * (1 - discountValue)) : 
+      deliveryPrice + (currentTotal * (100-discountValueForPrices)/100) : 
       deliveryPrice + currentTotal;
 
     // сохраняю данные заказа на клиенте - перенес в контекст
@@ -280,7 +285,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
     if (!isCodeValid) {
       sendOrder(orderData, contacts, deliveryPoint, deliveryPrice, currentTotal, isDelivery, deliveryType)
     } else {
-      const discountedOrderForApi = discountedOrder(orderData, discountValue);
+      const discountedOrderForApi = discountedOrder(orderData, discountValueForPrices);
       sendOrder(discountedOrderForApi, contacts, deliveryPoint, deliveryPrice, currentTotal, isDelivery, deliveryType)
     }
   }
@@ -325,16 +330,19 @@ const checkPromoCode = async (value: string) => {
     const result = await checkPromo(value); // результат запроса от сервера
     if (result.success && result?.valid) { 
       setDiscountValue(result.value)
+      setDiscountValueForPrices(result.value * 100)
       setIsCodeValid(true);
     } else {
       setPromoresError('Промокод недействителен')
       setDiscountValue(0)
+      setDiscountValueForPrices(0)
       setIsCodeValid(false);
     }
   } catch (error) {
     setPromoresError('Ошибка при проверке промокода')
     setIsCodeValid(false); // при ошибке сбрасываем
     setDiscountValue(0)
+    setDiscountValueForPrices(0)
   }
 };
 
@@ -452,7 +460,7 @@ const checkPromoCode = async (value: string) => {
             </form>
             {deliveryType === 'Доставка по РФ' && (
               <span className={`${styles.cart__deliveryName}`}>
-                {currentTotal < freeDeliveryAmount ? 
+                {totalForDelivery < freeDeliveryAmount ? 
                   'Доставка осуществляется компанией СДЭК. Оплачивается отдельно при получении.' :
                   'Бесплатная доставка до пункта выдачи СДЭК на территории России по вашему выбору.'
                 }
@@ -509,7 +517,7 @@ const checkPromoCode = async (value: string) => {
                     />
                     <div className={styles.cart__promoresContainer}>
                       <span className={`${styles.cart__promores} ${isCodeValid ? styles.cart__promores_visible : ''}`}>
-                        Применен промокод на {discountValue*100}% скидку
+                        Применен промокод на {discountValue*100}% скидку 
                       </span>
                       <span className={`${styles.cart__promores} ${styles.cart__promores_false} ${!isCodeValid && isPromoChecked ? styles.cart__promores_visible : ''}`}>
                         {/* Промокод недействителен */}
@@ -533,7 +541,7 @@ const checkPromoCode = async (value: string) => {
                       <p className={styles.cart__goodsSummTitle}>
                         Скидка
                       </p>
-                    <p className={`${styles.cart__goodsSummMoney} ${styles.cart__goodsSummMoney_discount}`}>- {Math.round(currentTotal * discountValue)} &#8381;</p>
+                    <p className={`${styles.cart__goodsSummMoney} ${styles.cart__goodsSummMoney_discount}`}>- {(currentTotal * discountValueForPrices / 100)} &#8381;</p>
                   </div>
                   )}
                   <div className={styles.cart__goodsSummContainer}>
@@ -543,7 +551,7 @@ const checkPromoCode = async (value: string) => {
                       
                         deliveryType === 'Самовывоз' ? '0 ₽' : 
                         deliveryType === 'Курьер' ? `${deliveryPrice} ₽` : 
-                        deliveryType === 'Доставка по РФ' && (currentTotal * (1 - discountValue)) >= freeDeliveryAmount ? '0 ₽' :
+                        deliveryType === 'Доставка по РФ' && (currentTotal * (100-discountValueForPrices)/100) >= freeDeliveryAmount ? '0 ₽' :
                         'при получении'}
                     </p>
                   </div>
@@ -552,7 +560,7 @@ const checkPromoCode = async (value: string) => {
                       Итого
                     </p>
                     <p className={`${styles.cart__goodsSummMoney} ${styles.cart__goodsSummMoney_total}`}>
-                      {!isCodeValid ? deliveryPrice + currentTotal : deliveryPrice + Math.round(currentTotal * (1 - discountValue))} ₽
+                      {!isCodeValid ? deliveryPrice + currentTotal : deliveryPrice + (currentTotal * (100-discountValueForPrices)/100)} ₽
                     </p>
                   </div>
                   <div className={styles.cart__errorsContainer}>
