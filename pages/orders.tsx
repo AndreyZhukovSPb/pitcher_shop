@@ -60,7 +60,7 @@ const Orders: React.FC = () => {
       
       getOrders(localStorage.getItem('token'))
         .then(res => {
-          console.log(res)
+          // console.log(res)
           setOrders(res.reverse())
         })
     }
@@ -80,7 +80,7 @@ const Orders: React.FC = () => {
     auth(token)
     .then(data => {
       if (data.success) {
-        console.log('авторизация успешна')
+        // console.log('авторизация успешна')
         // console.log('deb')
         setIsLoggedIn(true)
       }
