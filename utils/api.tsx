@@ -79,7 +79,7 @@ export async function getItems() {
 //   }
 // }
 
-export async function postOrder(client, orderData, total, isCodeValid) {
+export async function postOrder(client, orderData, total, isCodeValid, namePromo) {
   const url = `${baseURL}orders`;
   // console.log(orderData)
   try {
@@ -87,7 +87,8 @@ export async function postOrder(client, orderData, total, isCodeValid) {
       client,
       orderData,
       total,
-      isCodeValid
+      isCodeValid,
+      namePromo
     }, {
       headers: {
         'Content-Type': 'application/json',

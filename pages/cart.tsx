@@ -52,6 +52,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
   const [isPaymentPending, setIsPaymentPending] = React.useState<boolean>(false);
   const [isPromoChecked, setIsPromoChecked] = React.useState<boolean>(false);
   const [isCodeValid, setIsCodeValid] = React.useState<boolean>(false);
+  const [namePromo, setNamePromo] = React.useState<string>('');
   const [promoresError, setPromoresError] = React.useState<string>('');
   const [discountValue, setDiscountValue] = React.useState<number>(0);
   const [discountValueForPrices, setDiscountValueForPrices] = React.useState<number>(0);
@@ -210,7 +211,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
     // const deliveryDataForStorage = JSON.stringify(fullDeliveryData);
     // localStorage.setItem('deliveryData', deliveryDataForStorage);
 
-    postOrder(fullDeliveryData, order, total, isCodeValid)
+    postOrder(fullDeliveryData, order, total, isCodeValid, namePromo)
       .then((data) => {
         if (data.orderData && data.urlForPayment) {
           // console.log(data)
@@ -331,30 +332,23 @@ const checkPromoCode = async (value: string) => {
     if (result.success && result?.valid) { 
       setDiscountValue(result.value)
       setDiscountValueForPrices(result.value * 100)
+      setNamePromo(value);
       setIsCodeValid(true);
     } else {
       setPromoresError('Промокод недействителен')
       setDiscountValue(0)
       setDiscountValueForPrices(0)
       setIsCodeValid(false);
+      setNamePromo('');
     }
   } catch (error) {
     setPromoresError('Ошибка при проверке промокода')
-    setIsCodeValid(false); // при ошибке сбрасываем
-    setDiscountValue(0)
-    setDiscountValueForPrices(0)
+    setIsCodeValid(false);
+    setDiscountValue(0);
+    setDiscountValueForPrices(0);
+    setNamePromo('');
   }
 };
-
-    // const result = checkPromo(value);
-    // if (!isPromoChecked) {
-    //   setIsPromoChecked(true)
-    // }
-    // if (value === '123') {
-    //   setIsCodeValid(true);
-    // } else {
-    //   setIsCodeValid(false);
-    // }
 
   if (orderData && orderData.length === 0) {
     // Пока данные загружаются, отображайте индикатор загрузки или placeholder
