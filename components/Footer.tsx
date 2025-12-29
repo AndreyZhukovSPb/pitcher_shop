@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
                 <p
                   className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
                 >
-                  +7-981-039-79-12
+                  +7-931-339-30-43
                 </p>
               </a>
             </li>
