@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           </p>
           <ul className={styles.footer__contacts}>
             <li className={styles.footer__contactbox}>
-              <a href="tel:+79531443546" className={styles.footer__box}>
+              <a href="tel:+79313393043" className={styles.footer__box}>
                 <Image
                   src={"/phone.svg"}
                   alt="icon phone"
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
                 <p
                   className={`${styles.footer__content} ${styles.footer__content_type_contacts}`}
                 >
-                  +7-953-144-35-46
+                  +7-931-339-30-43
                 </p>
               </a>
             </li>
