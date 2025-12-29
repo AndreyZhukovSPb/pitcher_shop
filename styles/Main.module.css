@@ -6,6 +6,7 @@
 .main__container {
   position: relative;
   height: 250px;
+  height: 300px;
   width: 100%;
 }
 
@@ -35,7 +36,8 @@
 
 .main__text {
   margin: 0;
-  width: 70%;
+  width: 70%; 
+  width: 80%; 
   font-family: var(--titles-h-font);
   font-size: var(--titles-h-font-size);
   /* font-size: 32px; */
@@ -46,6 +48,10 @@
   margin-bottom: 10px;
   font-size: var(--titles-h-large-font-size);
   /* font-size: 48px; */
+}
+
+.main__text_last {
+  margin-top: 10px;
 }
 
 .main__link {
