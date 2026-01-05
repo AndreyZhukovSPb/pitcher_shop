@@ -38,15 +38,15 @@ const Main: React.FC<MainProps> = ({ data }) => {
         </picture>
         <div className={styles.main__overlay}>
           <div className={styles.main__textContainer}>
-            {/* <p className={styles.main__text}>Свежий кофе </p> */}
+            <p className={styles.main__text}>Свежий кофе </p>
             {/* <p className={styles.main__text}>ЧЕРНАЯ ПЯТНИЦА</p> */}
-            <p className={styles.main__text}>Доставка в праздники</p>
+            {/* <p className={styles.main__text}>Доставка в праздники</p> */}
             
             {/* <p className={styles.main__text}>27, 28, 29, 30 НОЯБРЯ</p> */}
-            {/* <p className={styles.main__text}>с доставкой в день заказа</p> */}
-            <p className={styles.main__text}>заказы от 29.12-04.01 отправим 5 января</p>
+            <p className={styles.main__text}>с доставкой в день заказа</p>
+            {/* <p className={styles.main__text}>заказы от 29.12-04.01 отправим 5 января</p> */}
             {/* <p className={styles.main__text}></p> */}
-            <p className={`${styles.main__text} ${styles.main__text_last}`}>забрать заказ из кофейни можно в любой день кроме 1 января</p>
+            {/* <p className={`${styles.main__text} ${styles.main__text_last}`}>забрать заказ из кофейни можно в любой день кроме 1 января</p> */}
             <a href="/delivery" className={styles.main__link }>
               подробнее о доставке и оплате
             </a>
