@@ -11,7 +11,7 @@ const promoTime = true
 //     ? "http://localhost:4003/api/"   // SSR на сервере → напрямую к бэку
 //     : "https://www.shop.pitcherbar.ru/api/"; // браузер → публичный домен
 
-const freeDeliveryAmount = 2400
+const freeDeliveryAmount = 2500
 
 const millingTableNew = [
   'в зернах (не молоть)',
