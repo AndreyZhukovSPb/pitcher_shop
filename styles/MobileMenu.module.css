@@ -96,7 +96,7 @@
     font-size: 24px;
   }
   .menu__navigation_active {
-    border-bottom: 1.6px white solid;
+    border-bottom: 1.6px black solid;
   }
   .menu__container{
     width: 30%;

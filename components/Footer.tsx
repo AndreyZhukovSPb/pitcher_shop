@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
           </ul>
         </div>
         <div className={styles.footer__coffeshops}>
-          <h3 className={styles.footer__coffeshopsTitle}>Наши кофейни</h3>
+          <h3 className={styles.footer__coffeshopsTitle}>Кофейни PITCHER</h3>
           <div className={styles.footer__coffeshopsBox}>
             <div className={styles.footer__coffeshop}>
               <h4
@@ -117,7 +117,7 @@ const Footer: React.FC = () => {
           <Link className={styles.footer__conditions} href="/about">Реквизиты компании</Link>
         </div>
       </div>
-      <p className={styles.footer__copyright}>2014 - 2025 Pitcher loves you</p>
+      <p className={styles.footer__copyright}>2014 - 2026 Pitcher loves you</p>
     </footer>
   );
 };
