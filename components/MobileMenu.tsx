@@ -54,7 +54,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
           }`}
         ></button>
         <div className={styles.menu__navContainer}>
-          <Link
+          {/* <Link
             href={mainWebUrl}
             className={`${styles.menu__navigation} ${
               isMain ? styles.menu__navigation_active : ""
@@ -62,7 +62,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             onClick={onCloseClick}
           >
             Главная
-          </Link>
+          </Link> */}
           <Link
             href={'/'}
             className={`${styles.menu__navigation} ${
@@ -73,6 +73,29 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             Онлайн магазин
           </Link>
           <Link
+            href={'/delivery'}
+            className={styles.menu__navigation}
+            onClick={onCloseClick}
+          >
+            Доставка и оплата
+          </Link>
+          <Link
+            href={'/about'}
+            className={styles.menu__navigation}
+            onClick={onCloseClick}
+          >
+            Реквизиты
+          </Link>
+          <Link
+            href={'/oferta'}
+            className={styles.menu__navigation}
+            onClick={onCloseClick}
+          >
+            Оферта
+          </Link>
+
+
+          {/* <Link
             href={`${mainWebUrl}/park`}
             className={`${styles.menu__navigation} ${
               isPark ? styles.menu__navigation_active : ""
@@ -80,8 +103,8 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             onClick={onCloseClick}
           >
             Парк Победы
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             href={`${mainWebUrl}/mayak`}
             className={`${styles.menu__navigation} ${
               isMayak ? styles.menu__navigation_active : ""
@@ -89,8 +112,8 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             onClick={onCloseClick}
           >
             Маяковская
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             href={`${mainWebUrl}/contacts`}
             className={`${styles.menu__navigation} ${
               isContacts ? styles.menu__navigation_active : ""
@@ -98,7 +121,7 @@ const MobileMenu: React.FC<mobileMenuProps> = ({
             onClick={onCloseClick}
           >
             Контакты
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

@@ -107,24 +107,7 @@ const Navigation: React.FC<navigationProps> = ({
   return (
     <>
     {!isFullCard && !isCart && (
-      <nav className={styles.navigation}>
-      {/* <Link
-        href={fisrtLink}
-        className={`${styles.navigation__link} 
-          ${isPark || isShop ? styles.navigation__link_active : ""} 
-          ${isMain ? styles.navigation__link_type_main : ""}
-        `}
-      >
-        {firstTitle}
-      </Link>
-      <Link
-        href={secondLink}
-        className={`${styles.navigation__link} ${
-          isMayak ? styles.navigation__link_active : ""
-        } ${isMain ? styles.navigation__link_type_main : ""} ${!isGuideReady ? styles.navigation__link_hidden : ''}`}
-      >
-        {secondTitle}
-      </Link> */}
+      <nav className={`${styles.navigation}`}>
         <button
           aria-label="меню для мобильного"
           onClick={handleBurgerClick}
