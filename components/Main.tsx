@@ -9,6 +9,7 @@ import mainbanner from '../public/mainbanner.png'
 import mainbanmob from '../public/mainbannermob.png'
 import mainbannerny from '../public/bannerNYL.jpeg'
 import mainbannernymob from '../public/bannerNYS.jpeg'
+import springbanner from '../public/spring3.jpeg'
 import React from "react";
 
 // import img1 from "../public/Mobile_1_2.png";
@@ -27,10 +28,10 @@ const Main: React.FC<MainProps> = ({ data }) => {
       <div className={styles.main__container}>
         <picture>
           {/* <source srcSet={mainbanmob.src} media="(max-width: 399px)" /> */}
-          <source srcSet={mainbannernymob.src} media="(max-width: 399px)" />
+          <source srcSet={springbanner.src} media="(max-width: 399px)" />
           <Image
             // src={mainbanner}
-            src={mainbannerny}
+            src={springbanner}
             alt="main banner"
             className={styles.main__banner}
             fill

@@ -13,7 +13,7 @@ const Index = ({ data }) => {
   const ProductList = ContextProduct.productsData;
   const ContextCart = React.useContext(CartContext);
   const currentProductFeatures = ContextCart.currentProductFeatures;
-  
+
   return (
       <Main
         data = {data}
@@ -24,7 +24,6 @@ const Index = ({ data }) => {
 export default Index;
 
 export async function getServerSideProps() {
-  
   try {    
     const res = await fetch(baseURL);
     const data = await res.json();

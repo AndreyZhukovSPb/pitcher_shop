@@ -8,7 +8,7 @@ import React from "react";
 import { CartContextProvider, ProductsContextProvider } from "../components/Context";
 
 export default function MyApp({ Component, pageProps }) {  
-  
+
   return (
     <>
       <Head>
