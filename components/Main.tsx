@@ -28,10 +28,13 @@ const Main: React.FC<MainProps> = ({ data }) => {
       <div className={styles.main__container}>
         <picture>
           {/* <source srcSet={mainbanmob.src} media="(max-width: 399px)" /> */}
-          <source srcSet={springbanner.src} media="(max-width: 399px)" />
+          {/* <source srcSet={springbanner.src} media="(max-width: 399px)" /> */}
+          <source srcSet={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/spring_2026/spring3.jpeg'} media="(max-width: 399px)" />
+          
           <Image
-            // src={mainbanner}
-            src={springbanner}
+            src={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/spring_2026/spring3.jpeg'}
+            // src={springbanner}
+
             alt="main banner"
             className={styles.main__banner}
             fill
