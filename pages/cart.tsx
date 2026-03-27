@@ -84,8 +84,8 @@ const Cart: React.FC<cartProps> = ({  }) => {
   }, [deliveryType])
 
   useEffect(() => {
-  setIsPreloaderOpened(false);
-}, []);
+    setIsPreloaderOpened(false);
+  }, []);
 
   const handleChooseDelivery = (value: string) => {
     setDeliveryType(value);
@@ -179,6 +179,9 @@ const Cart: React.FC<cartProps> = ({  }) => {
       ) => {
     // console.log(data);
     // console.log(isDelivery);
+
+    setIsPreloaderOpened(true);
+
     let fullDeliveryData = {}
     if (isDelivery) {
       fullDeliveryData = {
@@ -219,7 +222,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
           // setOrderNumber(data.orderData.number)
           // setOrderEmail(data.orderData.client.email)
           // setIsOrderPayed(true) 
-          setIsPreloaderOpened(true);
+          setIsPreloaderOpened(false);
           // const orderDataForStorage = JSON.stringify(data.orderData);
           // localStorage.setItem('orderData', orderDataForStorage);
           // setIsPopupOpened(true);
@@ -282,7 +285,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
   }
   
   const handleCustomerData = (contacts: { [key: string]: string }) => {
-    setIsPreloaderOpened(true)
+    // setIsPreloaderOpened(true)
     if (!isCodeValid) {
       sendOrder(orderData, contacts, deliveryPoint, deliveryPrice, currentTotal, isDelivery, deliveryType)
     } else {
