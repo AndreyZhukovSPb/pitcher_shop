@@ -217,7 +217,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
     postOrder(fullDeliveryData, order, total, isCodeValid, namePromo)
       .then((data) => {
         if (data.orderData && data.urlForPayment) {
-          // console.log(data)
+          console.log(data.orderData)
           // resetOrder();
           // setOrderNumber(data.orderData.number)
           // setOrderEmail(data.orderData.client.email)
