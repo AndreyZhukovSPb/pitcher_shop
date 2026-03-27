@@ -84,6 +84,7 @@ export const CartContextProvider = ({
       );
       if (updatedCart.length === 0) {
         localStorage.removeItem("orderData");
+        localStorage.removeItem("bankId");
       } else {
         localStorage.setItem("orderData", updatedCart);
       }
@@ -236,6 +237,7 @@ export const CartContextProvider = ({
     if (orderData.length === 1) {
       // console.log('это был последний заказа в корзине')
       localStorage.removeItem("orderData");
+      localStorage.removeItem("bankId");
     }
     setOrderData((prevState) =>
       prevState.filter((item) => !(item.cartId === product.cartId))
@@ -301,6 +303,7 @@ export const CartContextProvider = ({
   const resetCart = () => {
     setOrderData([]);
     localStorage.removeItem("orderData");
+    localStorage.removeItem("bankId");
   };
 
   const updateQuantity = (newId: string, value: string) => {
