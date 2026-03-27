@@ -149,10 +149,11 @@ export const CartContextProvider = ({
       console.log('ключ есть')
       checkOrder(storedBankId)
         .then((res)=> {
-          if (res.success) {
+          if (res.status) {
             console.log('проверили bankId заказ оплачен, удаляем все')
-            localStorage.removeItem("bankId")
-            localStorage.removeItem("orderData")
+            // localStorage.removeItem("bankId")
+            // localStorage.removeItem("orderData")
+            resetCart();
           } else {
             console.log('проверили bankId заказ НЕ оплачен, удаляем bankId')
             localStorage.removeItem("bankId")
