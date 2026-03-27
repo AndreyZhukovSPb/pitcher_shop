@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { OrderType, ProductType } from "../utils/sharedTypes";
-import { getItems } from "../utils/api";
+import { getItems, checkOrder } from "../utils/api";
 import { millingTableNew } from "../utils/constatnts";
 import { cartIdHandler } from "../utils/cartIdHandler";
 import { filterCats } from "../utils/dataTranformers";
@@ -140,6 +140,29 @@ export const CartContextProvider = ({
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
+  useEffect(()=>{
+    const storedBankId = localStorage.getItem("bankId");
+    if (storedBankId === null) {
+      return;
+    } else {
+      console.log('ключ есть')
+      checkOrder(storedBankId)
+        .then((res)=> {
+          if (res.success) {
+            console.log('проверили bankId заказ оплачен, удаляем все')
+            localStorage.removeItem("bankId")
+            localStorage.removeItem("orderData")
+          } else {
+            console.log('проверили bankId заказ НЕ оплачен, удаляем bankId')
+            localStorage.removeItem("bankId")
+          }
+        })
+        .catch((err)=> {
+          console.log(err)
+        })
+      }
+  },[])
 
   const [currentProductFeatures, setCurrentProductFeatures] = useState<
     ICurrentProductFeatures[]
@@ -655,4 +678,8 @@ export const ProductsContextProvider = ({
     </ProductsContext.Provider>
   );
 };
+
+function async(storedBankId: string) {
+  throw new Error("Function not implemented.");
+}
 
