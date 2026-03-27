@@ -217,14 +217,14 @@ const Cart: React.FC<cartProps> = ({  }) => {
     postOrder(fullDeliveryData, order, total, isCodeValid, namePromo)
       .then((data) => {
         if (data.orderData && data.urlForPayment) {
-          console.log(data.orderData)
+          // console.log(data.orderData)
           // resetOrder();
           // setOrderNumber(data.orderData.number)
           // setOrderEmail(data.orderData.client.email)
           // setIsOrderPayed(true) 
           setIsPreloaderOpened(false);
           // const orderDataForStorage = JSON.stringify(data.orderData);
-          localStorage.setItem('bankId', data.orderData.bankId);
+          localStorage.setItem("bankId", data.orderData.bankId);
           // setIsPopupOpened(true);
           router.push(data.urlForPayment);
         } else {
