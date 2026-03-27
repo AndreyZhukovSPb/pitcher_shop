@@ -224,7 +224,7 @@ const Cart: React.FC<cartProps> = ({  }) => {
           // setIsOrderPayed(true) 
           setIsPreloaderOpened(false);
           // const orderDataForStorage = JSON.stringify(data.orderData);
-          // localStorage.setItem('orderData', orderDataForStorage);
+          localStorage.setItem('bankId', data.orderData.bankId);
           // setIsPopupOpened(true);
           router.push(data.urlForPayment);
         } else {
