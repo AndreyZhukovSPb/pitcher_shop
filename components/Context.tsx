@@ -150,6 +150,7 @@ export const CartContextProvider = ({
       checkOrder(storedBankId)
         .then((res)=> {
           if (res.status) {
+            console.log(res)
             console.log('проверили bankId заказ оплачен, удаляем все')
             // localStorage.removeItem("bankId")
             // localStorage.removeItem("orderData")
@@ -325,8 +326,8 @@ export const CartContextProvider = ({
   };
 
   const resetCart = () => {
+    localStorage.removeItem("orderData");  
     setOrderData([]);
-    localStorage.removeItem("orderData");
     localStorage.removeItem("bankId");
   };
 
