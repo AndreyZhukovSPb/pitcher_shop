@@ -25,7 +25,6 @@ export default function MyApp({ Component, pageProps }) {
                 {...pageProps} 
               />
             </Layout>
-            
             </CartContextProvider>
           </ProductsContextProvider>
       </div>
