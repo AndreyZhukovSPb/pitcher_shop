@@ -107,6 +107,7 @@ const Header: React.FC<headerProps> = ({
       <div className={styles.header__cartContainer}>
         <Image
           src={"/cart.svg"}
+          priority={true}
           alt="main cart"
           className={`
             ${styles.header__cart} 
