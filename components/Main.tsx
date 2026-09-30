@@ -9,7 +9,8 @@ import mainbanner from '../public/mainbanner.png'
 import mainbanmob from '../public/mainbannermob.png'
 import mainbannerny from '../public/bannerNYL.jpeg'
 import mainbannernymob from '../public/bannerNYS.jpeg'
-import springbanner from '../public/spring3.jpeg'
+import fallbanner from '../public/mainspringbig.jpeg'
+import fallbanners from '../public/mainspringmob.jpeg'
 import React from "react";
 
 // import img1 from "../public/Mobile_1_2.png";
@@ -29,12 +30,13 @@ const Main: React.FC<MainProps> = ({ data }) => {
         <picture>
           {/* <source srcSet={mainbanmob.src} media="(max-width: 399px)" /> */}
           {/* <source srcSet={springbanner.src} media="(max-width: 399px)" /> */}
-          <source srcSet={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringmobss.jpeg'} media="(max-width: 399px)" />
+          {/* <source srcSet={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringmobss.jpeg'} media="(max-width: 399px)" /> */}
+          <source srcSet={fallbanners.src} media="(max-width: 399px)" />
           
           <Image
-            src={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringbig.jpeg'}
-            // src={springbanner}
-
+            // src={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringbig.jpeg'}
+            src={fallbanner.src}
+            priority
             alt="main banner"
             className={styles.main__banner}
             fill
