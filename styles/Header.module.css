@@ -35,6 +35,13 @@
   box-shadow: none;
 }
 
+.header__logoContainer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+  
+
 .header__logo {
   /* height: 50px; */
   height: 45px;
@@ -87,9 +94,9 @@
   filter: invert(0%);
 }
 
-.header__logoContainer {
+/* .header__logoContainer {
   position: relative;
-}
+} */
 
 .header__cartContainer {
   margin-top: 5px;
