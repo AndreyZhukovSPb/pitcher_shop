@@ -33,7 +33,6 @@ const Main: React.FC<MainProps> = ({ data }) => {
           
           <Image
             src={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringbig.jpeg'}
-            // src={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/spring_2026/spring3.jpeg'}
             // src={springbanner}
 
             alt="main banner"
