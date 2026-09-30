@@ -10,7 +10,7 @@ import mainbanmob from '../public/mainbannermob.png'
 import mainbannerny from '../public/bannerNYL.jpeg'
 import mainbannernymob from '../public/bannerNYS.jpeg'
 import fallbanner from '../public/mainspringbig.jpeg'
-import fallbanners from '../public/mainspringmob.jpeg'
+import fallbanners from '../public/mainspringmobss.jpeg'
 import React from "react";
 
 // import img1 from "../public/Mobile_1_2.png";
