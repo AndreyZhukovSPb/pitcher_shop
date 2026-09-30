@@ -31,7 +31,7 @@ const Main: React.FC<MainProps> = ({ data }) => {
         className={styles.main__container}
         style={{
             opacity: loaded ? 1 : 0,
-            // transition: 'opacity 0.2s ease',
+            transition: 'opacity 0.2s ease',
             }}
             >
         <picture>
