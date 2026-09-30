@@ -11,7 +11,7 @@ import mainbannerny from '../public/bannerNYL.jpeg'
 import mainbannernymob from '../public/bannerNYS.jpeg'
 import fallbanner from '../public/mainspringbig.jpeg'
 import fallbanners from '../public/mainspringmobss.jpeg'
-import React from "react";
+import React, { useState } from "react";
 
 // import img1 from "../public/Mobile_1_2.png";
 
@@ -22,16 +22,23 @@ interface MainProps {
 const Main: React.FC<MainProps> = ({ data }) => {
   const ContextProduct = React.useContext(ProductsContext);
   const products = ContextProduct.productsData
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <>
     <section className={styles.main}>
-      <div className={styles.main__container}>
+      <div 
+        className={styles.main__container}
+        style={{
+            opacity: loaded ? 1 : 0,
+            // transition: 'opacity 0.2s ease',
+            }}
+            >
         <picture>
           {/* <source srcSet={mainbanmob.src} media="(max-width: 399px)" /> */}
           {/* <source srcSet={springbanner.src} media="(max-width: 399px)" /> */}
           {/* <source srcSet={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringmobss.jpeg'} media="(max-width: 399px)" /> */}
-          <source srcSet={fallbanners.src} media="(max-width: 399px)" />
+          {/* <source srcSet={fallbanners.src} media="(max-width: 399px)" /> */}
           
           <Image
             // src={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringbig.jpeg'}
@@ -40,6 +47,7 @@ const Main: React.FC<MainProps> = ({ data }) => {
             alt="main banner"
             className={styles.main__banner}
             fill
+            onLoad={() => setLoaded(true)}
           />
         </picture>
         <div className={styles.main__overlay}>
