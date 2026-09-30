@@ -29,7 +29,7 @@ const Main: React.FC<MainProps> = ({ data }) => {
         <picture>
           {/* <source srcSet={mainbanmob.src} media="(max-width: 399px)" /> */}
           {/* <source srcSet={springbanner.src} media="(max-width: 399px)" /> */}
-          <source srcSet={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringmobs.jpg'} media="(max-width: 399px)" />
+          <source srcSet={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringmobs-transformed.jpeg'} media="(max-width: 399px)" />
           
           <Image
             src={'https://storage.yandexcloud.net/pitcher-photos/for%20shop/fall_2026/mainspringbig.jpeg'}
