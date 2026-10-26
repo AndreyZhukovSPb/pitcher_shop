@@ -1,10 +1,10 @@
 // const baseURL = 'http://localhost:4003/api/'
 // const baseURL = 'https://pitcherbartest.ru/api/'
 // const baseURL = 'http://79.174.78.101:4003/api/'
-// const baseURL = 'https://www.shop.pitcherbar.ru/api/'
-const baseURL = 'https://www.pitcherbarone.ru/api/'
-// const mainWebUrl = 'https://pitcherbar.ru'
-const mainWebUrl = 'https://pitcherbarone.ru'
+const baseURL = 'https://shop.pitcherbar.ru/api/'
+// const baseURL = 'https://pitcherbarone.ru/api/'
+const mainWebUrl = 'https://shop.pitcherbar.ru'
+// const mainWebUrl = 'https://pitcherbarone.ru'
 const showTime = false
 const promoTime = true
 
