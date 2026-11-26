@@ -60,11 +60,9 @@ const Cart: React.FC<cartProps> = ({  }) => {
   // const [currentDiscount, setCurrentDiscount] = React.useState<number>(0);
 
   // const [orderData, setOrderData] = React.useState<OrderType[]>([])
-
   // useEffect(()=> {
   //   setOrderData(orderDataFromContext);
   // },[orderDataFromContext])
-
   // useCheckStorage();
   useEffect(()=> {
     if (isCodeValid) {
@@ -136,8 +134,6 @@ const Cart: React.FC<cartProps> = ({  }) => {
       return acc + item.price.priceItem * item.quantity;
     }, 0));
   }, [orderData])
-
-  console.log(currentAmount)
 
   useEffect(() => {
     if (deliveryType === 'Курьер') {

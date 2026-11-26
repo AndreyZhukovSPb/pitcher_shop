@@ -5,7 +5,7 @@ const baseURL = 'https://shop.pitcherbar.ru/api/'
 // const baseURL = 'https://pitcherbarone.ru/api/'
 const mainWebUrl = 'https://shop.pitcherbar.ru'
 // const mainWebUrl = 'https://pitcherbarone.ru'
-const showTime = false
+const showTime = true
 const promoTime = true
 
 // const baseURL =

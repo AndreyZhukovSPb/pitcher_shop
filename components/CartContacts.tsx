@@ -29,7 +29,7 @@ const CartContacts: React.FC<cartContactsProps> = ({ isDelivery, passErrors, pas
   } = useForm({
     // defaultValues: {profileName: currentUser.name, profileEmail: currentUser.email},
     // mode: "all",
-    mode: "onChange"
+    mode: "onChange" // ПРОВЕРИТЬ И ВЕРНУТЬ!
   });
 
   //   const compare = watch((data) => {
